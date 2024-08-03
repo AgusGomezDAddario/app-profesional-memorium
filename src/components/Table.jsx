@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { usePacientes } from "../hooks/usePacientes.js";
 import './Table.css';
+import { MoreInformationButton } from './material-ui/buttons.jsx';
 
 export const BasicTable = () => {
   const pacientesData = usePacientes();
@@ -36,7 +37,11 @@ export const BasicTable = () => {
               <TableCell align="center">{paciente.edad}</TableCell>
               <TableCell align="center">{paciente.condicion}</TableCell>
               <TableCell align="center">{paciente.desempenoGlobal}</TableCell>
-              <TableCell align="center">Acciones</TableCell>
+              <TableCell align="center">
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <MoreInformationButton/>
+                </div>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
