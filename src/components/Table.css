@@ -5,3 +5,10 @@
 .header {
     background-color: #2f5496;
 }
+
+.table-historial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}

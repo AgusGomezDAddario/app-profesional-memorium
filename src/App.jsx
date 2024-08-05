@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Bienvenida } from './components/Bienvenida.jsx';
-import { BasicTable } from './components/Table.jsx';
+import { CollapsibleTable } from './components/TableCollapse.jsx';
 
 export default function App() {
 
@@ -9,7 +9,7 @@ export default function App() {
       <div className="App">
         <div className='WelcomeTable'>
           <Bienvenida />
-          <BasicTable />
+          <CollapsibleTable />
         </div>
       </div>
   );
