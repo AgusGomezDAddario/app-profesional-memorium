@@ -5,8 +5,8 @@ import awsConfig from './aws-exports';
 
 Amplify.configure(awsConfig);
 
-import { LoginSystem } from './components/auth/login.jsx';
-
+// import { LoginSystem } from './components/auth/login.jsx';
+import { AuthenticatorTheme } from './components/auth/LoginThemeCustom.jsx';
 // export async function handleSignUp({ 
 //     username,
 //     password,
@@ -46,7 +46,7 @@ export default function App () {
   return (
           <div className="App">
             <div className='WelcomeTable'>
-              <LoginSystem />
+              <AuthenticatorTheme />
             </div>
           </div>
       );
