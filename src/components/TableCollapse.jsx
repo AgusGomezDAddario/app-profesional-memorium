@@ -135,9 +135,7 @@ const pacientesData = [
   createData('Jorge Lopez', 89, 'Perdida de memoria por edad', 89),
 ];
 
-export const CollapsibleTable = () => {
-  console.log(pacientesData);
-
+function CollapsibleTable () {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table" className='table'>
@@ -159,3 +157,5 @@ export const CollapsibleTable = () => {
     </TableContainer>
   );
 }
+
+export default CollapsibleTable;

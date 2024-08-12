@@ -4,6 +4,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import { Link } from 'react-router-dom';
 
 export const cardPacientes = (
     <React.Fragment>
@@ -16,7 +17,7 @@ export const cardPacientes = (
             </Typography>
         </CardContent>
         <CardActions sx={{ backgroundColor: '#2f5496', fontFamily: 'Gentium Plus', color: 'white', borderBottom: '1px solid white', borderLeft: '1px solid white', borderRight: '1px solid white' }}>
-            <a style={{ fontFamily: 'Gentium Plus', color: 'white' }} clickable href="#">Ingresar</a>
+            <Link style={{ fontFamily: 'Gentium Plus', color: 'white' }} clickable to='/pacientes' >Ingresar</Link>
         </CardActions>
     </React.Fragment>
 );
@@ -32,7 +33,7 @@ export const cardJuegos = (
             </Typography>
         </CardContent>
         <CardActions sx={{ backgroundColor: '#2f5496', fontFamily: 'Gentium Plus', color: 'white', borderBottom: '1px solid white', borderLeft: '1px solid white', borderRight: '1px solid white' }}>
-            <a style={{ fontFamily: 'Gentium Plus', color: 'white' }} clickable href="#">Conocer más</a>
+            <Link style={{ fontFamily: 'Gentium Plus', color: 'white' }} clickable to='/juegos' >Conocer más</Link>
         </CardActions>
     </React.Fragment>
 );
@@ -48,7 +49,7 @@ export const cardPlataforma = (
             </Typography>
         </CardContent>
         <CardActions sx={{ backgroundColor: '#2f5496', fontFamily: 'Gentium Plus', color: 'white', borderBottom: '1px solid white', borderLeft: '1px solid white', borderRight: '1px solid white' }}>
-            <a style={{ fontFamily: 'Gentium Plus', color: 'white' }} clickable href="#">Conocer más</a>
+            <Link style={{ fontFamily: 'Gentium Plus', color: 'white' }} clickable to='/plataforma' >Conocer más</Link>
         </CardActions>
     </React.Fragment>
 );
