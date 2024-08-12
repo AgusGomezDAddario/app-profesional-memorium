@@ -12,3 +12,6 @@
     --amplify-components-button-link-color: var(--amplify-colors-neutral-80);
   }
   
+.justify {
+  text-align: justify;
+}

@@ -1,10 +1,9 @@
 import React from 'react';
-import './App.css';
 import { Amplify } from 'aws-amplify';
 import awsConfig from './aws-exports';
 import { HomePage } from './components/HomePage.jsx'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Bienvenida } from './components/Bienvenida.jsx';
+import { AuthenticatorTheme } from './components/auth/LoginThemeCustom.jsx';
 
 Amplify.configure(awsConfig);
 
@@ -14,7 +13,7 @@ export default function App () {
                 <Router>
                     <Routes>
                         <Route path="/" element={<HomePage />} />
-                        <Route path="/pacientes" element={<Bienvenida />}></Route>
+                        <Route path="/pacientes" element={<AuthenticatorTheme />}></Route>
                     </Routes>
                 </Router>
               <Router />

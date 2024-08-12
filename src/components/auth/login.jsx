@@ -4,7 +4,7 @@ import { Authenticator, useTheme, View, Heading, Button, Text, Image } from '@aw
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from '../../aws-exports';
 import { useAuthenticator } from '@aws-amplify/ui-react';
-import logo from '../../images/logo_memorium.png'
+import logo from '../../images/logo_memorium_white.png'
 import { I18n } from 'aws-amplify/utils';
 import { translations } from '@aws-amplify/ui-react';
 

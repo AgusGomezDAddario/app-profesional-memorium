@@ -6,12 +6,10 @@ export const HomePage = () => {
 
   return (
     <>
-      <div id='root'>
         <h1 className='welcome-text'>Bienvenido a Memorium!</h1>
         <h2 className='welcome-text'>Este es tu centro de seguimiento de pacientes</h2>
-            <img src={logo} className="logo" alt="Memorium logo" />
-            <OutlinedCard />
-      </div>
+        <img src={logo} className="logo" alt="Memorium logo" />
+        <OutlinedCard />
     </>
   )
 }
