@@ -8,10 +8,13 @@
     margin-top: 2rem;
     margin-left: 2rem;
     margin-bottom: 0rem;
+    color: white;
 }
 
 .container{
     padding-left: 1rem;
+    margin: 0;
+    padding: 0;
 }
 
 .h2{
@@ -19,6 +22,7 @@
     margin-top: 0rem;
     font-family: 'Gentium Plus', sans-serif;
     font-style: normal;
+    color: white;
     margin-left: 2rem;
 }
 

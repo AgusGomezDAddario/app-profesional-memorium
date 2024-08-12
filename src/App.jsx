@@ -13,7 +13,7 @@ export default function App () {
                 <Router>
                     <Routes>
                         <Route path="/" element={<HomePage />} />
-                        <Route path="/pacientes" element={<AuthenticatorTheme />}></Route>
+                        <Route path="/login" element={<AuthenticatorTheme />}></Route>
                     </Routes>
                 </Router>
               <Router />

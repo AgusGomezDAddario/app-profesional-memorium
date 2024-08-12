@@ -7,6 +7,7 @@ import { useAuthenticator } from '@aws-amplify/ui-react';
 import logo from '../../images/logo_memorium_white.png'
 import { I18n } from 'aws-amplify/utils';
 import { translations } from '@aws-amplify/ui-react';
+import { PacientesTable } from '../PacientesTable';
 
 Amplify.configure(awsExports);
 
@@ -288,7 +289,12 @@ const formFields = {
 export const LoginSystem = () => {
   return (
     <Authenticator formFields={formFields} components={components}>
-      {({ signOut }) => <button onClick={signOut}>Cerrar sesión</button>}
+      {({ signOut }) => (
+        <>
+          <PacientesTable />
+          <button onClick={signOut}>Cerrar sesión</button>
+        </>
+      )}
     </Authenticator>
   );
 }

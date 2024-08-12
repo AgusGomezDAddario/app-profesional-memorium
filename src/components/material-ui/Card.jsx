@@ -17,7 +17,7 @@ export const cardPacientes = (
             </Typography>
         </CardContent>
         <CardActions sx={{ backgroundColor: '#2f5496', fontFamily: 'Gentium Plus', color: 'white', borderBottom: '1px solid white', borderLeft: '1px solid white', borderRight: '1px solid white' }}>
-            <Link style={{ fontFamily: 'Gentium Plus', color: 'white' }} clickable to='/pacientes' >Ingresar</Link>
+            <Link style={{ fontFamily: 'Gentium Plus', color: 'white' }} clickable to='/login' >Ingresar</Link>
         </CardActions>
     </React.Fragment>
 );

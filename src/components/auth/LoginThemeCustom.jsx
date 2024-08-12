@@ -53,7 +53,7 @@ export const AuthenticatorTheme = () => {
     return (
       <div className='justify'>
       <ThemeProvider theme={theme}>
-        <View padding="xxl">
+        <View>
           <LoginSystem />
         </View>
       </ThemeProvider>
