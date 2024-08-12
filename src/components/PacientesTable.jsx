@@ -1,8 +1,8 @@
 import React from 'react';
-import "./Bienvenida.css"
+import "./PacientesTable.css"
 import CollapsibleTable from './TableCollapse';
 
-export const Bienvenida = () => {
+export const PacientesTable = () => {
 
     return (
         <div className="container">
