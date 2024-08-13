@@ -289,10 +289,9 @@ const formFields = {
 export const LoginSystem = () => {
   return (
     <Authenticator formFields={formFields} components={components}>
-      {({ signOut }) => (
+      {() => (
         <>
           <PacientesTable />
-          <button onClick={signOut}>Cerrar sesión</button>
         </>
       )}
     </Authenticator>
