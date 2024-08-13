@@ -18,11 +18,10 @@ import './Table.css';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-function createData(nombre, edad, condicion, desempenoGlobal) {
+function createData(nombre, edad, desempenoGlobal) {
   return {
     nombre,
     edad,
-    condicion,
     desempenoGlobal,
     historial: [
       {
@@ -73,7 +72,6 @@ function Paciente({ paciente }) {
           {paciente.nombre}
         </TableCell>
         <TableCell align="center">{paciente.edad}</TableCell>
-        <TableCell align="center">{paciente.condicion}</TableCell>
         <TableCell align="center">{paciente.desempenoGlobal}</TableCell>
       </TableRow>
       <TableRow>
@@ -119,8 +117,8 @@ function Paciente({ paciente }) {
 Paciente.propTypes = {
   paciente: PropTypes.shape({
     nombre: PropTypes.string.isRequired,
-    desempenoGlobal: PropTypes.number.isRequired,
     edad: PropTypes.number.isRequired,
+    desempenoGlobal: PropTypes.number.isRequired,
     historial: PropTypes.arrayOf(
       PropTypes.shape({
         errores: PropTypes.number.isRequired,
@@ -132,7 +130,7 @@ Paciente.propTypes = {
 };
 
 const pacientesData = [
-  createData('Jorge Lopez', 89, 'Perdida de memoria por edad', 89),
+  createData('Jorge Lopez', 89, 89, '-'),
 ];
 
 function CollapsibleTable () {
@@ -144,8 +142,8 @@ function CollapsibleTable () {
             <TableCell />
             <TableCell sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }} align="center">Nombre</TableCell>
             <TableCell sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }} align="center">Edad</TableCell>
-            <TableCell sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }} align="center">Condición</TableCell>
-            <TableCell sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }} align="center">Desempeño</TableCell>
+            <TableCell sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }} align="center">Desempeño(%)</TableCell>
+            <TableCell sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }} align="center">Clasificación</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
