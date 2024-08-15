@@ -18,24 +18,37 @@ import FeedIcon from '@mui/icons-material/Feed';
 import { Authenticator } from '@aws-amplify/ui-react';
 import { signOut } from '@aws-amplify/auth';
 import Divider from '@mui/material/Divider';
-import { getCurrentUser } from 'aws-amplify/auth';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { fetchUserAttributes } from 'aws-amplify/auth';
+
+async function getUserName() {
+    try {
+        const userAttributes = await fetchUserAttributes();
+        console.log(userAttributes.family_name, userAttributes.given_name);
+        return {
+            family_name: userAttributes.family_name,
+            given_name: userAttributes.given_name
+        };
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 export default function TemporaryDrawer() {
     const [open, setOpen] = useState(false);
-    const [currentUser, setCurrentUser] = useState(null);
+    const [userNames, setUserNames] = useState('');
+
+    useEffect(() => {
+        async function fetchUserName() {
+            const names = await getUserName();
+            setUserNames(names);
+        }
+        fetchUserName();
+    }, []);
 
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
     };
-
-    useEffect(() => {
-        getCurrentUser().then(user => {
-            setCurrentUser(user.username);
-        }).catch(error => {
-            console.error("Error obteniendo el usuario actual:", error);
-        });
-    }, []);
 
     const DrawerList = (
         <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
@@ -100,7 +113,7 @@ export default function TemporaryDrawer() {
                     </ListItem>
                 </Authenticator>
                 <ListItem key={'Sesión Actual'} disablePadding>
-                    <ListItemText primary={`Sesión iniciada: ${currentUser}`} sx={{'& .MuiTypography-root': { fontFamily: 'Gentium Plus, serif', color: '#2f5496', paddingLeft: '1.2rem' }}} />
+                    <ListItemText primary={`Sesión Actual: ${userNames.family_name}, ${userNames.given_name}`} sx={{'& .MuiTypography-root': { fontFamily: 'Gentium Plus, serif', color: '#2f5496', paddingLeft: '0.8rem' }}} />
                 </ListItem>
             </List>
         </Box>
