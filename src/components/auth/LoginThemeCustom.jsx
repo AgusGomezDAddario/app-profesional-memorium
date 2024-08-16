@@ -1,62 +1,61 @@
 import './Login.css';
 import React from 'react';
 import { LoginSystem } from './Login.jsx';
+import { Grid } from '@mui/material';
 
 import {
-    ThemeProvider,
-    useTheme,
-    View,
-  } from '@aws-amplify/ui-react';
+  ThemeProvider,
+  useTheme,
+  View,
+} from '@aws-amplify/ui-react';
 
 export const AuthenticatorTheme = () => {
-    const { tokens } = useTheme();
-    const theme = {
-      name: 'Auth Theme',
-      tokens: {
-        components:
-   {
-          authenticator: {
-            router: {
-              boxShadow: `0 0 16px ${tokens.colors.overlay['10']}`,
-              borderWidth: '0',
-            },
-            form: {
-              padding: `${tokens.space.medium} ${tokens.space.xl} ${tokens.space.medium}`,
-            },
+  const { tokens } = useTheme();
+  const theme = {
+    name: 'Auth Theme',
+    tokens: {
+      components:
+      {
+        authenticator: {
+          router: {
+            boxShadow: `0 0 16px ${tokens.colors.overlay['10']}`,
+            borderWidth: '0',
           },
-          button: {
-            primary: {
-              backgroundColor: '#2f5496', // Replace with your blue color
-            },
-            link: {
-              color: tokens.colors.neutral['80'],
-            },
+          form: {
+            padding: `${tokens.space.medium} ${tokens.space.xl} ${tokens.space.medium}`,
           },
-          fieldcontrol: {
-            _focus: {
-              boxShadow: `0 0 0 2px #2f5496`, // Replace with your blue color
-            },
+        },
+        button: {
+          primary: {
+            backgroundColor: '#2f5496', // Replace with your blue color
           },
-          tabs: {
-            item: {
-              color: tokens.colors.neutral['80'],
-              _active: {
-                borderColor: tokens.colors.neutral['100'],
-                color: '#2f5496', // Replace with your blue color
-              },
+          link: {
+            color: tokens.colors.neutral['80'],
+          },
+        },
+        fieldcontrol: {
+          _focus: {
+            boxShadow: `0 0 0 2px #2f5496`, // Replace with your blue color
+          },
+        },
+        tabs: {
+          item: {
+            color: tokens.colors.neutral['80'],
+            _active: {
+              borderColor: tokens.colors.neutral['100'],
+              color: '#2f5496', // Replace with your blue color
             },
           },
         },
       },
-    };
-  
-    return (
-      <div className='justify'>
+    },
+  };
+
+  return (
+    <View style={{textAlign: 'justify'}}>
       <ThemeProvider theme={theme}>
-        <View>
-          <LoginSystem />
-        </View>
+        <LoginSystem />
       </ThemeProvider>
-      </div>
-    );
-  }
+    </View>
+  );
+}

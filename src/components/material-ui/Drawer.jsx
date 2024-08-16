@@ -24,7 +24,6 @@ import { fetchUserAttributes } from 'aws-amplify/auth';
 async function getUserName() {
     try {
         const userAttributes = await fetchUserAttributes();
-        console.log(userAttributes.family_name, userAttributes.given_name);
         return {
             family_name: userAttributes.family_name,
             given_name: userAttributes.given_name
@@ -112,9 +111,6 @@ export default function TemporaryDrawer() {
                         </ListItemButton>
                     </ListItem>
                 </Authenticator>
-                <ListItem key={'Sesión Actual'} disablePadding>
-                    <ListItemText primary={`Sesión Actual: ${userNames.family_name}, ${userNames.given_name}`} sx={{'& .MuiTypography-root': { fontFamily: 'Gentium Plus, serif', color: '#2f5496', paddingLeft: '0.8rem' }}} />
-                </ListItem>
             </List>
         </Box>
     );
