@@ -9,41 +9,19 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import MenuIcon from '@mui/icons-material/Menu';
-import LogoutIcon from '@mui/icons-material/Logout';
 import WebIcon from '@mui/icons-material/Web';
 import PsychologyIcon from '@mui/icons-material/Psychology';
-import PersonIcon from '@mui/icons-material/Person';
 import DevicesIcon from '@mui/icons-material/Devices';
 import FeedIcon from '@mui/icons-material/Feed';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { Authenticator } from '@aws-amplify/ui-react';
 import { signOut } from '@aws-amplify/auth';
 import Divider from '@mui/material/Divider';
-import { useState, useEffect } from 'react';
-import { fetchUserAttributes } from 'aws-amplify/auth';
-
-async function getUserName() {
-    try {
-        const userAttributes = await fetchUserAttributes();
-        return {
-            family_name: userAttributes.family_name,
-            given_name: userAttributes.given_name
-        };
-    } catch (error) {
-        console.log(error);
-    }
-}
+import { useState } from 'react';
+import { DialogProfile } from './DialogProfile';
 
 export default function TemporaryDrawer() {
     const [open, setOpen] = useState(false);
-    const [userNames, setUserNames] = useState('');
-
-    useEffect(() => {
-        async function fetchUserName() {
-            const names = await getUserName();
-            setUserNames(names);
-        }
-        fetchUserName();
-    }, []);
 
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
@@ -92,14 +70,7 @@ export default function TemporaryDrawer() {
                         <ListItemText primary={'Nuestro Trabajo'} sx={{'& .MuiTypography-root': { fontFamily: 'Gentium Plus, serif' }}} />
                     </ListItemButton>
                 </ListItem>
-                <ListItem key={'Mi Perfil'} disablePadding>
-                    <ListItemButton sx={{color: '#2f5496'}}>
-                        <ListItemIcon>
-                            <PersonIcon sx={{color: '#2f5496'}} />
-                        </ListItemIcon>
-                        <ListItemText primary={'Mi Perfil'} sx={{'& .MuiTypography-root': { fontFamily: 'Gentium Plus, serif' }}} />
-                    </ListItemButton>
-                </ListItem>
+                <DialogProfile />
                 <Divider />
                 <Authenticator>
                     <ListItem key={'Cerrar Sesión'} disablePadding>
@@ -117,7 +88,7 @@ export default function TemporaryDrawer() {
 
     return (
         <div>
-            <Button variant="outlined" endIcon={<MenuIcon />} sx={{ color: 'white', backgroundColor: '#2f5496', border: '2px solid white' }} onClick={toggleDrawer(true)}>
+            <Button variant="outlined" endIcon={<MenuIcon />} sx={{ color: 'white', backgroundColor: '#2f5496', border: '2px solid white', marginLeft: '2rem' }} onClick={toggleDrawer(true)}>
                 Menú
             </Button>
 
