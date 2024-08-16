@@ -13,9 +13,9 @@ import ListItemText from '@mui/material/ListItemText';
 import PersonIcon from '@mui/icons-material/Person';
 import { useState, useEffect } from 'react';
 import { fetchUserAttributes } from 'aws-amplify/auth';
-import LogoutIcon from '@mui/icons-material/Logout';
-import { Authenticator } from '@aws-amplify/ui-react';
 import { signOut } from '@aws-amplify/auth';
+import { Link } from 'react-router-dom';
+
 
 async function getUserInformation() {
     try {
@@ -94,9 +94,11 @@ export const DialogProfile = () => {
                     <Button onClick={signOut} sx={{ color: 'red' }}>
                         <ListItemText primary={'Cerrar Sesión'} sx={{ '& .MuiTypography-root': { fontFamily: 'Gentium Plus, serif' } }} />
                     </Button>
-                    <Button sx={{ color: '#2f5496' }}>
-                        <ListItemText primary={'Editar'} sx={{ '& .MuiTypography-root': { fontFamily: 'Gentium Plus, serif' } }} />
-                    </Button>
+                    <Link to='/update-user' >
+                        <Button sx={{ color: '#2f5496' }}>
+                            <ListItemText primary={'Editar'} sx={{ '& .MuiTypography-root': { fontFamily: 'Gentium Plus, serif' } }} />
+                        </Button>
+                    </Link>
                 </DialogActions>
             </Dialog>
         </React.Fragment>
