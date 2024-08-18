@@ -1,5 +1,5 @@
-import React from 'react';
-import { updateUserAttribute } from 'aws-amplify/auth';
+import React, { useState } from 'react';
+import { updateUserAttribute, updatePassword } from 'aws-amplify/auth';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import Form from '@mui/material/CardActions';
@@ -12,62 +12,6 @@ import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import ListItemText from '@mui/material/ListItemText';
 import { Divider } from '@mui/material';
-import { useState } from 'react';
-import { updatePassword } from 'aws-amplify/auth';
-
-// async function handleSendUserAttributeVerificationCode(key) {
-//     try {
-//       await sendUserAttributeVerificationCode({
-//         userAttributeKey: key
-//       });
-//       console.log(`Verification code sent for attribute ${key}.`);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-
-async function handleUpdateUserAttribute(attributeKey, value) {
-    try {
-        const output = await updateUserAttribute({
-            userAttribute: {
-                attributeKey,
-                value
-            }
-        });
-        handleUpdateUserAttributeNextSteps(output);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-function handleUpdateUserAttributeNextSteps(output) {
-    const { nextStep } = output;
-
-    switch (nextStep.updateAttributeStep) {
-        case 'CONFIRM_ATTRIBUTE_WITH_CODE':
-            const codeDeliveryDetails = nextStep.codeDeliveryDetails;
-            console.log(
-                `Confirmation code was sent to ${codeDeliveryDetails?.deliveryMedium}.`
-            );
-            break;
-        case 'DONE':
-            console.log(`attribute was successfully updated.`);
-            break;
-    }
-}
-
-async function handleUpdatePassword(oldPassword, newPassword) {
-    if (!oldPassword || !newPassword) {
-        console.log('Both oldPassword and newPassword are required to change the password.');
-        return;
-    }
-    try {
-        await updatePassword({ oldPassword, newPassword });
-        console.log('Password updated successfully.');
-    } catch (err) {
-        console.log(err);
-    }
-}
 
 export const UpdateUser = () => {
     const [userData, setUserData] = useState({
@@ -77,6 +21,59 @@ export const UpdateUser = () => {
         oldPassword: '',
         newPassword: ''
     });
+
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+
+    async function handleUpdateUserAttribute(attributeKey, value) {
+        try {
+            const output = await updateUserAttribute({
+                userAttribute: {
+                    attributeKey,
+                    value
+                }
+            });
+            handleUpdateUserAttributeNextSteps(output);
+        } catch (error) {
+            console.log(error);
+            setError('Error al actualizar la información del usuario.');
+        }
+    }
+
+    function handleUpdateUserAttributeNextSteps(output) {
+        const { nextStep } = output;
+
+        switch (nextStep.updateAttributeStep) {
+            case 'CONFIRM_ATTRIBUTE_WITH_CODE':
+                const codeDeliveryDetails = nextStep.codeDeliveryDetails;
+                setSuccess('');
+                setError("Se ha enviado un código de confirmación a su correo electrónico.");
+                break;
+            case 'DONE':
+                setError('');
+                setSuccess("Información actualizada correctamente.");
+                break;
+            default:
+                setError('Paso de actualización desconocido.');
+        }
+    }
+
+    async function handleUpdatePassword(oldPassword, newPassword) {
+        if (!oldPassword || !newPassword) {
+            setSuccess('');
+            setError('Por favor, ingrese la contraseña actual y la nueva contraseña.');
+            return;
+        }
+        try {
+            await updatePassword({ oldPassword, newPassword });
+            setError('');
+            setSuccess('Contraseña actualizada correctamente.');
+            console.log('Password updated successfully.');
+        } catch (err) {
+            console.log(err);
+            setError('Error al actualizar la contraseña.');
+        }
+    }
 
     function submitForm(event) {
         event.preventDefault();
@@ -97,7 +94,7 @@ export const UpdateUser = () => {
             ...userData,
             [event.target.id]: event.target.value,
         });
-        console.log("Cambiando")
+        console.log("Cambiando");
     }
 
     return (
@@ -132,9 +129,13 @@ export const UpdateUser = () => {
                                 <ListItemText primary={'Volver'} sx={{ '& .MuiTypography-root': { fontFamily: 'Gentium Plus, serif' } }} />
                             </Button>
                         </Link>
-                        <Button sx={{ color: 'green' }}>
-                            <ListItemText primary={'Enviar'} sx={{ '& .MuiTypography-root': { fontFamily: 'Gentium Plus, serif' } }} onClick={submitForm} />
+                        <Button sx={{ color: 'green' }} onClick={submitForm}>
+                            <ListItemText primary={'Enviar'} sx={{ '& .MuiTypography-root': { fontFamily: 'Gentium Plus, serif' } }} />
                         </Button>
+                        <p>La contraseña debe contener al menos: 8 caracteres, 1 número y una mayúscula</p>
+                        <p>La matrícula debe contener 8 dígitos</p>
+                        {error && <h5 className="error">{error}</h5>}
+                        {success && <h5 className="success">{success}</h5>}
                     </Box>
                 </Form>
             </CardContent>
