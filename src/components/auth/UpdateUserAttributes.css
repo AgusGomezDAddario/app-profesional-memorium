@@ -1,0 +1,10 @@
+.container-update {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    background-color: 'white';
+    border-radius: '20px';
+    max-width: '80em';
+}
