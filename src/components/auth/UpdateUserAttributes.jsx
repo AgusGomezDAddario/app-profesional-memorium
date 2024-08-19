@@ -134,8 +134,8 @@ export const UpdateUser = () => {
                         </Button>
                         <p>La contraseña debe contener al menos: 8 caracteres, 1 número y una mayúscula</p>
                         <p>La matrícula debe contener 8 dígitos</p>
-                        {error && <h5 className="error">{error}</h5>}
-                        {success && <h5 className="success">{success}</h5>}
+                        {error && <h5 style={{fontFamily: 'Gentium Plus, serif', color: 'red'}}>{error}</h5>}
+                        {success && <h5 style={{fontFamily: 'Gentium Plus, serif', color: 'green'}}>{success}</h5>}
                     </Box>
                 </Form>
             </CardContent>
