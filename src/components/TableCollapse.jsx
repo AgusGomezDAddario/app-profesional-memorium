@@ -17,6 +17,7 @@ import { usePacientes } from "../pacientesInfo/usePacientes.js";
 import './Table.css';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 function Paciente({ paciente }) {
   const [open, setOpen] = React.useState(false);
@@ -67,7 +68,9 @@ function Paciente({ paciente }) {
                   </TableBody>
                 </Table>
                 <Stack>
-                  <Button variant="contained" sx={{backgroundColor: '#2f5496'}}>Más</Button>
+                  <Link to={`/profile-paciente/${paciente.id}`}>
+                    <Button variant="contained" sx={{backgroundColor: '#2f5496'}}>Más</Button>
+                  </Link>
                 </Stack>
               </div>
             </Box>

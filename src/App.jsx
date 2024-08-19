@@ -17,7 +17,7 @@ export default function App () {
                         <Route path="/" element={<HomePage />} />
                         <Route path="/login" element={<AuthenticatorTheme />}></Route>
                         <Route path="/update-user" element={<UpdateUser />}></Route>
-                        <Route path="/profile-paciente/:pacienteId" element={<ProfilePaciente />} />
+                        <Route path="/profile-paciente/:id" element={<ProfilePaciente />} />
                     </Routes>
                 </Router>
               <Router />
