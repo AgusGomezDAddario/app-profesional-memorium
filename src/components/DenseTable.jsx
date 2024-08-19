@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { usePacientes } from "../pacientesInfo/usePacientes.js";
+import './Table.css';
 
 export default function DenseTable() {
   const { id } = useParams();
@@ -28,12 +29,12 @@ export default function DenseTable() {
       {pacienteProfile ? (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-            <TableHead>
+            <TableHead className='header'>
               <TableRow>
-                <TableCell>Juego</TableCell>
-                <TableCell align="right">Aciertos</TableCell>
-                <TableCell align="right">Errores</TableCell>
-                <TableCell align="right">Rendimiento</TableCell>
+                <TableCell align="center" sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }}>Juego</TableCell>
+                <TableCell align="center" sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }}>Aciertos</TableCell>
+                <TableCell align="center" sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }}>Errores</TableCell>
+                <TableCell align="center" sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }}>Rendimiento</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

@@ -14,7 +14,6 @@ export const ProfilePaciente = () => {
         pacientes.forEach((paciente) => {
             if (paciente.id === id) {
                 setPacienteProfile(paciente);
-                console.log(paciente);
             }
         });
     }, [pacientes, id]);
@@ -23,10 +22,10 @@ export const ProfilePaciente = () => {
         <div>
             {pacienteProfile ? (
                 <div>
-                    <p style={{color: 'white', fontSize: '3rem'}}>{pacienteProfile.nombre}</p>
+                    <p style={{color: 'white', fontSize: '3rem', marginTop: '0.7rem'}}>{pacienteProfile.nombre}</p>
                     <Divider style={{backgroundColor: 'white'}} />
-                    <p style={{color: 'white', fontSize: '1.8rem'}}>Edad: {pacienteProfile.edad}</p>
-                    <p style={{color: 'white', fontSize: '1.8rem'}}>Desempeño: {pacienteProfile.desempenoGlobal}%</p>
+                    <p style={{color: 'white', fontSize: '1.8rem', marginTop: '0.3rem'}}>Edad: {pacienteProfile.edad}</p>
+                    <p style={{color: 'white', fontSize: '1.8rem', marginTop: '0.3rem'}}>Desempeño: {pacienteProfile.desempenoGlobal}%</p>
                     <DenseTable id={id}/>
                 </div>
             ) : (
