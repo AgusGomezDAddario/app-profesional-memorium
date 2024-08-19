@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import pacientes from "./pacientes";
+import { indexOf } from "list";
 
 function calcularPorcentajeAciertos(globalScores) {
     let totalCorrect = 0;
@@ -17,7 +18,7 @@ function calcularPorcentajeAciertos(globalScores) {
 
 export function usePacientes() {
     const [pacientesData, setPacientesData] = useState([]);
-
+    const [game, setGame] = useState(1);
 
     useEffect(() => {
         if (!Array.isArray(pacientes)) return;
@@ -27,6 +28,13 @@ export function usePacientes() {
             nombre: paciente.name,
             edad: paciente.age,
             desempenoGlobal: calcularPorcentajeAciertos(paciente.globalScores),
+
+            historial: Object.entries(paciente.globalScores).map(([juego, scores]) => ({
+                juego: scores.game,
+                errores: scores.scoreincorrect,
+                aciertos: scores.scorecorrect,
+            }
+        )),
         }));
         setPacientesData(mappedPacientes);
     }, [pacientes]);

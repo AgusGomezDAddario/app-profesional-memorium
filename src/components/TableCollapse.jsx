@@ -13,49 +13,13 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { usePacientes } from "../hooks/usePacientes.js";
+import { usePacientes } from "../pacientesInfo/usePacientes.js";
 import './Table.css';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-function createData(nombre, edad, desempenoGlobal) {
-  return {
-    nombre,
-    edad,
-    desempenoGlobal,
-    historial: [
-      {
-        juego: 1,
-        aciertos: 2,
-        errores: 3,
-      },
-      {
-        juego: 2,
-        aciertos: 2,
-        errores: 3,
-      },
-      {
-        juego: 3,
-        aciertos: 2,
-        errores: 3,
-      },
-      {
-        juego: 4,
-        aciertos: 2,
-        errores: 3,
-      },
-      {
-        juego: 5,
-        aciertos: 2,
-        errores: 3,
-      },
-    ],
-  };
-}
-
 function Paciente({ paciente }) {
   const [open, setOpen] = React.useState(false);
-
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -91,8 +55,8 @@ function Paciente({ paciente }) {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {paciente.historial.map((historial) => (
-                      <TableRow key={historial.juego}>
+                  {paciente.historial && paciente.historial.map((historial, index) => (
+                      <TableRow key={index}>
                         <TableCell component="th" scope="row" align="center">
                           {historial.juego}
                         </TableCell>
@@ -103,7 +67,7 @@ function Paciente({ paciente }) {
                   </TableBody>
                 </Table>
                 <Stack>
-                <Button variant="contained" sx={{backgroundColor: '#2f5496'}}>Más</Button>
+                  <Button variant="contained" sx={{backgroundColor: '#2f5496'}}>Más</Button>
                 </Stack>
               </div>
             </Box>
@@ -116,24 +80,19 @@ function Paciente({ paciente }) {
 
 Paciente.propTypes = {
   paciente: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     nombre: PropTypes.string.isRequired,
     edad: PropTypes.number.isRequired,
     desempenoGlobal: PropTypes.number.isRequired,
-    historial: PropTypes.arrayOf(
-      PropTypes.shape({
-        errores: PropTypes.number.isRequired,
-        aciertos: PropTypes.number.isRequired,
-        juego: PropTypes.number.isRequired,
-      })
-    ).isRequired,
+    historial: PropTypes.arrayOf(PropTypes.shape({
+      juego: PropTypes.string.isRequired,
+      aciertos: PropTypes.number.isRequired,
+      errores: PropTypes.number.isRequired,
+    })).isRequired,
   }).isRequired,
 };
-
-const pacientesData = [
-  createData('Jorge Lopez', 89, 89, '-'),
-];
-
 function CollapsibleTable () {
+  const pacientes = usePacientes();
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table" className='table'>
@@ -147,8 +106,8 @@ function CollapsibleTable () {
           </TableRow>
         </TableHead>
         <TableBody>
-          {pacientesData.map((paciente) => (
-            <Paciente key={paciente.nombre} paciente={paciente} />
+          {Object.entries(pacientes).map(([dni, paciente]) => (
+            <Paciente key={dni} paciente={paciente} />
           ))}
         </TableBody>
       </Table>
