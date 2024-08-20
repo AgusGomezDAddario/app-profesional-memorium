@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import pacientes from "./pacientes";
-import { indexOf } from "list";
 
 function calcularPorcentajeAciertos(globalScores) {
     let totalCorrect = 0;
@@ -40,3 +39,15 @@ export function usePacientes() {
     }, [pacientes]);
     return pacientesData;
 }
+
+export function calcularPorcentajeAciertosPorJuego(historial) {
+    console.log(historial);
+    let totalCorrect = 0;
+    let totalAttempts = 0;
+    
+    totalCorrect += historial.aciertos; 
+    totalAttempts += historial.errores + historial.aciertos;
+    
+    const porcentajeAciertos = totalAttempts > 0 ? (totalCorrect * 100) / totalAttempts : 0;
+    return porcentajeAciertos.toFixed(2); 
+  }
