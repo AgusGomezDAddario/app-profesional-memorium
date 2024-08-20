@@ -41,7 +41,6 @@ export function usePacientes() {
 }
 
 export function calcularPorcentajeAciertosPorJuego(historial) {
-    console.log(historial);
     let totalCorrect = 0;
     let totalAttempts = 0;
     
