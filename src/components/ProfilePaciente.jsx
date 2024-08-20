@@ -5,6 +5,7 @@ import { usePacientes } from "../pacientesInfo/usePacientes.js";
 import Divider from '@mui/material/Divider';
 import DenseTable from './DenseTable.jsx';
 import { Link } from 'react-router-dom';
+// import { OutlinedCard } from './material-ui/CardAnotaciones.jsx';
 
 export const ProfilePaciente = () => {
     const { id } = useParams();
@@ -30,6 +31,9 @@ export const ProfilePaciente = () => {
                         <a style={{color: 'white', fontSize: '1.2rem', marginTop: '0.3rem', marginLeft: '1.5rem', display: 'flex', fontFamily: 'Gentium Plus'}}>Volver a Pacientes</a>
                     </Link>
                     <DenseTable id={id}/>
+                    <div style={{marginTop: '1.5rem', width: '100%', alignContent: 'center', justifyContent: 'center', display: 'flex'}}>
+                        {/* <OutlinedCard /> */}
+                    </div>
                 </div>
             ) : (
                 <p>Cargando...</p>
