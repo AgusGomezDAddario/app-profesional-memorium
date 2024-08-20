@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { usePacientes } from "../pacientesInfo/usePacientes.js";
 import './Table.css';
+import { calcularPorcentajeAciertosPorJuego } from "../pacientesInfo/usePacientes.js";
 
 export default function DenseTable() {
   const { id } = useParams();
@@ -46,7 +47,7 @@ export default function DenseTable() {
                     </TableCell>
                     <TableCell align="center">{historial.aciertos}</TableCell>
                     <TableCell align="center">{historial.errores}</TableCell>
-                    <TableCell align="center">9999</TableCell>
+                    <TableCell align="center">{calcularPorcentajeAciertosPorJuego(historial)}</TableCell>
                   </TableRow>
                 ))}
             </TableBody>

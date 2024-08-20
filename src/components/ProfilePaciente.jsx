@@ -12,12 +12,11 @@ export const ProfilePaciente = () => {
     const [pacienteProfile, setPacienteProfile] = useState(null);
 
     useEffect(() => {
-        pacientes.forEach((paciente) => {
-            if (paciente.id === id) {
-                setPacienteProfile(paciente);
-            }
-        });
-    }, [pacientes, id]);
+        const pacienteEncontrado = pacientes.find((paciente) => paciente.id === id);
+        if (pacienteEncontrado) {
+            setPacienteProfile(pacienteEncontrado);
+        }
+    }, [id, pacientes]);
 
     return (
         <div>
