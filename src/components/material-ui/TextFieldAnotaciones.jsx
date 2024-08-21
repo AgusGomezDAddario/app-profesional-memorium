@@ -1,8 +1,8 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
-import TextField from "@mui/material/TextField";
-import { useState, useRef } from "react";
-import { Button } from "@mui/material";
+import React, { useContext } from 'react';
+import { styled } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+import { Button } from '@mui/material';
+import { AnotacionContext } from '../../contexts/anotaciones';
 
 const TextFieldCustom = styled(TextField)({
   "& label.Mui-focused": {
@@ -29,31 +29,9 @@ const TextFieldCustom = styled(TextField)({
 });
 
 export const TextFieldAnotacion = () => {
-  const [anotacionFinal, setAnotacionFinal] = useState("");
-  const anotacionRef = useRef("");
-
-  const clearAnotacion = () => {
-    anotacionRef.current.value = "";
-  };
-
-  const obtenerAnotacion = () => {
-    setAnotacionFinal(anotacionRef.current.value);
-  };
-
-  const imprimirAnotacion = () => {
-    console.log(anotacionFinal);
-    clearAnotacion();
-  };
+  const { anotacionRef, obtenerAnotacion, anotacionFinal, clearAnotacion } = useContext(AnotacionContext);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "stretch",
-      }}
-    >
       <TextFieldCustom
         label="Anotación"
         id="anotaciones-pacientes"
@@ -63,13 +41,7 @@ export const TextFieldAnotacion = () => {
         variant="outlined"
         onChange={obtenerAnotacion}
       />
-      <Button
-        variant="text"
-        sx={{ color: "white" }}
-        onClick={imprimirAnotacion}
-      >
-        Enviar
-      </Button>
-    </div>
   );
 };
+
+// export default TextFieldAnotacion;
