@@ -4,33 +4,13 @@ import { TextFieldAnotacion } from "./material-ui/TextFieldAnotaciones.jsx";
 import { AnotacionContext } from "../contexts/anotaciones";
 import { Button } from "@mui/material";
 import { useContext } from "react";
-import { ddbDocClient, PutCommand, ScanCommand } from '../dinamodb.js';
 import { useParams } from "react-router-dom";
-
-
-const saveAnotacionOnBD = async (id_row, dni, date_row, note) => {
-  try {
-    const params = {
-      TableName: "patient_annotations",
-      Item: {
-        id: id_row,
-        date: date_row, 
-        anotacion: note,
-        paciente_dni: dni,
-      },
-    };
-    await ddbDocClient.send(new PutCommand(params));
-    console.log("Anotación guardada con éxito");
-  } catch (err) {
-    console.error("Error al guardar la anotación: ", err);
-  }
-};
-
+import { saveAnotacionOnBD, countItemsInTable } from '../pacientesInfo/pacientesAnotaciones.js';
 
 const PacientesAnotaciones = () => {
   const { anotacionFinal, clearAnotacion } = useContext(AnotacionContext);
   const { id } = useParams();
-  
+
   const generarAnotacionBD = async () => {
     const paciente_dni = id;
     const date_row = new Date().toDateString();
@@ -72,19 +52,6 @@ const PacientesAnotaciones = () => {
       <OutlinedCard />
     </div>
   );
-};
-
-async function countItemsInTable() {
-  try {
-      const params = {
-          TableName: "patient_annotations",
-      };
-      const data = await ddbDocClient.send(new ScanCommand(params));
-      return data.Count;
-  } catch (err) {
-      console.error("Error al contar los items:", err);
-      return null;
-  }
 };
 
 export default PacientesAnotaciones;
