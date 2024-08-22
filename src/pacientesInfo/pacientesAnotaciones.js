@@ -31,16 +31,24 @@ async function countItemsInTable() {
   }
 }
 
-async function getAnotacionesFromBD() {
+async function getAnotacionesFromBD(idPaciente) {
+  console.log("idPaciente: ", idPaciente);
   try {
     const params = {
       TableName: "patient_annotations",
     };
     const data = await ddbDocClient.send(new ScanCommand(params));
-    setAnotaciones(data.Items);
+
+    if (Array.isArray(data.Items)) {
+      const filteredItems = data.Items.filter((item) => item.paciente_dni === idPaciente);
+      return filteredItems;
+    } else {
+      console.error("data.Items no es un array");
+      return [];
+    }
   } catch (err) {
     console.error("Error al obtener las anotaciones: ", err);
-    return null;
+    return [];
   }
 }
 
