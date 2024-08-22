@@ -3,6 +3,8 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { getAnotacionesFromBD } from '../../pacientesInfo/pacientesAnotaciones.js';
+import { useParams } from "react-router-dom";
 
 const card = (
   <React.Fragment>
@@ -18,6 +20,16 @@ const card = (
 );
 
 export const OutlinedCard = () => {
+  const { id } = useParams();
+  const [anotaciones, setAnotaciones] = React.useState([]);
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAnotacionesFromBD(id);
+      setAnotaciones(data);
+    };
+    fetchData();
+  }, [id]);
+  console.log(anotaciones);
   return (
     <Box sx={{ maxWidth: '300px' }}>
       <Card variant="outlined">{card}</Card>
