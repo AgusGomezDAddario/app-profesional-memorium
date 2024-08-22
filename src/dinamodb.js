@@ -1,5 +1,5 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBDocumentClient, PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-provider-cognito-identity";
 
@@ -19,4 +19,4 @@ const client = new DynamoDBClient({
 // Configura el cliente de DynamoDB Document
 const ddbDocClient = DynamoDBDocumentClient.from(client);
 
-export { ddbDocClient, PutCommand };
+export { ddbDocClient, PutCommand, ScanCommand };
