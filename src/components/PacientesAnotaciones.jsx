@@ -6,14 +6,15 @@ import { Button } from "@mui/material";
 import { useContext } from "react";
 import { ddbDocClient, PutCommand } from '../dinamodb.js';
 
-const saveAnotacionOnBD = async (dni, date, note) => {
+const saveAnotacionOnBD = async (id_row, dni, date_row, note) => {
   try {
     const params = {
       TableName: "patient_annotations",
       Item: {
-        paciente_dni: dni,
-        fecha: date, 
+        id: id_row,
+        date: date_row, 
         anotacion: note,
+        paciente_dni: dni,
       },
     };
     await ddbDocClient.send(new PutCommand(params));
@@ -29,7 +30,7 @@ const PacientesAnotaciones = () => {
   const imprimirAnotacion = () => {
     console.log(anotacionFinal);
     clearAnotacion();
-    saveAnotacionOnBD(12345678, "2024-08-21T14:30:00Z", "El paciente muestra signos de mejoría...");
+    saveAnotacionOnBD("3", 12345678, "2024-08-21T14:30:00Z", "El paciente muestra signos de mejoría...");
   };
 
   return (
