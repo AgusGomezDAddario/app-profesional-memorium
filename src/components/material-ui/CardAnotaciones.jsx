@@ -6,18 +6,19 @@ import Typography from '@mui/material/Typography';
 import { getAnotacionesFromBD } from '../../pacientesInfo/pacientesAnotaciones.js';
 import { useParams } from "react-router-dom";
 
-const card = (
-  <React.Fragment>
+const CustomCardContent = ({ content, fecha }) => {
+  content = content || "No hay anotaciones";
+  return (
     <CardContent>
       <Typography sx={{ fontFamily: 'Gentium Plus', fontSize: '1.5rem' }} color="text.primary">
-        Anotaciones Paciente
+        {content}
       </Typography>
-      <Typography sx={{ fontFamily: 'Gentium Plus' }}>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi temporibus id incidunt ex qui corporis iure perferendis corrupti delectus dolor, eveniet placeat exercitationem at fuga repellat illo mollitia saepe. Ducimus!
+      <Typography sx={{ fontFamily: 'Gentium Plus', fontSize: '1.2rem' }}>
+        {fecha}
       </Typography>
     </CardContent>
-  </React.Fragment>
-);
+  );
+};
 
 export const OutlinedCard = () => {
   const { id } = useParams();
@@ -29,10 +30,14 @@ export const OutlinedCard = () => {
     };
     fetchData();
   }, [id]);
-  console.log(anotaciones);
+
   return (
-    <Box sx={{ maxWidth: '300px' }}>
-      <Card variant="outlined">{card}</Card>
+    <Box sx={{ maxWidth: '300px'}}>
+      {anotaciones.map((anotacion, index) => (
+        <Card key={index} variant="outlined" sx={{margin: '10px'}}>
+          <CustomCardContent content={anotacion.anotacion} fecha={anotacion.date} />
+        </Card>
+      ))}
     </Box>
   );
-}
+};
