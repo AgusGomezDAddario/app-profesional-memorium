@@ -5,6 +5,8 @@ import { AnotacionContext } from "../contexts/anotaciones";
 import { Button } from "@mui/material";
 import { useContext } from "react";
 import { ddbDocClient, PutCommand } from '../dinamodb.js';
+import { useParams } from "react-router-dom";
+
 
 const saveAnotacionOnBD = async (id_row, dni, date_row, note) => {
   try {
@@ -24,13 +26,16 @@ const saveAnotacionOnBD = async (id_row, dni, date_row, note) => {
   }
 };
 
+
 const PacientesAnotaciones = () => {
   const { anotacionFinal, clearAnotacion } = useContext(AnotacionContext);
-
-  const imprimirAnotacion = () => {
-    console.log(anotacionFinal);
+  const { id } = useParams();
+  
+  const generarAnotacionBD = () => {
+    const paciente_dni = id;
+    const date = new Date().toDateString();
     clearAnotacion();
-    saveAnotacionOnBD("3", 12345678, "2024-08-21T14:30:00Z", "El paciente muestra signos de mejoría...");
+    saveAnotacionOnBD("3", paciente_dni, date, anotacionFinal);
   };
 
   return (
@@ -57,7 +62,7 @@ const PacientesAnotaciones = () => {
         <Button
           variant="text"
           sx={{ color: "white" }}
-          onClick={imprimirAnotacion}
+          onClick={generarAnotacionBD}
         >
           Enviar
         </Button>
