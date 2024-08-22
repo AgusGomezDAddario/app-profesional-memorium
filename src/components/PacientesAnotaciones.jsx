@@ -13,7 +13,13 @@ const PacientesAnotaciones = () => {
 
   const generarAnotacionBD = async () => {
     const paciente_dni = id;
-    const date_row = new Date().toDateString();
+    const currentDate = new Date();
+    const day = currentDate.getDate();
+    const month = currentDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
+    const hour = currentDate.getHours();
+    const minutes = currentDate.getMinutes();
+    const date_row = `${day}/${month}/${year} ${hour}:${minutes}`;
     clearAnotacion();
     const count = await countItemsInTable();
     const id_row = (count + 1).toString();
