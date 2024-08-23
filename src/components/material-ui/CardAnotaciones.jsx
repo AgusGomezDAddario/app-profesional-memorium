@@ -32,12 +32,21 @@ export const OutlinedCard = () => {
   }, [id]);
 
   return (
-    <Box sx={{ maxWidth: '300px'}}>
+    <div
+    style={{
+      display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+        gap: "1rem",
+        justifyContent: "space-between",
+        alignItems: "stretch",
+        width: "100%",
+    }}
+    >
       {anotaciones.map((anotacion, index) => (
-        <Card key={index} variant="outlined" sx={{margin: '10px'}}>
+        <Card key={index} variant="outlined" sx={{ width: '100%', margin: '0' }}>
           <CustomCardContent content={anotacion.anotacion} fecha={anotacion.date} />
         </Card>
       ))}
-    </Box>
+    </div>
   );
 };
