@@ -6,10 +6,22 @@ import { Button } from "@mui/material";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { saveAnotacionOnBD, countItemsInTable } from '../pacientesInfo/pacientesAnotaciones.js';
+import { SimpleSnackbar } from "./material-ui/SnackbarAnotaciones.jsx";
+import { useRef } from "react";
 
 const PacientesAnotaciones = () => {
   const { anotacionFinal, clearAnotacion } = useContext(AnotacionContext);
   const { id } = useParams();
+  const snackbarRef = useRef();
+
+  const triggerSnackbar = () => {
+    snackbarRef.current.handleClick();
+  };
+
+  const handleButtonClick = async () => {
+    await generarAnotacionBD();
+    triggerSnackbar();
+  };
 
   const generarAnotacionBD = async () => {
     const paciente_dni = id;
@@ -24,6 +36,7 @@ const PacientesAnotaciones = () => {
     const count = await countItemsInTable();
     const id_row = (count + 1).toString();
     saveAnotacionOnBD(id_row, paciente_dni, date_row, anotacionFinal);
+    triggerSnackbar();
   };
 
   return (
@@ -50,12 +63,13 @@ const PacientesAnotaciones = () => {
         <Button
           variant="text"
           sx={{ color: "white" }}
-          onClick={generarAnotacionBD}
+          onClick={handleButtonClick}
         >
           Enviar
         </Button>
       </div>
       <OutlinedCard />
+      <SimpleSnackbar ref={snackbarRef} />
     </div>
   );
 };
