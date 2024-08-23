@@ -30,7 +30,10 @@ const PacientesAnotaciones = () => {
     const month = currentDate.getMonth() + 1;
     const year = currentDate.getFullYear();
     const hour = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
+    let minutes = currentDate.getMinutes();
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
     const date_row = `${day}/${month}/${year} ${hour}:${minutes}`;
     clearAnotacion();
     const count = await countItemsInTable();
