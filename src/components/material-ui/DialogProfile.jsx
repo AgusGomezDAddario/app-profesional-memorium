@@ -46,7 +46,6 @@ export const DialogProfile = () => {
         async function fetchUserInformation() {
             const information = await getUserInformation();
             setuserInformation(information);
-            console.log(userInformation);
         }
         fetchUserInformation();
     }, []);
