@@ -19,6 +19,7 @@ import { signOut } from '@aws-amplify/auth';
 import Divider from '@mui/material/Divider';
 import { useState } from 'react';
 import { DialogProfile } from './DialogProfile';
+import { handleClickMemoriumPaper } from '../../assets/paperMemorium';
 
 export default function TemporaryDrawer() {
     const [open, setOpen] = useState(false);
@@ -47,7 +48,7 @@ export default function TemporaryDrawer() {
                     </ListItemButton>
                 </ListItem>
                 <ListItem key={'Memoria de Trabajo'} disablePadding>
-                    <ListItemButton sx={{color: '#2f5496'}}>
+                    <ListItemButton sx={{color: '#2f5496'}} onClick={handleClickMemoriumPaper}>
                         <ListItemIcon>
                             <PsychologyIcon sx={{color: '#2f5496'}} />
                         </ListItemIcon>
