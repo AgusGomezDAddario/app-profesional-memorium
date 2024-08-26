@@ -7,6 +7,7 @@ import DenseTable from "./DenseTable.jsx";
 import { Link } from "react-router-dom";
 import PacientesAnotaciones from "./PacientesAnotaciones.jsx";
 import { AnotacionProvider } from "../contexts/anotaciones.jsx";
+import { SimpleCharts } from "./material-ui/Chart.jsx";
 
 export const ProfilePaciente = () => {
   const { id } = useParams();
@@ -56,6 +57,7 @@ export const ProfilePaciente = () => {
           <AnotacionProvider>
             <PacientesAnotaciones />
           </AnotacionProvider>
+          <SimpleCharts />
           ,
         </div>
       ) : (
