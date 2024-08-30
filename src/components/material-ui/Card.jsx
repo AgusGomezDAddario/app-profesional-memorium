@@ -13,7 +13,7 @@ export const cardPacientes = (
                 Sección Pacientes
             </Typography>
             <Typography variant="body2" sx={{ fontSize: '1.1rem', fontFamily: 'Gentium Plus', color: 'white' }}>
-                Siga la evolución de sus pacientes en sus tratamientos de la memoria de trabajo y brinde una mejor atención
+                Siga la evolución de sus pacientes en sus tratamientos y brinde una mejor atención
             </Typography>
         </CardContent>
         <CardActions sx={{ backgroundColor: '#2f5496', fontFamily: 'Gentium Plus', color: 'white', borderBottom: '1px solid white', borderLeft: '1px solid white', borderRight: '1px solid white' }}>
