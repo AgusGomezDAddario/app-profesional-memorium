@@ -25,7 +25,7 @@
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@mui/x-charts": "^7.14.0",
     "aws-amplify": "^6.4.3",
-    "aws-sdk": "^2.1667.0",
+    "aws-sdk": "^2.1685.0",
     "core-js": "^3.38.1",
     "dotenv": "^16.4.5",
     "list": "^2.0.19",

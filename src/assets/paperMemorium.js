@@ -14,7 +14,7 @@ export const handleClickMemoriumPaper = async () => {
     const params = {
       Bucket: 'mybuckets3appprofesionalesmemorium',
       Key: 'paper_memoria_trabajo.pdf', 
-      Expires: 60 // Tiempo de expiración del URL
+      Expires: 60 
     };
 
     const data = await s3.getSignedUrlPromise('getObject', params);

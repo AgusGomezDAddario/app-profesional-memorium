@@ -4,7 +4,7 @@ import CollapsibleTable from './TableCollapse';
 import TemporaryDrawer from './material-ui/Drawer';
 import { View } from '@aws-amplify/ui-react';
 import { Header } from './Header';
-import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import AudioPlayer from './AudioInstrucciones';
 
 export const PacientesTable = () => {
     return (
@@ -17,7 +17,7 @@ export const PacientesTable = () => {
                         <h1 className="h1">Bienvenido a su sitio web de Memorium</h1>
                         <h2 className="h2">Aquí tiene el historial de sus pacientes</h2>
                     </div>
-                    <VolumeUpIcon style={{paddingRight: '2rem', fontSize: '5rem', color: 'white', paddingTop: '0'}}/>
+                    <AudioPlayer audioSrc="https://mybuckets3appprofesionalesmemorium.s3.us-east-2.amazonaws.com/instructivo_home_pacientes.mp3" />
                 </div>
                 <CollapsibleTable />
             </div>
