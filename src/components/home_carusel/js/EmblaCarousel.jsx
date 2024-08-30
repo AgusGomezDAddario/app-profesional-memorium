@@ -28,8 +28,9 @@ const EmblaCarousel = (props) => {
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((index) => (
-            <div className="embla__slide" key={index}>
+            <div className="embla__slide embla__class-name" key={index}>
                 <img 
+                className="embla__slide__img"
                 src={images_carrusel[index].src} 
                 alt="Imagen de interfaz de Memorium App Profesional" />
             </div>

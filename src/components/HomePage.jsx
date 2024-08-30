@@ -19,9 +19,9 @@ export const HomePage = () => {
         <OutlinedCard />
         <h3 className='welcome-text'>Memorium te ayuda a seguir de cerca el progreso de tus pacientes y a guiarlos hacia una mejora en su calidad de vida</h3>
         <h3 className='welcome-text'>Explora nuestras herramientas diseñadas para apoyar tu práctica clínica y facilitar el seguimiento de tratamientos</h3>
-        <img src={image} className="imagen_central" alt="Imagen de cerebro con un celular" />
-        <h2 className='welcome-text'>Descubra el universo Memorium y la variedad de herramientas que ofrecemos para el tratamiento en la pérdida de la memoria de trabajo</h2>
         <EmblaCarousel slides={SLIDES} options={OPTIONS}/>
+        <h2 className='welcome-text'>Descubra el universo Memorium y la variedad de herramientas que ofrecemos para el tratamiento en la pérdida de la memoria de trabajo</h2>
+        <img src={image} className="imagen_central" alt="Imagen de cerebro con un celular" />
     </>
   )
 }
