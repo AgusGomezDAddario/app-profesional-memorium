@@ -21,7 +21,7 @@ export const HomePage = () => {
         <h3 className='welcome-text'>Explora nuestras herramientas diseñadas para apoyar tu práctica clínica y facilitar el seguimiento de tratamientos</h3>
         <img src={image} className="imagen_central" alt="Imagen de cerebro con un celular" />
         <h2 className='welcome-text'>Descubra el universo Memorium y la variedad de herramientas que ofrecemos para el tratamiento en la pérdida de la memoria de trabajo</h2>
-        <EmblaCarousel slides={SLIDES} options={OPTIONS} />
+        <EmblaCarousel slides={SLIDES} options={OPTIONS}/>
     </>
   )
 }

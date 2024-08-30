@@ -1,4 +1,5 @@
 import React from 'react'
+import '../images_carrusel'
 import { DotButton, useDotButton } from './EmblaCarouselDotButton'
 import {
   PrevButton,
@@ -6,6 +7,7 @@ import {
   usePrevNextButtons
 } from './EmblaCarouselArrowButtons'
 import useEmblaCarousel from 'embla-carousel-react'
+import { images_carrusel } from '../images_carrusel'
 
 const EmblaCarousel = (props) => {
   const { slides, options } = props
@@ -27,7 +29,9 @@ const EmblaCarousel = (props) => {
         <div className="embla__container">
           {slides.map((index) => (
             <div className="embla__slide" key={index}>
-              <div className="embla__slide__number">{index + 1}</div>
+                <img 
+                src={images_carrusel[index].src} 
+                alt="Imagen de interfaz de Memorium App Profesional" />
             </div>
           ))}
         </div>
