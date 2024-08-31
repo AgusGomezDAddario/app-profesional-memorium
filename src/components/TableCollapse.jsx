@@ -19,12 +19,37 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import SelectVariants from './material-ui/SelectClasfication.jsx'; 
+import { useState, useEffect } from 'react';
+
 
 function Paciente({ paciente }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [clasificacion, setClasificacion] = useState('');
+
+  function getColor () {
+    if (clasificacion === 'mejorando') {
+      return '#d4edda';
+    } else if (clasificacion === 'en_tratamiento') {
+      return '#fff3cd';
+    } else if (clasificacion === 'empeorando') {
+      return '#f8d7da';
+    } else if (clasificacion === 'consulta') {
+      return '#cce5ff';
+    } else if (clasificacion === 'en_alta') {
+      return '#d6d8d9';
+    } else {
+      return '#fff';
+    }
+  }
+
+  useEffect(() => {
+    getColor();
+    console.log(clasificacion);
+  }, [clasificacion]);
+
   return (
     <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+      <TableRow sx={{ '& > *': { borderBottom: 'unset' }, backgroundColor: getColor() }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -39,7 +64,12 @@ function Paciente({ paciente }) {
         </TableCell>
         <TableCell align="center">{paciente.edad}</TableCell>
         <TableCell align="center">{paciente.desempenoGlobal}</TableCell>
-        <TableCell align="center"><SelectVariants /></TableCell>
+        <TableCell align="center">
+          <SelectVariants 
+            clasificacion={clasificacion} 
+            setClasificacion={setClasificacion} 
+          />
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -96,6 +126,7 @@ Paciente.propTypes = {
     })).isRequired,
   }).isRequired,
 };
+
 function CollapsibleTable () {
   const pacientes = usePacientes();
   return (
