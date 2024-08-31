@@ -18,6 +18,7 @@ import './Table.css';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import SelectVariants from './material-ui/SelectClasfication.jsx'; 
 
 function Paciente({ paciente }) {
   const [open, setOpen] = React.useState(false);
@@ -38,6 +39,7 @@ function Paciente({ paciente }) {
         </TableCell>
         <TableCell align="center">{paciente.edad}</TableCell>
         <TableCell align="center">{paciente.desempenoGlobal}</TableCell>
+        <TableCell align="center"><SelectVariants /></TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
