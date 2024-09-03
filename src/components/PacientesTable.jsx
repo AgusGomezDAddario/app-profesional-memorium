@@ -5,6 +5,7 @@ import TemporaryDrawer from './material-ui/Drawer';
 import { View } from '@aws-amplify/ui-react';
 import { Header } from './Header';
 import AudioPlayer from './AudioInstrucciones';
+import SelectFiltrado from './FilterPacientes';
 
 export const PacientesTable = () => {
     return (
@@ -19,6 +20,7 @@ export const PacientesTable = () => {
                     </div>
                     <AudioPlayer audioSrc="https://mybuckets3appprofesionalesmemorium.s3.us-east-2.amazonaws.com/instructivo_home_pacientes.mp3" />
                 </div>
+                <SelectFiltrado />
                 <CollapsibleTable />
             </div>
         </View >

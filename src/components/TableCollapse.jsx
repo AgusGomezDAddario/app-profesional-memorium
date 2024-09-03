@@ -1,44 +1,43 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import * as React from "react";
+import PropTypes from "prop-types";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { usePacientes } from "../pacientesInfo/usePacientes.js";
-import './Table.css';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
-import SelectVariants from './material-ui/SelectClasfication.jsx'; 
-import { useState, useEffect } from 'react';
-
+import "./Table.css";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
+import SelectVariants from "./material-ui/SelectClasfication.jsx";
+import { useState, useEffect } from "react";
 
 function Paciente({ paciente }) {
   const [open, setOpen] = useState(false);
-  const [clasificacion, setClasificacion] = useState('');
+  const [clasificacion, setClasificacion] = useState("");
 
-  function getColor () {
-    if (clasificacion === 'mejorando') {
-      return '#d4edda';
-    } else if (clasificacion === 'en_tratamiento') {
-      return '#fff3cd';
-    } else if (clasificacion === 'empeorando') {
-      return '#f8d7da';
-    } else if (clasificacion === 'consulta') {
-      return '#cce5ff';
-    } else if (clasificacion === 'en_alta') {
-      return '#d6d8d9';
+  function getColor() {
+    if (clasificacion === "mejorando") {
+      return "#d4edda";
+    } else if (clasificacion === "en_tratamiento") {
+      return "#fff3cd";
+    } else if (clasificacion === "empeorando") {
+      return "#f8d7da";
+    } else if (clasificacion === "consulta") {
+      return "#cce5ff";
+    } else if (clasificacion === "en_alta") {
+      return "#d6d8d9";
     } else {
-      return '#fff';
+      return "#fff";
     }
   }
 
@@ -49,7 +48,9 @@ function Paciente({ paciente }) {
 
   return (
     <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' }, backgroundColor: getColor() }}>
+      <TableRow
+        sx={{ "& > *": { borderBottom: "unset" }, backgroundColor: getColor() }}
+      >
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -65,9 +66,9 @@ function Paciente({ paciente }) {
         <TableCell align="center">{paciente.edad}</TableCell>
         <TableCell align="center">{paciente.desempenoGlobal}</TableCell>
         <TableCell align="center">
-          <SelectVariants 
-            clasificacion={clasificacion} 
-            setClasificacion={setClasificacion} 
+          <SelectVariants
+            clasificacion={clasificacion}
+            setClasificacion={setClasificacion}
           />
         </TableCell>
       </TableRow>
@@ -75,33 +76,74 @@ function Paciente({ paciente }) {
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              <Typography sx={{fontSize: '1.4rem', fontFamily: 'Gentium Plus'}} gutterBottom component="div">
+              <Typography
+                sx={{ fontSize: "1.4rem", fontFamily: "Gentium Plus" }}
+                gutterBottom
+                component="div"
+              >
                 Historial
               </Typography>
-              <div className='table-historial'>
+              <div className="table-historial">
                 <Table size="small" aria-label="purchases">
-                  <TableHead className='header'>
+                  <TableHead className="header">
                     <TableRow>
-                      <TableCell align="center" sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }}>Juego</TableCell>
-                      <TableCell align="center" sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }}>Aciertos</TableCell>
-                      <TableCell align="center" sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }}>Errores</TableCell>
+                      <TableCell
+                        align="center"
+                        sx={{
+                          color: "white",
+                          fontSize: "1.2rem",
+                          fontFamily: "Gentium Plus",
+                        }}
+                      >
+                        Juego
+                      </TableCell>
+                      <TableCell
+                        align="center"
+                        sx={{
+                          color: "white",
+                          fontSize: "1.2rem",
+                          fontFamily: "Gentium Plus",
+                        }}
+                      >
+                        Aciertos
+                      </TableCell>
+                      <TableCell
+                        align="center"
+                        sx={{
+                          color: "white",
+                          fontSize: "1.2rem",
+                          fontFamily: "Gentium Plus",
+                        }}
+                      >
+                        Errores
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                  {paciente.historial && paciente.historial.map((historial, index) => (
-                      <TableRow key={index}>
-                        <TableCell component="th" scope="row" align="center">
-                          {historial.juego}
-                        </TableCell>
-                        <TableCell align="center">{historial.aciertos}</TableCell>
-                        <TableCell align="center">{historial.errores}</TableCell>
-                      </TableRow>
-                    ))}
+                    {paciente.historial &&
+                      paciente.historial.map((historial, index) => (
+                        <TableRow key={index}>
+                          <TableCell component="th" scope="row" align="center">
+                            {historial.juego}
+                          </TableCell>
+                          <TableCell align="center">
+                            {historial.aciertos}
+                          </TableCell>
+                          <TableCell align="center">
+                            {historial.errores}
+                          </TableCell>
+                        </TableRow>
+                      ))}
                   </TableBody>
                 </Table>
                 <Stack>
                   <Link to={`/profile-paciente/${paciente.id}`}>
-                    <Button variant="contained" sx={{backgroundColor: '#2f5496'}}>Más</Button>
+                    <Button
+                      variant="contained"
+                      sx={{ backgroundColor: "#2f5496" }}
+                    >
+                      Más
+                    </Button>
                   </Link>
                 </Stack>
               </div>
@@ -119,35 +161,73 @@ Paciente.propTypes = {
     nombre: PropTypes.string.isRequired,
     edad: PropTypes.number.isRequired,
     desempenoGlobal: PropTypes.number.isRequired,
-    historial: PropTypes.arrayOf(PropTypes.shape({
-      juego: PropTypes.string.isRequired,
-      aciertos: PropTypes.number.isRequired,
-      errores: PropTypes.number.isRequired,
-    })).isRequired,
+    historial: PropTypes.arrayOf(
+      PropTypes.shape({
+        juego: PropTypes.string.isRequired,
+        aciertos: PropTypes.number.isRequired,
+        errores: PropTypes.number.isRequired,
+      })
+    ).isRequired,
   }).isRequired,
 };
 
-function CollapsibleTable () {
+function CollapsibleTable() {
   const pacientes = usePacientes();
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table" className='table'>
-        <TableHead className='header'>
-          <TableRow>
-            <TableCell />
-            <TableCell sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }} align="center">Nombre</TableCell>
-            <TableCell sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }} align="center">Edad</TableCell>
-            <TableCell sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }} align="center">Desempeño(%)</TableCell>
-            <TableCell sx={{ color: 'white', fontSize: '1.2rem', fontFamily: 'Gentium Plus' }} align="center">Clasificación</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {Object.entries(pacientes).map(([dni, paciente]) => (
-            <Paciente key={dni} paciente={paciente} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+      <TableContainer component={Paper}>
+        <Table aria-label="collapsible table" className="table">
+          <TableHead className="header">
+            <TableRow>
+              <TableCell />
+              <TableCell
+                sx={{
+                  color: "white",
+                  fontSize: "1.2rem",
+                  fontFamily: "Gentium Plus",
+                }}
+                align="center"
+              >
+                Nombre
+              </TableCell>
+              <TableCell
+                sx={{
+                  color: "white",
+                  fontSize: "1.2rem",
+                  fontFamily: "Gentium Plus",
+                }}
+                align="center"
+              >
+                Edad
+              </TableCell>
+              <TableCell
+                sx={{
+                  color: "white",
+                  fontSize: "1.2rem",
+                  fontFamily: "Gentium Plus",
+                }}
+                align="center"
+              >
+                Desempeño(%)
+              </TableCell>
+              <TableCell
+                sx={{
+                  color: "white",
+                  fontSize: "1.2rem",
+                  fontFamily: "Gentium Plus",
+                }}
+                align="center"
+              >
+                Clasificación
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {Object.entries(pacientes).map(([dni, paciente]) => (
+              <Paciente key={dni} paciente={paciente} />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
   );
 }
 
