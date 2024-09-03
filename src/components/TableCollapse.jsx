@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -18,12 +18,16 @@ import "./Table.css";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import SelectFiltrado from "./FilterPacientes.jsx";
 import SelectVariants from "./material-ui/SelectClasfication.jsx";
-import { useState, useEffect } from "react";
+import { useFilter } from "../contexts/filters";
 
 function Paciente({ paciente }) {
   const [open, setOpen] = useState(false);
   const [clasificacion, setClasificacion] = useState("");
+  const { filtrado } = useFilter();
+
+  console.log(filtrado);
 
   function getColor() {
     if (clasificacion === "mejorando") {
@@ -41,117 +45,116 @@ function Paciente({ paciente }) {
     }
   }
 
-  useEffect(() => {
-    getColor();
-    console.log(clasificacion);
-  }, [clasificacion]);
-
   return (
-    <React.Fragment>
-      <TableRow
-        sx={{ "& > *": { borderBottom: "unset" }, backgroundColor: getColor() }}
-      >
-        <TableCell>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
-        <TableCell component="th" scope="row" align="center">
-          {paciente.nombre}
-        </TableCell>
-        <TableCell align="center">{paciente.edad}</TableCell>
-        <TableCell align="center">{paciente.desempenoGlobal}</TableCell>
-        <TableCell align="center">
-          <SelectVariants
-            clasificacion={clasificacion}
-            setClasificacion={setClasificacion}
-          />
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography
-                sx={{ fontSize: "1.4rem", fontFamily: "Gentium Plus" }}
-                gutterBottom
-                component="div"
-              >
-                Historial
-              </Typography>
-              <div className="table-historial">
-                <Table size="small" aria-label="purchases">
-                  <TableHead className="header">
-                    <TableRow>
-                      <TableCell
-                        align="center"
-                        sx={{
-                          color: "white",
-                          fontSize: "1.2rem",
-                          fontFamily: "Gentium Plus",
-                        }}
+    <>
+      {filtrado === "" || filtrado === clasificacion? (
+        <React.Fragment>
+        <TableRow
+          sx={{ "& > *": { borderBottom: "unset" }, backgroundColor: getColor() }}
+        >
+          <TableCell>
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => setOpen(!open)}
+            >
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
+          <TableCell component="th" scope="row" align="center">
+            {paciente.nombre}
+          </TableCell>
+          <TableCell align="center">{paciente.edad}</TableCell>
+          <TableCell align="center">{paciente.desempenoGlobal}</TableCell>
+          <TableCell align="center">
+            <SelectVariants
+              clasificacion={clasificacion}
+              setClasificacion={setClasificacion}
+            />
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <Box sx={{ margin: 1 }}>
+                <Typography
+                  sx={{ fontSize: "1.4rem", fontFamily: "Gentium Plus" }}
+                  gutterBottom
+                  component="div"
+                >
+                  Historial
+                </Typography>
+                <div className="table-historial">
+                  <Table size="small" aria-label="purchases">
+                    <TableHead className="header">
+                      <TableRow>
+                        <TableCell
+                          align="center"
+                          sx={{
+                            color: "white",
+                            fontSize: "1.2rem",
+                            fontFamily: "Gentium Plus",
+                          }}
+                        >
+                          Juego
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          sx={{
+                            color: "white",
+                            fontSize: "1.2rem",
+                            fontFamily: "Gentium Plus",
+                          }}
+                        >
+                          Aciertos
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          sx={{
+                            color: "white",
+                            fontSize: "1.2rem",
+                            fontFamily: "Gentium Plus",
+                          }}
+                        >
+                          Errores
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {paciente.historial &&
+                        paciente.historial.map((historial, index) => (
+                          <TableRow key={index}>
+                            <TableCell component="th" scope="row" align="center">
+                              {historial.juego}
+                            </TableCell>
+                            <TableCell align="center">
+                              {historial.aciertos}
+                            </TableCell>
+                            <TableCell align="center">
+                              {historial.errores}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
+                  <Stack>
+                    <Link to={`/profile-paciente/${paciente.id}`}>
+                      <Button
+                        variant="contained"
+                        sx={{ backgroundColor: "#2f5496" }}
                       >
-                        Juego
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        sx={{
-                          color: "white",
-                          fontSize: "1.2rem",
-                          fontFamily: "Gentium Plus",
-                        }}
-                      >
-                        Aciertos
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        sx={{
-                          color: "white",
-                          fontSize: "1.2rem",
-                          fontFamily: "Gentium Plus",
-                        }}
-                      >
-                        Errores
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {paciente.historial &&
-                      paciente.historial.map((historial, index) => (
-                        <TableRow key={index}>
-                          <TableCell component="th" scope="row" align="center">
-                            {historial.juego}
-                          </TableCell>
-                          <TableCell align="center">
-                            {historial.aciertos}
-                          </TableCell>
-                          <TableCell align="center">
-                            {historial.errores}
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                  </TableBody>
-                </Table>
-                <Stack>
-                  <Link to={`/profile-paciente/${paciente.id}`}>
-                    <Button
-                      variant="contained"
-                      sx={{ backgroundColor: "#2f5496" }}
-                    >
-                      Más
-                    </Button>
-                  </Link>
-                </Stack>
-              </div>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-    </React.Fragment>
+                        Más
+                      </Button>
+                    </Link>
+                  </Stack>
+                </div>
+              </Box>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+      </React.Fragment>
+      ) : null}
+    </>
   );
 }
 
@@ -173,7 +176,11 @@ Paciente.propTypes = {
 
 function CollapsibleTable() {
   const pacientes = usePacientes();
+  const { filtrado, setFiltrado } = useFilter();
+
   return (
+    <>
+      <SelectFiltrado filtrado={filtrado} setFiltrado={setFiltrado}/>
       <TableContainer component={Paper}>
         <Table aria-label="collapsible table" className="table">
           <TableHead className="header">
@@ -222,12 +229,13 @@ function CollapsibleTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {Object.entries(pacientes).map(([dni, paciente]) => (
-              <Paciente key={dni} paciente={paciente} />
-            ))}
+          {Object.entries(pacientes).map(([dni, paciente]) => (
+            <Paciente key={dni} paciente={paciente} />
+          ))}
           </TableBody>
         </Table>
       </TableContainer>
+    </>
   );
 }
 

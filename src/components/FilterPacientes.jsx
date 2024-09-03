@@ -3,7 +3,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import "./PacientesTable.css";
 import { styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 
@@ -18,9 +17,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     fontSize: 16,
     padding: "10px 26px 10px 12px",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
-    fontFamily: [
-      "Gentium Plus",
-    ].join(","),
+    fontFamily: ["Gentium Plus"].join(","),
     "&:focus": {
       borderRadius: 4,
       borderColor: "white",
@@ -35,9 +32,9 @@ export default function SelectFiltrado({ filtrado, setFiltrado }) {
   };
 
   return (
-    <div style={{ display: "flex", alignItems: "center" }}>
+    <div style={{ display: "flex", alignItems: "baseline"}}>
       <h2 className="h2">Filtrado de pacientes</h2>
-      <FormControl sx={{ m: 1, minWidth: '170px'}} variant="standard">
+      <FormControl sx={{ m: 1, minWidth: "170px" }} variant="standard">
         <Select
           labelId="demo-customized-select-label"
           id="demo-customized-select"
@@ -46,13 +43,13 @@ export default function SelectFiltrado({ filtrado, setFiltrado }) {
           input={<BootstrapInput />}
         >
           <MenuItem value="">
-            <em>None</em>
+            <em>-</em>
           </MenuItem>
-          <MenuItem value={"mejorando"}>Mejorando</MenuItem>
-          <MenuItem value={"en_tratamiento"}>En Tratamiento</MenuItem>
-          <MenuItem value={"empeorando"}>Empeorando</MenuItem>
-          <MenuItem value={"consulta"}>Consulta</MenuItem>
-          <MenuItem value={"en_alta"}>En Alta</MenuItem>
+          <MenuItem value="mejorando">Mejorando</MenuItem>
+          <MenuItem value="en_tratamiento">En Tratamiento</MenuItem>
+          <MenuItem value="empeorando">Empeorando</MenuItem>
+          <MenuItem value="consulta">Consulta</MenuItem>
+          <MenuItem value="en_alta">En Alta</MenuItem>
         </Select>
       </FormControl>
     </div>
