@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
+import TableSortLabel from '@mui/material/TableSortLabel';
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -22,12 +23,26 @@ import SelectFiltrado from "./FilterPacientes.jsx";
 import SelectVariants from "./material-ui/SelectClasfication.jsx";
 import { useFilter } from "../contexts/filters";
 
+function descendingComparator(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
+
+function getComparator(order, orderBy) {
+  return order === 'desc'
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+}
+
 function Paciente({ paciente }) {
   const [open, setOpen] = useState(false);
   const [clasificacion, setClasificacion] = useState("");
   const { filtrado } = useFilter();
-
-  console.log(filtrado);
 
   function getColor() {
     if (clasificacion === "mejorando") {
@@ -47,112 +62,112 @@ function Paciente({ paciente }) {
 
   return (
     <>
-      {filtrado === "" || filtrado === clasificacion? (
+      {filtrado === "" || filtrado === clasificacion ? (
         <React.Fragment>
-        <TableRow
-          sx={{ "& > *": { borderBottom: "unset" }, backgroundColor: getColor() }}
-        >
-          <TableCell>
-            <IconButton
-              aria-label="expand row"
-              size="small"
-              onClick={() => setOpen(!open)}
-            >
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
-          </TableCell>
-          <TableCell component="th" scope="row" align="center">
-            {paciente.nombre}
-          </TableCell>
-          <TableCell align="center">{paciente.edad}</TableCell>
-          <TableCell align="center">{paciente.desempenoGlobal}</TableCell>
-          <TableCell align="center">
-            <SelectVariants
-              clasificacion={clasificacion}
-              setClasificacion={setClasificacion}
-            />
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box sx={{ margin: 1 }}>
-                <Typography
-                  sx={{ fontSize: "1.4rem", fontFamily: "Gentium Plus" }}
-                  gutterBottom
-                  component="div"
-                >
-                  Historial
-                </Typography>
-                <div className="table-historial">
-                  <Table size="small" aria-label="purchases">
-                    <TableHead className="header">
-                      <TableRow>
-                        <TableCell
-                          align="center"
-                          sx={{
-                            color: "white",
-                            fontSize: "1.2rem",
-                            fontFamily: "Gentium Plus",
-                          }}
+          <TableRow
+            sx={{ "& > *": { borderBottom: "unset" }, backgroundColor: getColor() }}
+          >
+            <TableCell>
+              <IconButton
+                aria-label="expand row"
+                size="small"
+                onClick={() => setOpen(!open)}
+              >
+                {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+              </IconButton>
+            </TableCell>
+            <TableCell component="th" scope="row" align="center">
+              {paciente.nombre}
+            </TableCell>
+            <TableCell align="center">{paciente.edad}</TableCell>
+            <TableCell align="center">{paciente.desempenoGlobal}</TableCell>
+            <TableCell align="center">
+              <SelectVariants
+                clasificacion={clasificacion}
+                setClasificacion={setClasificacion}
+              />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <Box sx={{ margin: 1 }}>
+                  <Typography
+                    sx={{ fontSize: "1.4rem", fontFamily: "Gentium Plus" }}
+                    gutterBottom
+                    component="div"
+                  >
+                    Historial
+                  </Typography>
+                  <div className="table-historial">
+                    <Table size="small" aria-label="purchases">
+                      <TableHead className="header">
+                        <TableRow>
+                          <TableCell
+                            align="center"
+                            sx={{
+                              color: "white",
+                              fontSize: "1.2rem",
+                              fontFamily: "Gentium Plus",
+                            }}
+                          >
+                            Juego
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            sx={{
+                              color: "white",
+                              fontSize: "1.2rem",
+                              fontFamily: "Gentium Plus",
+                            }}
+                          >
+                            Aciertos
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            sx={{
+                              color: "white",
+                              fontSize: "1.2rem",
+                              fontFamily: "Gentium Plus",
+                            }}
+                          >
+                            Errores
+                          </TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {paciente.historial &&
+                          paciente.historial.map((historial, index) => (
+                            <TableRow key={index}>
+                              <TableCell component="th" scope="row" align="center">
+                                {historial.juego}
+                              </TableCell>
+                              <TableCell align="center">
+                                {historial.aciertos}
+                              </TableCell>
+                              <TableCell align="center">
+                                {historial.errores}
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                      </TableBody>
+                    </Table>
+                    <Stack>
+                      <Link to={`/profile-paciente/${paciente.id}`}>
+                        <Button
+                          variant="contained"
+                          sx={{ backgroundColor: "#2f5496" }}
                         >
-                          Juego
-                        </TableCell>
-                        <TableCell
-                          align="center"
-                          sx={{
-                            color: "white",
-                            fontSize: "1.2rem",
-                            fontFamily: "Gentium Plus",
-                          }}
-                        >
-                          Aciertos
-                        </TableCell>
-                        <TableCell
-                          align="center"
-                          sx={{
-                            color: "white",
-                            fontSize: "1.2rem",
-                            fontFamily: "Gentium Plus",
-                          }}
-                        >
-                          Errores
-                        </TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {paciente.historial &&
-                        paciente.historial.map((historial, index) => (
-                          <TableRow key={index}>
-                            <TableCell component="th" scope="row" align="center">
-                              {historial.juego}
-                            </TableCell>
-                            <TableCell align="center">
-                              {historial.aciertos}
-                            </TableCell>
-                            <TableCell align="center">
-                              {historial.errores}
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                    </TableBody>
-                  </Table>
-                  <Stack>
-                    <Link to={`/profile-paciente/${paciente.id}`}>
-                      <Button
-                        variant="contained"
-                        sx={{ backgroundColor: "#2f5496" }}
-                      >
-                        Más
-                      </Button>
-                    </Link>
-                  </Stack>
-                </div>
-              </Box>
-            </Collapse>
-          </TableCell>
-        </TableRow>
-      </React.Fragment>
+                          Más
+                        </Button>
+                      </Link>
+                    </Stack>
+                  </div>
+                </Box>
+              </Collapse>
+            </TableCell>
+          </TableRow>
+        </React.Fragment>
       ) : null}
     </>
   );
@@ -177,10 +192,26 @@ Paciente.propTypes = {
 function CollapsibleTable() {
   const pacientes = usePacientes();
   const { filtrado, setFiltrado } = useFilter();
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('nombre');
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
+
+  const sortedPacientes = useMemo(
+    () =>
+      Object.entries(pacientes)
+        .map(([dni, paciente]) => paciente)
+        .sort(getComparator(order, orderBy)),
+    [pacientes, order, orderBy]
+  );
 
   return (
     <>
-      <SelectFiltrado filtrado={filtrado} setFiltrado={setFiltrado}/>
+      <SelectFiltrado filtrado={filtrado} setFiltrado={setFiltrado} />
       <TableContainer component={Paper}>
         <Table aria-label="collapsible table" className="table">
           <TableHead className="header">
@@ -193,8 +224,17 @@ function CollapsibleTable() {
                   fontFamily: "Gentium Plus",
                 }}
                 align="center"
+                sortDirection={orderBy === 'nombre' ? order : false}
               >
-                Nombre
+                <TableSortLabel
+                  active={orderBy === 'nombre'}
+                  direction={orderBy === 'nombre' ? order : 'asc'}
+                  onClick={(event) => handleRequestSort(event, 'nombre')}
+                  style={{color: "white"}}
+                  sx={{ color: "white", '& .MuiTableSortLabel-icon': { color: "white !important" } }}
+                >
+                  Nombre
+                </TableSortLabel>
               </TableCell>
               <TableCell
                 sx={{
@@ -203,8 +243,17 @@ function CollapsibleTable() {
                   fontFamily: "Gentium Plus",
                 }}
                 align="center"
+                sortDirection={orderBy === 'edad' ? order : false}
               >
-                Edad
+                <TableSortLabel
+                  active={orderBy === 'edad'}
+                  direction={orderBy === 'edad' ? order : 'asc'}
+                  onClick={(event) => handleRequestSort(event, 'edad')}
+                  style={{color: "white"}}
+                  sx={{ color: "white", '& .MuiTableSortLabel-icon': { color: "white !important" } }}
+                >
+                  Edad
+                </TableSortLabel>
               </TableCell>
               <TableCell
                 sx={{
@@ -229,9 +278,9 @@ function CollapsibleTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-          {Object.entries(pacientes).map(([dni, paciente]) => (
-            <Paciente key={dni} paciente={paciente} />
-          ))}
+            {sortedPacientes.map((paciente) => (
+              <Paciente key={paciente.id} paciente={paciente} />
+            ))}
           </TableBody>
         </Table>
       </TableContainer>

@@ -43,7 +43,7 @@ export default function SelectFiltrado({ filtrado, setFiltrado }) {
           input={<BootstrapInput />}
         >
           <MenuItem value="">
-            <em>-</em>
+            <em>Todos</em>
           </MenuItem>
           <MenuItem value="mejorando">Mejorando</MenuItem>
           <MenuItem value="en_tratamiento">En Tratamiento</MenuItem>
