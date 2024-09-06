@@ -32,15 +32,19 @@ export const TextFieldAnotacion = () => {
   const { anotacionRef, obtenerAnotacion, anotacionFinal, clearAnotacion } = useContext(AnotacionContext);
 
   return (
-      <TextFieldCustom
-        label="Anotación"
-        id="anotaciones-pacientes"
-        multiline
-        rows={4}
-        inputRef={anotacionRef}
-        variant="outlined"
-        onChange={obtenerAnotacion}
-      />
+    <TextFieldCustom
+      label="Anotación"
+      style={{color: 'white'}}
+      id="anotaciones-pacientes"
+      multiline
+      rows={4}
+      inputRef={anotacionRef}
+      variant="outlined"
+      InputLabelProps={{
+        style: { color: 'white' },
+      }}
+      onChange={obtenerAnotacion}
+    />
   );
 };
 
