@@ -2,7 +2,7 @@ export const images_carrusel = [
     {
         id: 0,
         src: '../../src/images/platform_1.png',
-        text: 'Conozca nieustra plataforma',
+        text: 'Conozca nuestra plataforma',
     },
     {
         id: 1,

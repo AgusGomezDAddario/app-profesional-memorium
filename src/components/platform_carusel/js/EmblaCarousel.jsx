@@ -29,8 +29,8 @@ const EmblaCarousel = (props) => {
                 className="embla__slide__img"
                 src={images_carrusel[index].src} 
                 alt="Imagen de interfaz de Memorium App Profesional" />
-              <div className="embla__slide__text">
-                <p>{images_carrusel[index].text}</p>
+              <div>
+                <p className='embla__slide__text'>{images_carrusel[index].text}</p>
               </div>
             </div>
           ))}
