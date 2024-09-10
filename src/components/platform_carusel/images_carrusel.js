@@ -6,13 +6,13 @@ export const images_carrusel = [
     },
     {
         id: 1,
-        src: '../../src/images/platform_2.png',
-        text: 'En esta primera sección, podrás iniciar sesión con tu cuenta de Memorium, o crear una nueva cuenta si aún no tienes una.',
+        src: '../../src/images/platform_3.png',
+        text: 'En el menú inicial, podrás acceder a cualquiera de las tres secciones que tenemos en Memorium: "Mis pacientes", "Conocer Plataforma" o "Juegos disponibles".',
     },
     {
         id: 2,
-        src: '../../src/images/platform_3.png',
-        text: 'Una vez ingresado, podrás acceder a cualquiera de las tres secciones que tenemos en Memorium: "Mis pacientes", "Conocer Plataforma" o "Juegos disponibles".',
+        src: '../../src/images/platform_2.png',
+        text: 'Si accedes a la gestión de pacientes, podrás iniciar sesión con tu cuenta de Memorium, o crear una nueva cuenta si aún no tienes una.',
     },
     {
         id: 3,
