@@ -7,6 +7,8 @@ import {
 } from './EmblaCarouselArrowButtons'
 import useEmblaCarousel from 'embla-carousel-react'
 import { images_carrusel } from '../images_carrusel'
+import AudioPlayer from '../../AudioInstrucciones';
+
 
 const EmblaCarousel = (props) => {
   const { slides, options } = props
@@ -42,7 +44,9 @@ const EmblaCarousel = (props) => {
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
         </div>
-
+        <div className="embla__audio">
+          <AudioPlayer audioSrc="https://mybuckets3appprofesionalesmemorium.s3.us-east-2.amazonaws.com/instructivo_home_pacientes.mp3" />
+        </div>
       </div>
     </section>
   )
