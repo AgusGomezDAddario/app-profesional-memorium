@@ -2,7 +2,7 @@ export const images_carrusel = [
     {
         id: 0,
         src: '../../src/images/platform_1.png',
-        text: 'Conozca nuestra plataforma',
+        text: 'Conozca nuestra plataforma: En Memorium podrás estar al día con los tratamientos de tus pacientes y conocer los juegos que tenemos disponibles para ellos.',
     },
     {
         id: 1,
