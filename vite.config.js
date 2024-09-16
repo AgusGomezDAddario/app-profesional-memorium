@@ -8,4 +8,7 @@ export default defineConfig({
   define: {
     global: {},
   },
+  build: {
+    outDir: 'dist',
+  },
 });
