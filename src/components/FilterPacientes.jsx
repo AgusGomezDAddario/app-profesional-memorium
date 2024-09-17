@@ -1,10 +1,10 @@
-import React from "react";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import { React } from "react";
+import { InputLabel } from "@mui/material/InputLabel";
+import { MenuItem } from "@mui/material/MenuItem";
+import { FormControl } from "@mui/material/FormControl";
+import { Select } from "@mui/material/Select";
 import { styled } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
+import { InputBase } from "@mui/material/InputBase";
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   "label + &": {
@@ -32,7 +32,7 @@ export default function SelectFiltrado({ filtrado, setFiltrado }) {
   };
 
   return (
-    <div style={{ display: "flex", alignItems: "baseline"}}>
+    <div style={{ display: "flex", alignItems: "baseline" }}>
       <h2 className="h2">Filtrado de pacientes</h2>
       <FormControl sx={{ m: 1, minWidth: "170px" }} variant="standard">
         <Select

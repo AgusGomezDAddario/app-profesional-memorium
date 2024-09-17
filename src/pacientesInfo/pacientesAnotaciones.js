@@ -1,4 +1,4 @@
-import { ddbDocClient, PutCommand, ScanCommand } from '../dinamodb.js';
+import { ddbDocClient, PutCommand, ScanCommand } from "../dinamodb.js";
 
 const saveAnotacionOnBD = async (id_row, dni, date_row, note) => {
   try {
@@ -40,7 +40,9 @@ async function getAnotacionesFromBD(idPaciente) {
     const data = await ddbDocClient.send(new ScanCommand(params));
 
     if (Array.isArray(data.Items)) {
-      const filteredItems = data.Items.filter((item) => item.paciente_dni === idPaciente);
+      const filteredItems = data.Items.filter(
+        (item) => item.paciente_dni === idPaciente
+      );
       return filteredItems;
     } else {
       console.error("data.Items no es un array");

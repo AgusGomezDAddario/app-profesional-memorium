@@ -1,6 +1,6 @@
 import * as React from "react";
-import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
+import { Stack } from "@mui/material/Stack";
+import { Box } from "@mui/material/Box";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";

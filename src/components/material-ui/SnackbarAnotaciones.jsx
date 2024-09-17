@@ -1,9 +1,9 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Snackbar from '@mui/material/Snackbar';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import { forwardRef, useState, useImperativeHandle } from 'react';
+import * as React from "react";
+import { Button } from "@mui/material/Button";
+import { Snackbar } from "@mui/material/Snackbar";
+import { IconButton } from "@mui/material/IconButton";
+import { CloseIcon } from "@mui/icons-material/Close";
+import { forwardRef, useState, useImperativeHandle } from "react";
 
 export const SimpleSnackbar = forwardRef((props, ref) => {
   const [open, setOpen] = useState(false);
@@ -13,7 +13,7 @@ export const SimpleSnackbar = forwardRef((props, ref) => {
   };
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -26,7 +26,7 @@ export const SimpleSnackbar = forwardRef((props, ref) => {
 
   const reloadPage = () => {
     window.location.reload();
-  }
+  };
 
   const action = (
     <React.Fragment>

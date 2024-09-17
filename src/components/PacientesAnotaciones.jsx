@@ -1,11 +1,14 @@
-import React from "react";
+import { React } from "react";
 import { OutlinedCard } from "./material-ui/CardAnotaciones.jsx";
 import { TextFieldAnotacion } from "./material-ui/TextFieldAnotaciones.jsx";
 import { AnotacionContext } from "../contexts/anotaciones";
 import { Button } from "@mui/material";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { saveAnotacionOnBD, countItemsInTable } from '../pacientesInfo/pacientesAnotaciones.js';
+import {
+  saveAnotacionOnBD,
+  countItemsInTable,
+} from "../pacientesInfo/pacientesAnotaciones.js";
 import { SimpleSnackbar } from "./material-ui/SnackbarAnotaciones.jsx";
 import { useRef } from "react";
 

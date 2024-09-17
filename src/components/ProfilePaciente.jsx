@@ -1,11 +1,11 @@
-import React from "react";
+import { React } from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { usePacientes } from "../pacientesInfo/usePacientes.js";
-import Divider from "@mui/material/Divider";
-import DenseTable from "./DenseTable.jsx";
+import { Divider } from "@mui/material/Divider";
+import { DenseTable } from "./DenseTable.jsx";
 import { Link } from "react-router-dom";
-import PacientesAnotaciones from "./PacientesAnotaciones.jsx";
+import { PacientesAnotaciones } from "./PacientesAnotaciones.jsx";
 import { AnotacionProvider } from "../contexts/anotaciones.jsx";
 import { SimpleCharts } from "./material-ui/Chart.jsx";
 
@@ -57,8 +57,7 @@ export const ProfilePaciente = () => {
           <AnotacionProvider>
             <PacientesAnotaciones />
           </AnotacionProvider>
-          <SimpleCharts />
-          ,
+          <SimpleCharts />,
         </div>
       ) : (
         <p>Cargando...</p>
