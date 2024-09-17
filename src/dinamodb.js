@@ -5,7 +5,7 @@ import { fromCognitoIdentityPool } from "@aws-sdk/credential-provider-cognito-id
 
 // Configura la región y el ID del Identity Pool de Cognito
 const region = "us-east-2";
-const identityPoolId = "us-east-2:dd5efd73-b6e0-43e9-a03f-4c74df3f2908"; // Reemplaza con tu ID de Identity Pool
+const identityPoolId = import.meta.env.VITE_AWS_IDENTITY_POOL_ID; // Reemplaza con tu ID de Identity Pool
 
 // Configura el cliente de DynamoDB con credenciales de Cognito
 const client = new DynamoDBClient({
