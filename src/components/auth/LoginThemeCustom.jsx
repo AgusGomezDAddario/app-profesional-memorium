@@ -1,7 +1,6 @@
-import "./Login.css";
-import { React } from "react";
-import { LoginSystem } from "./login.jsx";
-import { Grid } from "@mui/material";
+import './Login.css';
+import React from 'react';
+import { LoginSystem } from './login.jsx';
 
 import { ThemeProvider, useTheme, View } from "@aws-amplify/ui-react";
 
