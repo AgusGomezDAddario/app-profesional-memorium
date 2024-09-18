@@ -1,6 +1,7 @@
 import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-provider-cognito-identity";
 import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 // Configurar el cliente de S3 con las variables de entorno
 const s3Client = new S3Client({
@@ -14,13 +15,12 @@ const s3Client = new S3Client({
 export const handleClickMemoriumPaper = async () => {
   try {
     const params = {
-      Bucket: 'mybuckets3appprofesionalesmemorium',
+      Bucket: 'mybuckets3appprofesionalesmemorium', // Nombre del bucket corregido
       Key: 'paper_memoria_trabajo.pdf',
-      Expires: 60,
     };
 
     const command = new GetObjectCommand(params);
-    const url = await s3Client.getSignedUrl(command);
+    const url = await getSignedUrl(s3Client, command, { expiresIn: 60 });
     window.open(url, '_blank', 'noopener noreferrer');
   } catch (err) {
     console.error('Error obteniendo el archivo:', err);
