@@ -26,7 +26,6 @@ const AudioPlayer = ({ audioSrc }) => {
     <div>
       <VolumeUpIcon
         style={{
-          paddingRight: "2rem",
           fontSize: "5rem",
           color: "white",
           paddingTop: "0",
