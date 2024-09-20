@@ -32,6 +32,8 @@ export function usePacientes() {
 
             historial: Object.entries(paciente.globalScores).map(([juego, scores]) => ({
                 juego: juego.replace(/\D/g, ''), // Eliminar todo excepto los dígitos
+                aciertos: calcularAciertosPorJuego(scores),
+                errores: calcularErroresPorJuego(scores),
                 partidas: Object.entries(scores).map(([num, partida]) => ({
                     aciertos: partida.scorecorrect,
                     errores: partida.scoreincorrect,
