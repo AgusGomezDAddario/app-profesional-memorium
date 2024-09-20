@@ -4,9 +4,6 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import DenseTable from "../DenseTable";
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { usePacientes } from "../../pacientesInfo/usePacientes.js";
 import { BasicTable } from "./BasicTable";
 
 function CustomTabPanel(props) {
@@ -97,19 +94,19 @@ export const BasicTabs = () => {
         <DenseTable />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <BasicTable />
+        <BasicTable game={1}/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <BasicTable />
+        <BasicTable game={2}/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
-        <BasicTable />
+        <BasicTable game={3}/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={4}>
-        <BasicTable />
+        <BasicTable game={4}/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={5}>
-        <BasicTable />
+        <BasicTable game={5}/>
       </CustomTabPanel>
     </Box>
   );
