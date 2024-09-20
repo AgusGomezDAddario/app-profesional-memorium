@@ -40,7 +40,6 @@ export const ProfilePaciente = () => {
           >
             Desempeño: {pacienteProfile.desempenoGlobal}%
           </p>
-          {/* <DenseTable id={id} /> */}
           <BasicTabs />
           <Link to="/login" style={{ textDecoration: "none" }}>
             <a

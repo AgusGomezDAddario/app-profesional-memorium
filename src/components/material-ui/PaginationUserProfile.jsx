@@ -1,9 +1,13 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import DenseTable from '../DenseTable';
+import * as React from "react";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
+import DenseTable from "../DenseTable";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { usePacientes } from "../../pacientesInfo/usePacientes.js";
+import { BasicTable } from "./BasicTable";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -30,7 +34,7 @@ CustomTabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -42,35 +46,71 @@ export const BasicTabs = () => {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="General" {...a11yProps(0)} />
-          <Tab label="Juego 1" {...a11yProps(1)} />
-          <Tab label="Juego 2" {...a11yProps(2)} />
-          <Tab label="Juego 3" {...a11yProps(3)} />
-          <Tab label="Juego 4" {...a11yProps(4)} />
-          <Tab label="Juego 5" {...a11yProps(5)} />
+    <Box sx={{ width: "100%" }}>
+      <Box
+        sx={{
+          borderBottom: 1,
+          borderColor: "divider",
+          backgroundColor: "white",
+        }}
+      >
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+          variant="scrollable"
+          scrollButtons="auto"
+        >
+          <Tab
+            label="General"
+            {...a11yProps(0)}
+            sx={{ fontSize: "1.2rem", fontFamily: "Gentium Plus" }}
+          />
+          <Tab
+            label="1"
+            {...a11yProps(1)}
+            sx={{ fontSize: "1.2rem", fontFamily: "Gentium Plus" }}
+          />
+          <Tab
+            label="2"
+            {...a11yProps(2)}
+            sx={{ fontSize: "1.2rem", fontFamily: "Gentium Plus" }}
+          />
+          <Tab
+            label="3"
+            {...a11yProps(3)}
+            sx={{ fontSize: "1.2rem", fontFamily: "Gentium Plus" }}
+          />
+          <Tab
+            label="4"
+            {...a11yProps(4)}
+            sx={{ fontSize: "1.2rem", fontFamily: "Gentium Plus" }}
+          />
+          <Tab
+            label="5"
+            {...a11yProps(5)}
+            sx={{ fontSize: "1.2rem", fontFamily: "Gentium Plus" }}
+          />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
         <DenseTable />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item One
+        <BasicTable />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Item Two
+        <BasicTable />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
-        Item Three
+        <BasicTable />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={4}>
-        Item Four
+        <BasicTable />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={5}>
-        Item Five
+        <BasicTable />
       </CustomTabPanel>
     </Box>
   );
-}
+};
