@@ -8,7 +8,8 @@ import { Link } from "react-router-dom";
 import PacientesAnotaciones from "./PacientesAnotaciones.jsx";
 import { AnotacionProvider } from "../contexts/anotaciones.jsx";
 import { SimpleCharts } from "./material-ui/Chart.jsx";
-
+import { BasicTabs } from "./material-ui/PaginationUserProfile.jsx";
+ 
 export const ProfilePaciente = () => {
   const { id } = useParams();
   const pacientes = usePacientes();
@@ -39,7 +40,8 @@ export const ProfilePaciente = () => {
           >
             Desempeño: {pacienteProfile.desempenoGlobal}%
           </p>
-          <DenseTable id={id} />
+          {/* <DenseTable id={id} /> */}
+          <BasicTabs />
           <Link to="/login" style={{ textDecoration: "none" }}>
             <a
               style={{
