@@ -61,7 +61,7 @@ export const ProfilePaciente = () => {
           ,
         </div>
       ) : (
-        <p>Cargando...</p>
+        <p style={{color: 'white'}}>Cargando...</p>
       )}
     </div>
   );

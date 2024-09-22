@@ -58,7 +58,7 @@ export const BasicTable = ({ game }) => {
           </Table>
         </TableContainer>
       ) : (
-        <p>Cargando...</p>
+        <p style={{color: 'white'}}>Cargando...</p>
       )}
     </div>
   );

@@ -54,7 +54,7 @@ export default function DenseTable() {
           </Table>
         </TableContainer>
       ) : (
-        <p>Cargando...</p>
+        <p style={{color: 'white'}}>Cargando...</p>
       )}
     </div>
   );
