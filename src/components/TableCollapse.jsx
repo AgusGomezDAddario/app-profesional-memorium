@@ -47,7 +47,7 @@ function Paciente({ paciente }) {
   function getColor() {
     if (clasificacion === "mejorando") {
       return "#d4edda";
-    } else if (clasificacion === "en_tratamiento") {
+    } else if (clasificacion === "iniciando") {
       return "#fff3cd";
     } else if (clasificacion === "empeorando") {
       return "#f8d7da";

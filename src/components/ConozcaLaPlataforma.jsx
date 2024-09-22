@@ -31,7 +31,7 @@ export const ConozcaLaPlataforma = () => {
                 fontFamily: "Gentium Plus",
               }}
             >
-              Volver a Home Page
+              Volver a Inicio
             </a>
           </Link>
       <EmblaCarousel slides={SLIDES} options={OPTIONS}/>

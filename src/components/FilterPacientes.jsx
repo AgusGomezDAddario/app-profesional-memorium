@@ -46,7 +46,7 @@ export default function SelectFiltrado({ filtrado, setFiltrado }) {
             <em>Todos</em>
           </MenuItem>
           <MenuItem value="mejorando">Mejorando</MenuItem>
-          <MenuItem value="en_tratamiento">En Tratamiento</MenuItem>
+          <MenuItem value="iniciando">Iniciando</MenuItem>
           <MenuItem value="empeorando">Empeorando</MenuItem>
           <MenuItem value="consulta">Consulta</MenuItem>
           <MenuItem value="en_alta">En Alta</MenuItem>
