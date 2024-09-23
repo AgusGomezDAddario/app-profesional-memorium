@@ -77,7 +77,6 @@ export const UpdateUser = () => {
 
     function submitForm(event) {
         event.preventDefault();
-        console.log(userData);
         Object.entries(userData).forEach(([key, value]) => {
             if (value !== '') {
                 handleUpdateUserAttribute(key, value);

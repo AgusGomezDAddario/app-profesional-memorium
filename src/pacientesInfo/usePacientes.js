@@ -80,17 +80,14 @@ export function calcularErroresPorJuego(scores) {
 
 export function obtenerTiemposDePaciente(id, juego) {
     const paciente = pacientes.find((paciente) => paciente.dni === id);
-    console.log(paciente);
     if (!paciente) {
         console.error(`Paciente con id ${id} no encontrado`);
         return [];
     }
 
     const scores = paciente.globalScores[juego];
-    if (!scores) {
-        console.error(`Juego ${juego} no encontrado para el paciente con id ${id}`);
-        return [];
-    }
-    console.log(scores);
-    return scores;
+    const tiempos = Object.values(scores).map(score => score.time);
+    const tiemposChart = tiempos.join(', ');
+    console.log(tiemposChart);
+    return tiempos;
 }
