@@ -32,19 +32,23 @@ export default function TemporaryDrawer() {
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
-        <ListItem key={"Juegos"} disablePadding>
-          <ListItemButton sx={{ color: "#2f5496" }}>
-            <ListItemIcon>
-              <SportsEsportsIcon sx={{ color: "#2f5496" }} />
-            </ListItemIcon>
-            <ListItemText
-              primary={"Juegos"}
-              sx={{
-                "& .MuiTypography-root": { fontFamily: "Gentium Plus, serif" },
-              }}
-            />
-          </ListItemButton>
-        </ListItem>
+        <Link to="/juegos" style={{ textDecoration: "none" }}>
+          <ListItem key={"Juegos"} disablePadding>
+            <ListItemButton sx={{ color: "#2f5496" }}>
+              <ListItemIcon>
+                <SportsEsportsIcon sx={{ color: "#2f5496" }} />
+              </ListItemIcon>
+              <ListItemText
+                primary={"Juegos"}
+                sx={{
+                  "& .MuiTypography-root": {
+                    fontFamily: "Gentium Plus, serif",
+                  },
+                }}
+              />
+            </ListItemButton>
+          </ListItem>
+        </Link>
         <Link to="/plataforma" style={{ textDecoration: "none" }}>
           <ListItem key={"Plataforma"} disablePadding>
             <ListItemButton sx={{ color: "#2f5496" }}>
