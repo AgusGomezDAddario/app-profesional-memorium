@@ -4,6 +4,7 @@ import Divider from "@mui/material/Divider";
 import './platform_carusel/css/embla.css';
 import image from '../images/image_brain.png';
 import { Link } from "react-router-dom";
+import { BasicStack } from "./material-ui/StackGames";
 
 export const Games = () => {
   return (
@@ -24,6 +25,7 @@ export const Games = () => {
               Volver a Inicio
             </a>
           </Link>
+        <BasicStack />
       <img src={image} className="imagen_central" alt="Imagen de cerebro con un celular" />
     </div>
   );
