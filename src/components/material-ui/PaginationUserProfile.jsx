@@ -1,10 +1,14 @@
 import * as React from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import DenseTable from "../DenseTable";
 import { BasicTable } from "./BasicTable";
+import { BasicLineChart } from "./LineChart";
+import { obtenerTiemposDePaciente } from "../../pacientesInfo/usePacientes";
+import { useParams } from "react-router-dom";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -36,7 +40,14 @@ function a11yProps(index) {
 }
 
 export const BasicTabs = () => {
+  const { id } = useParams();
   const [value, setValue] = React.useState(0);
+  const [tiempos, setTiempos] = React.useState([]);
+
+  useEffect(() => {
+    const tiemposObtenidos = obtenerTiemposDePaciente(id, 'juego1');
+    setTiempos(tiemposObtenidos);
+  }, [id]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -95,18 +106,23 @@ export const BasicTabs = () => {
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <BasicTable game={1}/>
+        {/* <BasicLineChart tiempos={tiempos[1] || []} /> */}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
         <BasicTable game={2}/>
+        {/* <BasicLineChart tiempos={tiempos[2] || []} /> */}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
         <BasicTable game={3}/>
+        {/* <BasicLineChart tiempos={tiempos[3] || []} /> */}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={4}>
         <BasicTable game={4}/>
+        {/* <BasicLineChart tiempos={tiempos[4] || []} /> */}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={5}>
         <BasicTable game={5}/>
+        {/* <BasicLineChart tiempos={tiempos[5] || []} /> */}
       </CustomTabPanel>
     </Box>
   );

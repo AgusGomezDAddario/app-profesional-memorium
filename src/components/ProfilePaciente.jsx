@@ -1,14 +1,14 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { usePacientes } from "../pacientesInfo/usePacientes.js";
+import { usePacientes } from "../pacientesInfo/usePacientes.js"; // Importa la función aquí
 import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
 import PacientesAnotaciones from "./PacientesAnotaciones.jsx";
 import { AnotacionProvider } from "../contexts/anotaciones.jsx";
 import { SimpleCharts } from "./material-ui/Chart.jsx";
 import { BasicTabs } from "./material-ui/PaginationUserProfile.jsx";
- 
+
 export const ProfilePaciente = () => {
   const { id } = useParams();
   const pacientes = usePacientes();

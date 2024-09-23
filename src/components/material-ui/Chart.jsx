@@ -22,7 +22,7 @@ export const SimpleCharts = () => {
   }, [id, pacientes]);
 
   if (!pacienteProfile || !pacienteProfile.historial) {
-    return <div>Loading...</div>;
+    return <div style={{color: 'white'}}>cargando...</div>;
   }
 
   const barChartsParams = {
