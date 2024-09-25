@@ -5,7 +5,7 @@ h3, p {
     font-family: 'Gentium Plus';
 }
 
-h3 {
+.title-game {
     font-size: 2rem;
     color: #2f5496;
     margin-top: 0px;

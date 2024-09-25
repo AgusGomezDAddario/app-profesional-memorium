@@ -36,18 +36,6 @@ const components = {
     );
   },
 
-  Footer() {
-    const { tokens } = useTheme();
-
-    return (
-      <View textAlign="center" padding={tokens.space.large}>
-        <Text color={tokens.colors.neutral[80]}>
-          Equipo de Desarrollo - Memorium
-        </Text>
-      </View>
-    );
-  },
-
   SignIn: {
     Header() {
       const { tokens } = useTheme();
