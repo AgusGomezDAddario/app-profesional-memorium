@@ -8,7 +8,7 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
 import CheckIcon from "@mui/icons-material/Check";
-import Button from "@mui/material/Button";
+import BasicModalGameVideo from "./ModalVideo";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "white",
@@ -19,15 +19,6 @@ const Item = styled(Paper)(({ theme }) => ({
   ...theme.applyStyles("dark", {
     backgroundColor: "#1A2027",
   }),
-}));
-
-const ColorButton = styled(Button)(({ theme }) => ({
-  fontFamily: "Gentium Plus",
-  color: theme.palette.getContrastText("#2f5496"),
-  backgroundColor: "#2f5496",
-  "&:hover": {
-    backgroundColor: "#00659d",
-  },
 }));
 
 export const BasicStack = () => {
@@ -90,9 +81,10 @@ export const BasicStack = () => {
               </ul>
             </p>
           </div>
-          <div className="button-center">
+          {/* <div className="button-center">
             <ColorButton variant="contained">Conozca Memory Game</ColorButton>
-          </div>
+          </div> */}
+          <BasicModalGameVideo />
         </Item>
         <Item>
           <div style={{ display: "flex", justifyContent: "center" }}>
@@ -151,9 +143,10 @@ export const BasicStack = () => {
               </ul>
             </p>
           </div>
-          <div className="button-center">
+          {/* <div className="button-center">
             <ColorButton variant="contained">Conozca Memory Game</ColorButton>
-          </div>
+          </div> */}
+          <BasicModalGameVideo />
         </Item>
         <Item>
           <div style={{ display: "flex", justifyContent: "center" }}>
@@ -215,9 +208,10 @@ export const BasicStack = () => {
               </ul>
             </p>
           </div>
-          <div className="button-center">
+          {/* <div className="button-center">
             <ColorButton variant="contained">Conozca Memory Game</ColorButton>
-          </div>
+          </div> */}
+          <BasicModalGameVideo />
         </Item>
       </Stack>
     </Box>
