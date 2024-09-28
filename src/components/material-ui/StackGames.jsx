@@ -84,7 +84,7 @@ export const BasicStack = () => {
           {/* <div className="button-center">
             <ColorButton variant="contained">Conozca Memory Game</ColorButton>
           </div> */}
-          <BasicModalGameVideo />
+          <BasicModalGameVideo video={'33M90oQbwPM'}/>
         </Item>
         <Item>
           <div style={{ display: "flex", justifyContent: "center" }}>
@@ -146,7 +146,7 @@ export const BasicStack = () => {
           {/* <div className="button-center">
             <ColorButton variant="contained">Conozca Memory Game</ColorButton>
           </div> */}
-          <BasicModalGameVideo />
+          <BasicModalGameVideo video={'fnYiPeNA2zg'}/>
         </Item>
         <Item>
           <div style={{ display: "flex", justifyContent: "center" }}>
@@ -211,7 +211,7 @@ export const BasicStack = () => {
           {/* <div className="button-center">
             <ColorButton variant="contained">Conozca Memory Game</ColorButton>
           </div> */}
-          <BasicModalGameVideo />
+          <BasicModalGameVideo video={'1dpUwBPCVwM'}/>
         </Item>
       </Stack>
     </Box>

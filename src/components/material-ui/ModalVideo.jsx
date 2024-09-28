@@ -1,10 +1,10 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import "../Games.css";
 import { styled } from "@mui/material/styles";
+import { useParams } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -12,6 +12,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
+  height: 600,
   bgcolor: "background.paper",
   border: "2px solid #000",
   borderRadius: 4,
@@ -28,10 +29,12 @@ const ColorButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-export default function BasicModalGameVideo() {
+export default function BasicModalGameVideo({video}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  console.log(video);
 
   return (
     <div>
@@ -49,8 +52,8 @@ export default function BasicModalGameVideo() {
         <Box sx={style}>
           <iframe
             width="100%"
-            height="315"
-            src="https://www.youtube.com/embed/fnYiPeNA2zg"
+            height="100%"
+            src={`https://www.youtube.com/embed/${video}`}
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
