@@ -8,11 +8,8 @@ import { UpdateUser } from './components/auth/UpdateUserAttributes.jsx';
 import { ProfilePaciente } from './components/ProfilePaciente.jsx';
 import { ConozcaLaPlataforma } from './components/ConozcaLaPlataforma.jsx';
 import { Games } from './components/Games.jsx';
-import fetchScores from './firebase/config.js';
 
 Amplify.configure(awsConfig);
-
-fetchScores();
 
 export default function App () {
   return (

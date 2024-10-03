@@ -23,8 +23,5 @@ export default async function fetchScores() {
     const resp = await getDocs(itemsRef);
 
     const data = resp.docs.map((doc) => doc.data());
-
-    resp.docs.forEach((doc) => {
-        console.log(doc.data());
-    });
-};
+    return data;
+}

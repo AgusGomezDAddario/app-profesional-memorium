@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import pacientes from "./pacientes";
+import fetchScores from '../firebase/config.js';
 
 function calcularPorcentajeAciertos(globalScores) {
     let totalCorrect = 0;
@@ -20,21 +21,54 @@ function calcularPorcentajeAciertos(globalScores) {
 
 export function usePacientes() {
     const [pacientesData, setPacientesData] = useState([]);
+    const [pacientesDataFirebase, setPacientesDataFirebase] = useState([]);
+
+    useEffect(() => {
+        fetchScores().then((data) => {
+            if (!Array.isArray(data)) {
+                console.error("fetchScores did not return an array:", data);
+                return;
+            }
+
+            const mappedPacientesFirebase = data.map((pacienteFirebase) => ({
+                id: pacienteFirebase.dni,
+                nombre: pacienteFirebase.name,
+                edad: pacienteFirebase.age,
+                desempenoGlobal: 0,
+        
+                // historial: Object.entries(pacienteFirebase.globalScores).map(([juego, scores]) => ({
+                //     juego: juego.replace(/\D/g, ''), // Eliminar todo excepto los dígitos
+                //     aciertos: calcularAciertosPorJuego(scores),
+                //     errores: calcularErroresPorJuego(scores),
+                //     partidas: Object.entries(scores).map(([, partida]) => ({
+                //         aciertos: partida.scorecorrect,
+                //         errores: partida.scoreincorrect,
+                //         tiempo: partida.time,
+                //         facilitaciones: partida.facilitations,
+                //     })),
+                // })),
+            }));
+            setPacientesDataFirebase(mappedPacientesFirebase);
+            console.log(mappedPacientesFirebase);
+        }).catch((error) => {
+            console.error("Error fetching scores:", error);
+        });
+    }, []);
 
     useEffect(() => {
         if (!Array.isArray(pacientes)) return;
-
+    
         const mappedPacientes = pacientes.map((paciente) => ({
             id: paciente.dni,
             nombre: paciente.name,
             edad: paciente.age,
             desempenoGlobal: calcularPorcentajeAciertos(paciente.globalScores),
-
+    
             historial: Object.entries(paciente.globalScores).map(([juego, scores]) => ({
                 juego: juego.replace(/\D/g, ''), // Eliminar todo excepto los dígitos
                 aciertos: calcularAciertosPorJuego(scores),
                 errores: calcularErroresPorJuego(scores),
-                partidas: Object.entries(scores).map(([num, partida]) => ({
+                partidas: Object.entries(scores).map(([, partida]) => ({
                     aciertos: partida.scorecorrect,
                     errores: partida.scoreincorrect,
                     tiempo: partida.time,
@@ -42,8 +76,10 @@ export function usePacientes() {
                 })),
             })),
         }));
+    
         setPacientesData(mappedPacientes);
-    }, [pacientes]);
+    }, [pacientes, pacientesDataFirebase]);
+
     return pacientesData;
 }
 
