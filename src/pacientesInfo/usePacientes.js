@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import pacientes from "./pacientes";
 import fetchScores from "../firebase/config.js";
 
 function calcularPorcentajeAciertos(globalScores) {
@@ -21,127 +20,103 @@ function calcularPorcentajeAciertos(globalScores) {
 }
 
 export function usePacientes() {
-  const [pacientesData, setPacientesData] = useState([]);
-  const [pacientesDataFirebase, setPacientesDataFirebase] = useState([]);
-
-  useEffect(() => {
-    fetchScores()
-      .then((data) => {
-        if (!Array.isArray(data)) {
-          console.error("fetchScores did not return an array:", data);
-          return;
+    const [pacientesDataFirebase, setPacientesDataFirebase] = useState([]);
+  
+    useEffect(() => {
+      async function getPacientes() {
+        try {
+          const data = await fetchScores();
+          if (!Array.isArray(data)) {
+            console.error("fetchScores did not return an array:", data);
+            return;
+          }
+  
+          const mappedPacientesFirebase = data.map((pacienteFirebase) => ({
+            id: pacienteFirebase.dni,
+            nombre: pacienteFirebase.name,
+            edad: pacienteFirebase.age,
+            desempenoGlobal: 0,
+            historial: establecerHistorialJugadorFirebase(pacienteFirebase),
+          }));
+          setPacientesDataFirebase(mappedPacientesFirebase);
+        } catch (error) {
+          console.error("Error fetching scores:", error);
         }
-
-        const mappedPacientesFirebase = data.map((pacienteFirebase) => ({
-          id: pacienteFirebase.dni,
-          nombre: pacienteFirebase.name,
-          edad: pacienteFirebase.age,
-          desempenoGlobal: 0,
-          historial: establecerHistorialJugadorFirebase(pacienteFirebase),
-        }));
-        setPacientesDataFirebase(mappedPacientesFirebase);
-      })
-      .catch((error) => {
-        console.error("Error fetching scores:", error);
-      });
-  }, []);
-
-  useEffect(() => {
-    if (!Array.isArray(pacientes)) return;
-
-    const mappedPacientes = pacientes.map((paciente) => ({
-      id: paciente.dni,
-      nombre: paciente.name,
-      edad: paciente.age,
-      desempenoGlobal: calcularPorcentajeAciertos(paciente.globalScores),
-      historial: Object.entries(paciente.globalScores).map(
-        ([juego, scores]) => ({
-          juego: juego.replace(/\D/g, ""), // Eliminar todo excepto los dígitos
-          aciertos: calcularAciertosPorJuego(scores),
-          errores: calcularErroresPorJuego(scores),
-          partidas: Object.entries(scores).map(([, partida]) => ({
-            aciertos: partida.scorecorrect,
-            errores: partida.scoreincorrect,
-            tiempo: partida.time,
-            facilitaciones: partida.facilitations,
-          })),
-        })
-      ),
-    }));
-    const combinedPacientes = mappedPacientes.concat(pacientesDataFirebase);
-    setPacientesData(combinedPacientes);
-  }, [pacientes, pacientesDataFirebase]);
-
-  return pacientesData;
-}
+      }
+  
+      getPacientes();
+    }, []);
+  
+    return pacientesDataFirebase;
+  }
 
 export function establecerHistorialJugadorFirebase(paciente) {
-    const historial = [];
-    const partidas_nulas = [];
+  const historial = [];
+  const partidas_nulas = [];
 
-    partidas_nulas.push({
-        aciertos: 0,
-        errores: 0,
-        tiempo: 0,
-        facilitaciones: 0,
-    });
+  partidas_nulas.push({
+    aciertos: 0,
+    errores: 0,
+    tiempo: 0,
+    facilitaciones: 0,
+  });
 
-    //Para el resto de los juegos, previsoriamente se van a cargar con valores nulos
-    for (let i = 0; i < 2; i++) {
-        historial.push({
-          juego: (i + 1).toString(),
-          aciertos: 0,
-          errores: 0,
-          partidas: partidas_nulas,
-          });
-      }
-
-    const partidas_go_no_go = [];
-    const partidas_orderium = [];
-    if (Array.isArray(paciente.gonoGo)) {
-      for (let i = 0; i < paciente.gonoGo.length; i++) {
-        const partida = paciente.gonoGo[i];
-        partidas_go_no_go.push({
-            aciertos: 1,
-            errores: parseInt(partida.attempts) - 1,
-            tiempo: 0,
-            facilitaciones: partida.facilitations,
-        });
-      }
-        historial.push({
-        juego: "3",
-        aciertos: 0,
-        errores: 0,
-        partidas: partidas_go_no_go,
-        });
-    }
-  
-    if (Array.isArray(paciente.orderium)) {
-      for (let i = 0; i < paciente.orderium.length; i++) {
-        const partida = paciente.orderium[i];
-        partidas_orderium.push({
-            aciertos: 1,
-            errores: parseInt(partida.attempts) - 1,
-            tiempo: partida.timeSpent,
-            facilitaciones: partida.facilitations,
-        });
-      }
-        historial.push({
-        juego: "4",
-        aciertos: 0,
-        errores: 0,
-        partidas: partidas_go_no_go,
-        });
-    }
-
+  //Para el resto de los juegos, previsoriamente se van a cargar con valores nulos
+  for (let i = 0; i < 2; i++) {
     historial.push({
-        juego: "5",
-        aciertos: 0,
-        errores: 0,
-        partidas: partidas_nulas,
-        });
-    return historial;
+      juego: (i + 1).toString(),
+      aciertos: 0,
+      errores: 0,
+      partidas: partidas_nulas,
+    });
   }
+
+  const partidas_go_no_go = [];
+  const partidas_orderium = [];
+  if (Array.isArray(paciente.gonoGo)) {
+    for (let i = 0; i < paciente.gonoGo.length; i++) {
+      const partida = paciente.gonoGo[i];
+      partidas_go_no_go.push({
+        aciertos: 1,
+        errores: parseInt(partida.attempts) - 1,
+        tiempo: 0,
+        facilitaciones: partida.facilitations,
+      });
+    }
+    historial.push({
+      juego: "3",
+      aciertos: 0,
+      errores: 0,
+      partidas: partidas_go_no_go,
+    });
+  }
+
+  if (Array.isArray(paciente.orderium)) {
+    for (let i = 0; i < paciente.orderium.length; i++) {
+      const partida = paciente.orderium[i];
+      partidas_orderium.push({
+        aciertos: 1,
+        errores: parseInt(partida.attempts) - 1,
+        tiempo: partida.timeSpent,
+        facilitaciones: partida.facilitations,
+      });
+    }
+    historial.push({
+      juego: "4",
+      aciertos: 0,
+      errores: 0,
+      partidas: partidas_orderium,
+    });
+  }
+
+  historial.push({
+    juego: "5",
+    aciertos: 0,
+    errores: 0,
+    partidas: partidas_nulas,
+  });
+  return historial;
+}
 
 export function calcularPorcentajeAciertosPorJuego(historial) {
   let totalCorrect = 0;
@@ -175,16 +150,33 @@ export function calcularErroresPorJuego(scores) {
   return totalIncorrect;
 }
 
-export function obtenerTiemposDePaciente(id, juego) {
-  const paciente = pacientes.find((paciente) => paciente.dni === id);
-  if (!paciente) {
-    console.error(`Paciente con id ${id} no encontrado`);
-    return [];
-  }
+export function obtenerTiemposDePaciente(pacientes, id, juego) {
 
-  const scores = paciente.globalScores[juego];
-  const tiempos = Object.values(scores).map((score) => score.time);
-  const tiemposChart = tiempos.join(", ");
-  console.log(tiemposChart);
-  return tiempos;
+    const paciente = pacientes.find((paciente) => paciente.id.trim().localeCompare(id.trim()) === 0);
+    if (!paciente) {
+        console.error(`Paciente con id ${id} no encontrado`);
+        return [];
+    }
+
+    if (!paciente.historial || !Array.isArray(paciente.historial)) {
+        console.error(`Historial no encontrado para el paciente con id ${id}`);
+        return [];
+    }
+
+    paciente.historial.forEach((entry, index) => {
+        console.log(`Juego ${index} en historial: ${entry.juego}`);
+    });
+
+    // Convert juego to numeric string
+    const juegoNumeric = juego.replace(/\D/g, "");
+
+    const juegoHistorial = paciente.historial.find((entry) => entry.juego === juegoNumeric);
+    if (!juegoHistorial || !Array.isArray(juegoHistorial.partidas)) {
+        console.error(`Partidas no encontradas para el juego ${juego} del paciente con id ${id}`);
+        return [];
+    }
+
+    const tiempos = juegoHistorial.partidas.map((partida) => partida.tiempo);
+    const tiemposChart = tiempos.join(", ");
+    return tiempos;
 }

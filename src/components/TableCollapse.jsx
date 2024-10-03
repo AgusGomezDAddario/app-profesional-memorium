@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
-import TableSortLabel from '@mui/material/TableSortLabel';
+import TableSortLabel from "@mui/material/TableSortLabel";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -34,7 +34,7 @@ function descendingComparator(a, b, orderBy) {
 }
 
 function getComparator(order, orderBy) {
-  return order === 'desc'
+  return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
@@ -65,7 +65,10 @@ function Paciente({ paciente }) {
       {filtrado === "" || filtrado === clasificacion ? (
         <React.Fragment>
           <TableRow
-            sx={{ "& > *": { borderBottom: "unset" }, backgroundColor: getColor() }}
+            sx={{
+              "& > *": { borderBottom: "unset" },
+              backgroundColor: getColor(),
+            }}
           >
             <TableCell>
               <IconButton
@@ -139,7 +142,11 @@ function Paciente({ paciente }) {
                         {paciente.historial &&
                           paciente.historial.map((historial, index) => (
                             <TableRow key={index}>
-                              <TableCell component="th" scope="row" align="center">
+                              <TableCell
+                                component="th"
+                                scope="row"
+                                align="center"
+                              >
                                 {historial.juego}
                               </TableCell>
                               <TableCell align="center">
@@ -192,19 +199,19 @@ Paciente.propTypes = {
 function CollapsibleTable() {
   const pacientes = usePacientes();
   const { filtrado, setFiltrado } = useFilter();
-  const [order, setOrder] = useState('asc');
-  const [orderBy, setOrderBy] = useState('nombre');
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("nombre");
 
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
   const sortedPacientes = useMemo(
     () =>
-      Object.entries(pacientes)
-        .map(([dni, paciente]) => paciente)
+      pacientes
+        .slice() // Crear una copia del array para no mutar el original
         .sort(getComparator(order, orderBy)),
     [pacientes, order, orderBy]
   );
@@ -224,14 +231,17 @@ function CollapsibleTable() {
                   fontFamily: "Gentium Plus",
                 }}
                 align="center"
-                sortDirection={orderBy === 'nombre' ? order : false}
+                sortDirection={orderBy === "nombre" ? order : false}
               >
                 <TableSortLabel
-                  active={orderBy === 'nombre'}
-                  direction={orderBy === 'nombre' ? order : 'asc'}
-                  onClick={(event) => handleRequestSort(event, 'nombre')}
-                  style={{color: "white"}}
-                  sx={{ color: "white", '& .MuiTableSortLabel-icon': { color: "white !important" } }}
+                  active={orderBy === "nombre"}
+                  direction={orderBy === "nombre" ? order : "asc"}
+                  onClick={(event) => handleRequestSort(event, "nombre")}
+                  style={{ color: "white" }}
+                  sx={{
+                    color: "white",
+                    "& .MuiTableSortLabel-icon": { color: "white !important" },
+                  }}
                 >
                   Nombre
                 </TableSortLabel>
@@ -243,14 +253,17 @@ function CollapsibleTable() {
                   fontFamily: "Gentium Plus",
                 }}
                 align="center"
-                sortDirection={orderBy === 'edad' ? order : false}
+                sortDirection={orderBy === "edad" ? order : false}
               >
                 <TableSortLabel
-                  active={orderBy === 'edad'}
-                  direction={orderBy === 'edad' ? order : 'asc'}
-                  onClick={(event) => handleRequestSort(event, 'edad')}
-                  style={{color: "white"}}
-                  sx={{ color: "white", '& .MuiTableSortLabel-icon': { color: "white !important" } }}
+                  active={orderBy === "edad"}
+                  direction={orderBy === "edad" ? order : "asc"}
+                  onClick={(event) => handleRequestSort(event, "edad")}
+                  style={{ color: "white" }}
+                  sx={{
+                    color: "white",
+                    "& .MuiTableSortLabel-icon": { color: "white !important" },
+                  }}
                 >
                   Edad
                 </TableSortLabel>
