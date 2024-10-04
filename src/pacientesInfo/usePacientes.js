@@ -34,27 +34,48 @@ export function usePacientes() {
 
 export function establecerHistorialJugadorFirebase(paciente) {
   const historial = [];
-  const partidas_nulas = [];
 
-  partidas_nulas.push({
-    aciertos: 0,
-    errores: 0,
-    tiempo: 0,
-    facilitaciones: 0,
-  });
+  const partidas_memory_game = [];
+  const partidas_numerium = [];
+  const partidas_go_no_go = [];
+  const partidas_orderium = [];
 
-  //Para el resto de los juegos, previsoriamente se van a cargar con valores nulos
-  for (let i = 0; i < 2; i++) {
+  if (Array.isArray(paciente.memoryGame)) {
+      for (let i = 0; i < paciente.memoryGame.length; i++) {
+        const partida = paciente.memoryGame[i];
+        partidas_memory_game.push({
+          aciertos: partida.correct,
+          errores: partida.incorrect,
+          tiempo: partida.timeSpent,
+          dificultad: partida.difficulty,
+        });
+      }
+      historial.push({
+        juego: "1",
+        aciertos: calcularAciertosPorJuego(partidas_memory_game),
+        errores: calcularErroresPorJuego(partidas_memory_game),
+        partidas: partidas_memory_game,
+      });
+  }
+
+  if (Array.isArray(paciente.numerium)) {
+    for (let i = 0; i < paciente.numerium.length; i++) {
+      const partida = paciente.numerium[i];
+      partidas_numerium.push({
+        aciertos: partida.correct,
+        errores: partida.incorrect,
+        tiempo: partida.timeSpent,
+        dificultad: partida.difficulty,
+      });
+    }
     historial.push({
-      juego: (i + 1).toString(),
-      aciertos: calcularAciertosPorJuego(partidas_nulas),
-      errores: calcularErroresPorJuego(partidas_nulas),
-      partidas: partidas_nulas,
+      juego: "2",
+      aciertos: calcularAciertosPorJuego(partidas_numerium),
+      errores: calcularErroresPorJuego(partidas_numerium),
+      partidas: partidas_numerium,
     });
   }
 
-  const partidas_go_no_go = [];
-  const partidas_orderium = [];
   if (Array.isArray(paciente.gonoGo)) {
     for (let i = 0; i < paciente.gonoGo.length; i++) {
       const partida = paciente.gonoGo[i];
@@ -91,12 +112,6 @@ export function establecerHistorialJugadorFirebase(paciente) {
     });
   }
 
-  historial.push({
-    juego: "5",
-    aciertos: 0,
-    errores: 0,
-    partidas: partidas_nulas,
-  });
   return historial;
 }
 

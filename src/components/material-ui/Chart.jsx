@@ -34,7 +34,6 @@ export const SimpleCharts = () => {
           pacienteProfile.historial[1].aciertos,
           pacienteProfile.historial[2].aciertos,
           pacienteProfile.historial[3].aciertos,
-          pacienteProfile.historial[4].aciertos,
         ],
         label: "Aciertos",
         stack: "total",
@@ -50,7 +49,6 @@ export const SimpleCharts = () => {
           pacienteProfile.historial[1].errores,
           pacienteProfile.historial[2].errores,
           pacienteProfile.historial[3].errores,
-          pacienteProfile.historial[4].errores,
         ],
         label: "Errores",
         stack: "total",
@@ -62,7 +60,7 @@ export const SimpleCharts = () => {
     ],
     xAxis: [
       {
-        data: ["Juego 1", "Juego 2", "Juego 3", "Juego 4", "Juego 5"],
+        data: ["Juego 1", "Juego 2", "Juego 3", "Juego 4"],
         scaleType: "band",
         id: "axis1",
       },
