@@ -1,24 +1,6 @@
 import { useState, useEffect } from "react";
 import fetchScores from "../firebase/config.js";
 
-function calcularPorcentajeAciertos(globalScores) {
-  let totalCorrect = 0;
-  let totalAttempts = 0;
-
-  for (let key in globalScores) {
-    const game = globalScores[key];
-    for (let i = 1; i <= Object.keys(game).length; i++) {
-      if (game[i]) {
-        totalCorrect += game[i].scorecorrect;
-        totalAttempts += game[i].scorecorrect + game[i].scoreincorrect;
-      }
-    }
-  }
-  const porcentajeAciertos =
-    totalAttempts > 0 ? (totalCorrect * 100) / totalAttempts : 0;
-  return porcentajeAciertos.toFixed(2);
-}
-
 export function usePacientes() {
     const [pacientesDataFirebase, setPacientesDataFirebase] = useState([]);
   
@@ -35,8 +17,8 @@ export function usePacientes() {
             id: pacienteFirebase.dni,
             nombre: pacienteFirebase.name,
             edad: pacienteFirebase.age,
-            desempenoGlobal: 0,
             historial: establecerHistorialJugadorFirebase(pacienteFirebase),
+            desempenoGlobal: calcularPorcentajeAciertos(establecerHistorialJugadorFirebase(pacienteFirebase)),
           }));
           setPacientesDataFirebase(mappedPacientesFirebase);
         } catch (error) {
@@ -65,8 +47,8 @@ export function establecerHistorialJugadorFirebase(paciente) {
   for (let i = 0; i < 2; i++) {
     historial.push({
       juego: (i + 1).toString(),
-      aciertos: 0,
-      errores: 0,
+      aciertos: calcularAciertosPorJuego(partidas_nulas),
+      errores: calcularErroresPorJuego(partidas_nulas),
       partidas: partidas_nulas,
     });
   }
@@ -85,8 +67,8 @@ export function establecerHistorialJugadorFirebase(paciente) {
     }
     historial.push({
       juego: "3",
-      aciertos: 0,
-      errores: 0,
+      aciertos: calcularAciertosPorJuego(partidas_go_no_go),
+      errores: calcularErroresPorJuego(partidas_go_no_go),
       partidas: partidas_go_no_go,
     });
   }
@@ -103,8 +85,8 @@ export function establecerHistorialJugadorFirebase(paciente) {
     }
     historial.push({
       juego: "4",
-      aciertos: 0,
-      errores: 0,
+      aciertos: calcularAciertosPorJuego(partidas_orderium),
+      errores: calcularErroresPorJuego(partidas_orderium),
       partidas: partidas_orderium,
     });
   }
@@ -118,12 +100,14 @@ export function establecerHistorialJugadorFirebase(paciente) {
   return historial;
 }
 
-export function calcularPorcentajeAciertosPorJuego(historial) {
+export function calcularPorcentajeAciertosPorJuego(juego) {
   let totalCorrect = 0;
   let totalAttempts = 0;
 
-  totalCorrect += historial.aciertos;
-  totalAttempts += historial.errores + historial.aciertos;
+  for (let i = 0; i < juego.partidas.length; i++) {
+    totalCorrect += juego.partidas[i].aciertos;
+    totalAttempts += juego.partidas[i].errores + juego.partidas[i].aciertos;
+  }
 
   const porcentajeAciertos =
     totalAttempts > 0 ? (totalCorrect * 100) / totalAttempts : 0;
@@ -133,8 +117,8 @@ export function calcularPorcentajeAciertosPorJuego(historial) {
 export function calcularAciertosPorJuego(scores) {
   let totalCorrect = 0;
   for (let i = 1; i <= Object.keys(scores).length; i++) {
-    if (scores[i] && scores[i].scorecorrect !== undefined) {
-      totalCorrect += scores[i].scorecorrect;
+    if (scores[i] && scores[i].aciertos !== undefined) {
+      totalCorrect += scores[i].aciertos;
     }
   }
   return totalCorrect;
@@ -143,11 +127,26 @@ export function calcularAciertosPorJuego(scores) {
 export function calcularErroresPorJuego(scores) {
   let totalIncorrect = 0;
   for (let i = 1; i <= Object.keys(scores).length; i++) {
-    if (scores[i] && scores[i].scoreincorrect !== undefined) {
-      totalIncorrect += scores[i].scoreincorrect;
+    if (scores[i] && scores[i].errores !== undefined) {
+      totalIncorrect += scores[i].errores;
     }
   }
   return totalIncorrect;
+}
+
+function calcularPorcentajeAciertos(historial) {
+  let totalCorrect = 0;
+  let totalAttempts = 0;
+
+  for (const game of historial) {
+    for (const partida of game.partidas) {
+      totalCorrect += partida.aciertos;
+      totalAttempts += partida.aciertos + partida.errores;
+    }
+  }
+
+  const porcentajeAciertos = totalAttempts > 0 ? (totalCorrect * 100) / totalAttempts : 0;
+  return porcentajeAciertos.toFixed(2);
 }
 
 export function obtenerTiemposDePaciente(pacientes, id, juego) {
@@ -163,10 +162,6 @@ export function obtenerTiemposDePaciente(pacientes, id, juego) {
         return [];
     }
 
-    paciente.historial.forEach((entry, index) => {
-        console.log(`Juego ${index} en historial: ${entry.juego}`);
-    });
-
     // Convert juego to numeric string
     const juegoNumeric = juego.replace(/\D/g, "");
 
@@ -177,6 +172,6 @@ export function obtenerTiemposDePaciente(pacientes, id, juego) {
     }
 
     const tiempos = juegoHistorial.partidas.map((partida) => partida.tiempo);
-    const tiemposChart = tiempos.join(", ");
+    // const tiemposChart = tiempos.join(", ");
     return tiempos;
 }
