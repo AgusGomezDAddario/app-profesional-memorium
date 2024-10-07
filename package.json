@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@aws-amplify/auth": "6.3.11",
-    "@aws-amplify/ui-react": "6.1.14",
+    "@aws-amplify/ui-react": "^6.1.14",
     "@aws-sdk/client-cognito-identity": "3.635.0",
     "@aws-sdk/client-dynamodb": "^3.662.0",
     "@aws-sdk/client-location": "^3.662.0",
@@ -24,7 +24,7 @@
     "@mui/material": "5.16.7",
     "@mui/styled-engine-sc": "6.0.0-alpha.18",
     "@mui/x-charts": "7.14.0",
-    "aws-amplify": "^6.6.3",
+    "aws-amplify": "^6.6.4",
     "aws-sdk": "2.1685.0",
     "core-js": "3.38.1",
     "dotenv": "16.4.5",
