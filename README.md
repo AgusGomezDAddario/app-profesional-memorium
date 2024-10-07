@@ -1,9 +1,9 @@
-##Memorium - Aplicación Web
+# Memorium - Aplicación Web
 
-#Descripción
+## Descripción
 Memorium es una plataforma web dirigida a profesionales de la salud que buscan mejorar el seguimiento y tratamiento de pacientes en ejercicios de memoria. Esta herramienta ofrece funcionalidades avanzadas para monitorear el progreso de cada paciente en tiempo real, permitiendo una personalización más efectiva de los tratamientos.
 
-#Características Principales
+## Características Principales
 - Seguimiento de Resultados: Visualización detallada de los resultados obtenidos por los pacientes en los juegos de la aplicación móvil, facilitando el análisis de su desempeño.
 
 - Clasificación de Pacientes: Organización y clasificación de los pacientes según su estado de avance en el tratamiento, permitiendo una gestión más eficiente.
