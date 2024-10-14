@@ -32,7 +32,7 @@ export const BasicStack = () => {
           <div style={{ display: "flex" }}>
             <DescriptionIcon sx={{ fontSize: "2rem", color: "#2f5496" }} />
             <p className="description-game">
-              Memory Game es una herramienta de evaluación y entrenamiento
+              Memory Game es una herramienta de entrenamiento
               cognitivo diseñada para mejorar la memoria de trabajo visual y
               espacial. El juego presenta una serie de estímulos visuales que el
               usuario debe recordar y reproducir en secuencia.
