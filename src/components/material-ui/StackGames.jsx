@@ -84,7 +84,7 @@ export const BasicStack = () => {
           {/* <div className="button-center">
             <ColorButton variant="contained">Conozca Memory Game</ColorButton>
           </div> */}
-          <BasicModalGameVideo video={'33M90oQbwPM'}/>
+          <BasicModalGameVideo video={'a7O-G3lhkdM'}/>
         </Item>
         <Item>
           <div style={{ display: "flex", justifyContent: "center" }}>
