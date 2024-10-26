@@ -6,12 +6,12 @@ export const images_carrusel = [
     },
     {
         id: 1,
-        src: '../../src/images/platform_3.png',
+        src: '../../src/images/platform_2.png',
         text: 'Esta es la pantalla principal de Memorium. Desde aquí puedes navegar fácilmente entre tres secciones clave: `Mis pacientes` para gestionar la información de tus pacientes, `Conocer Plataforma` para familiarizarte con las herramientas disponibles, y `Juegos disponibles` para conocer los juegos diseñados para entrenar la memoria.',
     },
     {
         id: 2,
-        src: '../../src/images/platform_2.png',
+        src: '../../src/images/platform_3.png',
         text: 'Para gestionar a tus pacientes, primero necesitas iniciar sesión en Memorium. Si ya tienes una cuenta, simplemente introduce tus credenciales. Si aún no estás registrado, puedes crear una cuenta rápidamente para comenzar a usar nuestras herramientas.',
     },
     {
