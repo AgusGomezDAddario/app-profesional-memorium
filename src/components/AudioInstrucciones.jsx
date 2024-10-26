@@ -16,7 +16,11 @@ const AudioPlayer = ({ audioSrc }) => {
 
   const handlePlayAudio = () => {
     if (audioRef.current) {
-      audioRef.current.play();
+      if (audioRef.current.paused) {
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+      }
     }
   };
 
