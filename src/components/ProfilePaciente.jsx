@@ -8,6 +8,7 @@ import PacientesAnotaciones from "./PacientesAnotaciones.jsx";
 import { AnotacionProvider } from "../contexts/anotaciones.jsx";
 import { SimpleCharts } from "./material-ui/Chart.jsx";
 import { BasicTabs } from "./material-ui/PaginationUserProfile.jsx";
+import { SimpleBackdrop } from "./material-ui/Loader.jsx";
 
 export const ProfilePaciente = () => {
   const { id } = useParams();
@@ -61,7 +62,8 @@ export const ProfilePaciente = () => {
           ,
         </div>
       ) : (
-        <p style={{color: 'white'}}>Cargando...</p>
+        // <p style={{color: 'white'}}>Cargando...</p>
+        <SimpleBackdrop />
       )}
     </div>
   );
