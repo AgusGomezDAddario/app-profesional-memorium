@@ -32,7 +32,7 @@ export const BasicStack = () => {
           <div style={{ display: "flex" }}>
             <DescriptionIcon sx={{ fontSize: "2rem", color: "#2f5496" }} />
             <p className="description-game">
-              Memory Game es una herramienta de evaluación y entrenamiento
+              Memory Game es una herramienta de entrenamiento
               cognitivo diseñada para mejorar la memoria de trabajo visual y
               espacial. El juego presenta una serie de estímulos visuales que el
               usuario debe recordar y reproducir en secuencia.
@@ -84,7 +84,7 @@ export const BasicStack = () => {
           {/* <div className="button-center">
             <ColorButton variant="contained">Conozca Memory Game</ColorButton>
           </div> */}
-          <BasicModalGameVideo video={'33M90oQbwPM'}/>
+          <BasicModalGameVideo video={'a7O-G3lhkdM'}/>
         </Item>
         <Item>
           <div style={{ display: "flex", justifyContent: "center" }}>
@@ -146,16 +146,16 @@ export const BasicStack = () => {
           {/* <div className="button-center">
             <ColorButton variant="contained">Conozca Memory Game</ColorButton>
           </div> */}
-          <BasicModalGameVideo video={'fnYiPeNA2zg'}/>
+          <BasicModalGameVideo video={'fvhIj9yVP4g'}/>
         </Item>
         <Item>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <h3 className="title-game">Go-No-Go</h3>
+            <h3 className="title-game">Contrarium</h3>
           </div>
           <div style={{ display: "flex" }}>
             <DescriptionIcon sx={{ fontSize: "2rem", color: "#2f5496" }} />
             <p className="description-game">
-              Go-No-Go es un juego de control inhibitorio que evalúa y entrena
+              Contrarium (Go-No-Go) es un juego de control inhibitorio que evalúa y entrena
               la capacidad del usuario para suprimir respuestas automáticas. El
               juego presenta estímulos que requieren una respuesta rápida (Go) o
               la inhibición de la respuesta (No-Go), con opciones de
@@ -211,7 +211,7 @@ export const BasicStack = () => {
           {/* <div className="button-center">
             <ColorButton variant="contained">Conozca Memory Game</ColorButton>
           </div> */}
-          <BasicModalGameVideo video={'1dpUwBPCVwM'}/>
+          <BasicModalGameVideo video={'IxeTPgcmhOI'}/>
         </Item>
       </Stack>
     </Box>
