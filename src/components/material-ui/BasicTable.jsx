@@ -14,15 +14,15 @@ import { useParams } from "react-router-dom";
 
 export const BasicTable = ({ game }) => {
   const { id } = useParams();
-  const pacientes = usePacientes();
+  const { pacientesDataFirebase } = usePacientes();
   const [pacienteProfile, setPacienteProfile] = useState(null);
 
   useEffect(() => {
-    const pacienteEncontrado = pacientes.find((paciente) => paciente.id === id);
+    const pacienteEncontrado = pacientesDataFirebase.find((paciente) => paciente.id === id);
     if (pacienteEncontrado) {
       setPacienteProfile(pacienteEncontrado);
     }
-  }, [id, pacientes]);
+  }, [id, pacientesDataFirebase]);
 
   return (
     <div>

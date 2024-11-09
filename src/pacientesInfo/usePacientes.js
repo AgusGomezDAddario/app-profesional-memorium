@@ -2,39 +2,39 @@ import { useState, useEffect } from "react";
 import fetchScores from "../firebase/config.js";
 
 export function usePacientes() {
-    const [pacientesDataFirebase, setPacientesDataFirebase] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const [pacientesDataFirebase, setPacientesDataFirebase] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        async function getPacientes() {
-            try {
-                const data = await fetchScores();
-                if (!Array.isArray(data)) {
-                    console.error("fetchScores did not return an array:", data);
-                    return;
-                }
-
-                const mappedPacientesFirebase = data.map((pacienteFirebase) => ({
-                    id: pacienteFirebase.dni,
-                    nombre: pacienteFirebase.name,
-                    edad: pacienteFirebase.age,
-                    historial: establecerHistorialJugadorFirebase(pacienteFirebase),
-                    desempenoGlobal: calcularPorcentajeAciertos(establecerHistorialJugadorFirebase(pacienteFirebase)),
-                }));
-                setPacientesDataFirebase(mappedPacientesFirebase);
-            } catch (error) {
-                console.error("Error fetching scores:", error);
-                setError(error);
-            } finally {
-                setLoading(false);
-            }
+  useEffect(() => {
+    async function getPacientes() {
+      try {
+        const data = await fetchScores();
+        if (!Array.isArray(data)) {
+          console.error("fetchScores did not return an array:", data);
+          return;
         }
 
-        getPacientes();
-    }, []);
+        const mappedPacientesFirebase = data.map((pacienteFirebase) => ({
+          id: pacienteFirebase.dni,
+          nombre: pacienteFirebase.name,
+          edad: pacienteFirebase.age,
+          historial: establecerHistorialJugadorFirebase(pacienteFirebase),
+          desempenoGlobal: calcularPorcentajeAciertos(establecerHistorialJugadorFirebase(pacienteFirebase)),
+        }));
+        setPacientesDataFirebase(mappedPacientesFirebase);
+      } catch (error) {
+        console.error("Error fetching scores:", error);
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    }
 
-    return { pacientesDataFirebase, loading, error };
+    getPacientes();
+  }, []);
+
+  return { pacientesDataFirebase, loading, error };
 }
 
 export function establecerHistorialJugadorFirebase(paciente) {
@@ -44,6 +44,7 @@ export function establecerHistorialJugadorFirebase(paciente) {
     const partidas_numerium = [];
     const partidas_go_no_go = [];
     const partidas_orderium = [];
+    const partidas_abecedarium = [];
 
     if (Array.isArray(paciente.memoryGame)) {
         for (let i = 0; i < paciente.memoryGame.length; i++) {
@@ -117,6 +118,24 @@ export function establecerHistorialJugadorFirebase(paciente) {
         });
     }
 
+    if (Array.isArray(paciente.abecedarium)) {
+        for (let i = 0; i < paciente.abecedarium.length; i++) {
+            const partida = paciente.abecedarium[i];
+            partidas_abecedarium.push({
+                errores: partida.equivocaciones.reduce((total, num) => total + num, 0),
+                aciertos: partida.vecesJugadas,
+                tiempo: partida.tiempo,
+                palabra: partida.palabra,
+            });
+        }
+        historial.push({
+            juego: "5",
+            aciertos: calcularAciertosPorJuego(partidas_abecedarium),
+            errores: calcularErroresPorJuego(partidas_abecedarium),
+            partidas: partidas_abecedarium,
+        });
+    }
+    console.log(historial);
     return historial;
 }
 

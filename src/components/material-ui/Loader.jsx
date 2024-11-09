@@ -2,16 +2,10 @@ import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-export const SimpleBackdrop = () => {
+export const SimpleBackdrop = ({ open }) => {
   return (
-    <>
-      <Backdrop
-        sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
-        open={open}
-        // onClick={handleClose}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-    </>
+    <Backdrop open={open} style={{ color: "#fff", zIndex: 1000 }}>
+      <CircularProgress color="inherit" />
+    </Backdrop>
   );
-}
+};

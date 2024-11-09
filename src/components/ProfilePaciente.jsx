@@ -12,15 +12,20 @@ import { SimpleBackdrop } from "./material-ui/Loader.jsx";
 
 export const ProfilePaciente = () => {
   const { id } = useParams();
-  const pacientes = usePacientes();
+  const { pacientesDataFirebase, loading, error } = usePacientes();
   const [pacienteProfile, setPacienteProfile] = useState(null);
 
   useEffect(() => {
-    const pacienteEncontrado = pacientes.find((paciente) => paciente.id === id);
-    if (pacienteEncontrado) {
-      setPacienteProfile(pacienteEncontrado);
+    if (Array.isArray(pacientesDataFirebase)) {
+      const pacienteEncontrado = pacientesDataFirebase.find((paciente) => paciente.id === id);
+      if (pacienteEncontrado) {
+        setPacienteProfile(pacienteEncontrado);
+      }
     }
-  }, [id, pacientes]);
+  }, [id, pacientesDataFirebase]);
+
+  if (loading) return <SimpleBackdrop />;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div>
@@ -42,7 +47,7 @@ export const ProfilePaciente = () => {
           </p>
           <BasicTabs />
           <Link to="/login" style={{ textDecoration: "none" }}>
-            <a
+            <span
               style={{
                 color: "white",
                 fontSize: "1.2rem",
@@ -53,7 +58,7 @@ export const ProfilePaciente = () => {
               }}
             >
               Volver a Pacientes
-            </a>
+            </span>
           </Link>
           <AnotacionProvider>
             <PacientesAnotaciones />
