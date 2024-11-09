@@ -49,7 +49,8 @@ export default function SelectFiltrado({ filtrado, setFiltrado }) {
           <MenuItem value="iniciando">Iniciando</MenuItem>
           <MenuItem value="empeorando">Empeorando</MenuItem>
           <MenuItem value="consulta">Consulta</MenuItem>
-          <MenuItem value="en_alta">En Alta</MenuItem>
+          <MenuItem value="en_alta">En Alta</MenuItem>          
+          <MenuItem value="no_iniciado">No Iniciado</MenuItem>          
         </Select>
       </FormControl>
     </div>

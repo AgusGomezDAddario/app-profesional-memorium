@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -40,12 +40,21 @@ function getComparator(order, orderBy) {
 }
 
 function Paciente({ paciente }) {
+
+  useEffect(() => {
+    if (!paciente.historial || paciente.historial.length === 0) {
+      setClasificacion("no_iniciado");
+    }
+  }, [paciente.historial]);
+
   const [open, setOpen] = useState(false);
   const [clasificacion, setClasificacion] = useState("");
   const { filtrado } = useFilter();
 
   function getColor() {
-    if (clasificacion === "mejorando") {
+    if (clasificacion === "no_iniciado") {
+      return "#9e8a8b";
+    } else if (clasificacion === "mejorando") {
       return "#d4edda";
     } else if (clasificacion === "iniciando") {
       return "#fff3cd";

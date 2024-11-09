@@ -193,28 +193,25 @@ function calcularPorcentajeAciertos(historial) {
 export function obtenerTiemposDePaciente(pacientes, id, juego) {
     const paciente = pacientes.find((paciente) => paciente.id.trim().localeCompare(id.trim()) === 0);
     if (!paciente) {
-        console.error(`Paciente con id ${id} no encontrado`);
-        return [];
+      console.error(`Paciente con id ${id} no encontrado`);
+      return [];
     }
-
+  
     if (!paciente.historial || !Array.isArray(paciente.historial)) {
-        console.error(`Historial no encontrado para el paciente con id ${id}`);
-        return [];
+      console.error(`Historial no encontrado para el paciente con id ${id}`);
+      return [];
     }
-
-    // Convert juego to numeric string
+  
     const juegoNumeric = juego.replace(/\D/g, "");
-
     const juegoHistorial = paciente.historial.find((entry) => entry.juego === juegoNumeric);
     if (!juegoHistorial || !Array.isArray(juegoHistorial.partidas)) {
-        console.error(`Partidas no encontradas para el juego ${juego} del paciente con id ${id}`);
-        return [];
+      console.error(`Partidas no encontradas para el juego ${juego} del paciente con id ${id}`);
+      return [];
     }
-
+  
     const tiempos = juegoHistorial.partidas.map((partida) => partida.tiempo);
-    // const tiemposChart = tiempos.join(", ");
     return tiempos;
-}
+  }
 
 export function obtenerAciertosMemoryGame(resultado, tipo) {
   if (resultado === "SI" && tipo === "correct") {

@@ -28,6 +28,7 @@ export default function SelectVariants({ clasificacion, setClasificacion }) {
           <MenuItem value={"empeorando"}>Empeorando</MenuItem>
           <MenuItem value={"consulta"}>Consulta</MenuItem>
           <MenuItem value={"en_alta"}>En Alta</MenuItem>
+          <MenuItem value="no_iniciado">No Iniciado</MenuItem>          
         </Select>
       </FormControl>
     </div>

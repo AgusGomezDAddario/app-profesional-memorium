@@ -10,14 +10,18 @@ import './Chart.css';
 export const BasicLineChart = ({ juego }) => {
   const [tiempos, setTiempos] = useState([]);
   const { id } = useParams();
-  const pacientes = usePacientes();
+  const { pacientesDataFirebase, loading, error } = usePacientes();
 
   useEffect(() => {
-    if (pacientes.length > 0) {
-      const tiemposObtenidos = obtenerTiemposDePaciente(pacientes, id, juego);
+    if (pacientesDataFirebase.length > 0) {
+      const tiemposObtenidos = obtenerTiemposDePaciente(pacientesDataFirebase, id, juego);
+      console.log("Tiempos obtenidos:", tiemposObtenidos); // Verifica los datos aquí
       setTiempos(tiemposObtenidos);
     }
-  }, [id, pacientes, juego]); // Agrega `pacientes` y `juego` como dependencias
+  }, [id, pacientesDataFirebase, juego]);
+
+  if (loading) return <div>Cargando...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div style={{marginTop: '2rem', borderRadius: '20px'}}>
@@ -32,10 +36,7 @@ export const BasicLineChart = ({ juego }) => {
               xAxis={[
                 {
                   scaleType: "band",
-                  data: [
-                    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-                    18, 19, 20, 21, 22, 23, 24, 25,
-                  ],
+                  data: tiempos.map((_, index) => index + 1), // Muestra los índices como etiquetas
                 },
               ]}
               series={[
