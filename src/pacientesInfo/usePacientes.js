@@ -50,10 +50,10 @@ export function establecerHistorialJugadorFirebase(paciente) {
         for (let i = 0; i < paciente.memoryGame.length; i++) {
             const partida = paciente.memoryGame[i];
             partidas_memory_game.push({
-                aciertos: partida.correct,
-                errores: partida.incorrect,
-                tiempo: partida.timeSpent,
-                dificultad: partida.difficulty,
+                aciertos: obtenerAciertosMemoryGame(partida.acerto, "correct"),
+                errores:obtenerAciertosMemoryGame(partida.acerto, "error"),
+                tiempo: partida.tiempo,
+                dificultad: obtenerDificultadMemoryGame(partida.categoria, partida.dificultad, partida.distractorTime, partida.tiempoImagenes),
             });
         }
         historial.push({
@@ -67,11 +67,12 @@ export function establecerHistorialJugadorFirebase(paciente) {
     if (Array.isArray(paciente.numerium)) {
         for (let i = 0; i < paciente.numerium.length; i++) {
             const partida = paciente.numerium[i];
+            console.log(partida);
             partidas_numerium.push({
-                aciertos: partida.correct,
-                errores: partida.incorrect,
-                tiempo: partida.timeSpent,
-                dificultad: partida.difficulty,
+                aciertos: 1,
+                errores: partida.vecesJugadas - 1,
+                tiempo: partida.tiempo,
+                dificultad: obtenerDificultadNumerium(partida.digitos, partida.distractorTime, partida.tiempoDigitos),
             });
         }
         historial.push({
@@ -125,7 +126,7 @@ export function establecerHistorialJugadorFirebase(paciente) {
                 errores: partida.equivocaciones.reduce((total, num) => total + num, 0),
                 aciertos: partida.vecesJugadas,
                 tiempo: partida.tiempo,
-                palabra: partida.palabra,
+                dificultad: `Jugó con la palabra: ${partida.palabra}`,
             });
         }
         historial.push({
@@ -212,4 +213,27 @@ export function obtenerTiemposDePaciente(pacientes, id, juego) {
     const tiempos = juegoHistorial.partidas.map((partida) => partida.tiempo);
     // const tiemposChart = tiempos.join(", ");
     return tiempos;
+}
+
+export function obtenerAciertosMemoryGame(resultado, tipo) {
+  if (resultado === "SI" && tipo === "correct") {
+    return 1;
+  }
+  if (resultado === "SI" && tipo === "error") {
+    return 0;
+  }
+  if (resultado === "NO" && tipo === "correct") {
+    return 0;
+  }
+  if (resultado === "NO" && tipo === "error") {
+    return 1;
+  }
+}
+
+export function obtenerDificultadMemoryGame(categoria, dificultad, distractorTime, tiempoImagenes) {
+  return `Jugó ${categoria}, con dificultad ${dificultad}, con ${distractorTime/100} sg. de distractor y ${tiempoImagenes/100} sg. de tiempo de imágenes`;
+}
+
+export function obtenerDificultadNumerium(digitos, distractorTime, tiempoDigitos) {
+  return `Jugó usando ${digitos} dígitos, con ${distractorTime/100} sg. de distractor y ${tiempoDigitos/100} sg. de tiempo de dígitos`;
 }

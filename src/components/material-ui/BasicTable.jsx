@@ -104,7 +104,7 @@ export const BasicTable = ({ game }) => {
                         <TableCell align="center">
                           {historial.juego === "3" || historial.juego === "4"
                             ? "Facilitaciones: " + partida.facilitaciones
-                            : "Dificultad: " + partida.dificultad}
+                            : partida.dificultad}
                         </TableCell>
                       </TableRow>
                     ))
