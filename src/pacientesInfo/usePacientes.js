@@ -51,7 +51,7 @@ export function establecerHistorialJugadorFirebase(paciente) {
             const partida = paciente.memoryGame[i];
             partidas_memory_game.push({
                 aciertos: obtenerAciertosMemoryGame(partida.acerto, "correct"),
-                errores:obtenerAciertosMemoryGame(partida.acerto, "error"),
+                errores: obtenerAciertosMemoryGame(partida.acerto, "error"),
                 tiempo: partida.tiempo,
                 dificultad: obtenerDificultadMemoryGame(partida.categoria, partida.dificultad, partida.distractorTime, partida.tiempoImagenes),
             });
@@ -67,7 +67,6 @@ export function establecerHistorialJugadorFirebase(paciente) {
     if (Array.isArray(paciente.numerium)) {
         for (let i = 0; i < paciente.numerium.length; i++) {
             const partida = paciente.numerium[i];
-            console.log(partida);
             partidas_numerium.push({
                 aciertos: 1,
                 errores: partida.vecesJugadas - 1,
@@ -136,7 +135,7 @@ export function establecerHistorialJugadorFirebase(paciente) {
             partidas: partidas_abecedarium,
         });
     }
-    console.log(historial);
+    // console.log(historial);
     return historial;
 }
 
@@ -155,12 +154,14 @@ export function calcularPorcentajeAciertosPorJuego(juego) {
 }
 
 export function calcularAciertosPorJuego(scores) {
+    // console.log(scores);
     let totalCorrect = 0;
-    for (let i = 1; i <= Object.keys(scores).length; i++) {
+    for (let i = 0; i <= Object.keys(scores).length; i++) {
         if (scores[i] && scores[i].aciertos !== undefined) {
             totalCorrect += scores[i].aciertos;
         }
     }
+    // console.log(totalCorrect);
     return totalCorrect;
 }
 
