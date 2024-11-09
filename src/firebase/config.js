@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore"
+import { getFirestore } from "firebase/firestore";
 import { collection, query, getDocs } from 'firebase/firestore';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,13 +16,19 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app)
+export const db = getFirestore(app);
+const auth = getAuth(app);
 
 export default async function fetchScores() {
-    const scoreRef = collection(db, 'score');
-    const itemsRef = query(scoreRef);
-    const resp = await getDocs(itemsRef);
+    try {
+        const scoreRef = collection(db, 'score');
+        const itemsRef = query(scoreRef);
+        const resp = await getDocs(itemsRef);
 
-    const data = resp.docs.map((doc) => doc.data());
-    return data;
+        const data = resp.docs.map((doc) => doc.data());
+        return data;
+    } catch (error) {
+        console.error('Error fetching scores:', error);
+        throw error;
+    }
 }

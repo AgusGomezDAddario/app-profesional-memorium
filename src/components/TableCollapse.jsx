@@ -141,6 +141,7 @@ function Paciente({ paciente }) {
                       <TableBody>
                         {paciente.historial &&
                           paciente.historial.map((historial, index) => (
+                            console.log(historial),
                             <TableRow key={index}>
                               <TableCell
                                 component="th"
@@ -197,7 +198,7 @@ Paciente.propTypes = {
 };
 
 function CollapsibleTable() {
-  const pacientes = usePacientes();
+  const { pacientesDataFirebase, loading, error } = usePacientes();
   const { filtrado, setFiltrado } = useFilter();
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("nombre");
@@ -210,11 +211,14 @@ function CollapsibleTable() {
 
   const sortedPacientes = useMemo(
     () =>
-      pacientes
-        .slice() // Crear una copia del array para no mutar el original
-        .sort(getComparator(order, orderBy)),
-    [pacientes, order, orderBy]
+      Array.isArray(pacientesDataFirebase)
+        ? pacientesDataFirebase.slice().sort(getComparator(order, orderBy))
+        : [],
+    [pacientesDataFirebase, order, orderBy]
   );
+
+  if (loading) return <div><p style={{color: 'white'}}>Cargando...</p></div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <>
