@@ -32,10 +32,10 @@ export const BasicStack = () => {
           <div style={{ display: "flex" }}>
             <DescriptionIcon sx={{ fontSize: "2rem", color: "#2f5496" }} />
             <p className="description-game">
-              Memory Game es una herramienta de entrenamiento
-              cognitivo diseñada para mejorar la memoria de trabajo visual y
-              espacial. El juego presenta una serie de estímulos visuales que el
-              usuario debe recordar y reproducir en secuencia.
+              Memory Game es una herramienta de entrenamiento cognitivo diseñada
+              para mejorar la memoria de trabajo visual y espacial. El juego
+              presenta una serie de estímulos visuales que el usuario debe
+              recordar y reproducir en secuencia.
             </p>
           </div>
           <div style={{ display: "flex", marginTop: "1.5rem" }}>
@@ -84,7 +84,7 @@ export const BasicStack = () => {
           {/* <div className="button-center">
             <ColorButton variant="contained">Conozca Memory Game</ColorButton>
           </div> */}
-          <BasicModalGameVideo video={'a7O-G3lhkdM'}/>
+          <BasicModalGameVideo video={"a7O-G3lhkdM"} />
         </Item>
         <Item>
           <div style={{ display: "flex", justifyContent: "center" }}>
@@ -146,7 +146,7 @@ export const BasicStack = () => {
           {/* <div className="button-center">
             <ColorButton variant="contained">Conozca Memory Game</ColorButton>
           </div> */}
-          <BasicModalGameVideo video={'fvhIj9yVP4g'}/>
+          <BasicModalGameVideo video={"fvhIj9yVP4g"} />
         </Item>
         <Item>
           <div style={{ display: "flex", justifyContent: "center" }}>
@@ -155,11 +155,11 @@ export const BasicStack = () => {
           <div style={{ display: "flex" }}>
             <DescriptionIcon sx={{ fontSize: "2rem", color: "#2f5496" }} />
             <p className="description-game">
-              Contrarium (Go-No-Go) es un juego de control inhibitorio que evalúa y entrena
-              la capacidad del usuario para suprimir respuestas automáticas. El
-              juego presenta estímulos que requieren una respuesta rápida (Go) o
-              la inhibición de la respuesta (No-Go), con opciones de
-              personalización de dificultad.
+              Contrarium (Go-No-Go) es un juego de control inhibitorio que
+              evalúa y entrena la capacidad del usuario para suprimir respuestas
+              automáticas. El juego presenta estímulos que requieren una
+              respuesta rápida (Go) o la inhibición de la respuesta (No-Go), con
+              opciones de personalización de dificultad.
             </p>
           </div>
           <div style={{ display: "flex", marginTop: "1.5rem" }}>
@@ -211,7 +211,131 @@ export const BasicStack = () => {
           {/* <div className="button-center">
             <ColorButton variant="contained">Conozca Memory Game</ColorButton>
           </div> */}
-          <BasicModalGameVideo video={'IxeTPgcmhOI'}/>
+          <BasicModalGameVideo video={"IxeTPgcmhOI"} />
+        </Item>
+        <Item>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <h3 className="title-game">Orderium</h3>
+          </div>
+          <div style={{ display: "flex" }}>
+            <DescriptionIcon sx={{ fontSize: "2rem", color: "#2f5496" }} />
+            <p className="description-game">
+              Orderium es una herramienta de entrenamiento cognitivo diseñada
+              para mejorar la memoria secuencial y las habilidades
+              organizativas. El juego presenta series de palabras que el usuario
+              debe ordenar correctamente, incorporando un elemento estratégico
+              mediante el uso de una "bomba" que elimina opciones incorrectas.
+            </p>
+          </div>
+          <div style={{ display: "flex", marginTop: "1.5rem" }}>
+            <PsychologyIcon sx={{ fontSize: "2rem", color: "#2f5496" }} />
+            <p className="description-game">
+              Este juego se fundamenta en los principios de la memoria de
+              trabajo y la organización jerárquica de información, componentes
+              esenciales de las funciones ejecutivas. Orderium se basa en
+              teorías sobre el procesamiento secuencial y la planificación
+              estratégica, adaptando estos conceptos a un formato interactivo y
+              desafiante.
+            </p>
+          </div>
+          <div style={{ display: "flex", marginTop: "1.5rem" }}>
+            <EmojiObjectsIcon sx={{ fontSize: "2rem", color: "#2f5496" }} />
+            <p className="description-game">
+              Objetivos:
+              <ul>
+                <li>
+                  Evaluar y mejorar la capacidad de organización secuencial
+                </li>
+                <li>Potenciar la memoria de trabajo y la planificación</li>
+                <li>
+                  Desarrollar estrategias de toma de decisiones bajo presión
+                </li>
+              </ul>
+            </p>
+          </div>
+          <div style={{ display: "flex", marginTop: "1.5rem" }}>
+            <CheckIcon sx={{ fontSize: "2rem", color: "#2f5496" }} />
+            <p className="description-game">
+              Beneficios:
+              <ul>
+                <li>
+                  Mejora en la capacidad de organizar información
+                  jerárquicamente
+                </li>
+                <li>
+                  Incremento en la velocidad y precisión de la toma de
+                  decisiones
+                </li>
+                <li>
+                  Potencial transferencia a actividades que requieren
+                  planificación y organización
+                </li>
+              </ul>
+            </p>
+          </div>
+          {/* <div className="button-center">
+            <ColorButton variant="contained">Conozca Memory Game</ColorButton>
+          </div> */}
+          {/* <BasicModalGameVideo video={'IxeTPgcmhOI'}/> */}
+        </Item>
+        <Item>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <h3 className="title-game">Abecedarium</h3>
+          </div>
+          <div style={{ display: "flex" }}>
+            <DescriptionIcon sx={{ fontSize: "2rem", color: "#2f5496" }} />
+            <p className="description-game">
+              Abecedarium es un juego de secuencias alfabéticas diseñado para
+              estimular la agilidad mental y la memoria secuencial. El juego
+              desafía al usuario a completar series de letras basándose en el
+              orden alfabético, adaptando la dificultad para mantener un nivel
+              óptimo de desafío cognitivo.
+            </p>
+          </div>
+          <div style={{ display: "flex", marginTop: "1.5rem" }}>
+            <PsychologyIcon sx={{ fontSize: "2rem", color: "#2f5496" }} />
+            <p className="description-game">
+              Este juego se fundamenta en los principios del procesamiento
+              lingüístico secuencial y la automatización de respuestas,
+              incorporando elementos de la teoría del aprendizaje procedimental.
+              Abecedarium integra conceptos de fluidez cognitiva y procesamiento
+              de información serializada.
+            </p>
+          </div>
+          <div style={{ display: "flex", marginTop: "1.5rem" }}>
+            <EmojiObjectsIcon sx={{ fontSize: "2rem", color: "#2f5496" }} />
+            <p className="description-game">
+              Objetivos:
+              <ul>
+                <li>
+                  Evaluar y mejorar la velocidad de procesamiento lingüístico
+                </li>
+                <li>Potenciar la memoria de trabajo y la fluidez alfabética</li>
+                <li>Desarrollar la automatización de secuencias y patrones</li>
+              </ul>
+            </p>
+          </div>
+          <div style={{ display: "flex", marginTop: "1.5rem" }}>
+            <CheckIcon sx={{ fontSize: "2rem", color: "#2f5496" }} />
+            <p className="description-game">
+              Beneficios:
+              <ul>
+                <li>
+                  Mejora en la velocidad de procesamiento de información
+                  secuencial
+                </li>
+                <li>Incremento en la fluidez mental y precisión lingüística</li>
+                <li>
+                  Potencial transferencia a actividades que requieren
+                  procesamiento rápido y secuencial
+                </li>
+              </ul>
+            </p>
+          </div>
+          {/* <div className="button-center">
+            <ColorButton variant="contained">Conozca Memory Game</ColorButton>
+          </div> */}
+          {/* <BasicModalGameVideo video={'IxeTPgcmhOI'}/> */}
         </Item>
       </Stack>
     </Box>

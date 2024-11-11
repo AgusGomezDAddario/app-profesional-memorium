@@ -20,7 +20,7 @@ export const BasicLineChart = ({ juego }) => {
     }
   }, [id, pacientesDataFirebase, juego]);
 
-  if (loading) return <div>Cargando...</div>;
+  // if (loading) return <div>Cargando...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
