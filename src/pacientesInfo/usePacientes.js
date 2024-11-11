@@ -88,7 +88,7 @@ export function establecerHistorialJugadorFirebase(paciente) {
             partidas_go_no_go.push({
                 aciertos: 1,
                 errores: parseInt(partida.attempts) - 1,
-                tiempo: 0,
+                tiempo: partida.time,
                 facilitaciones: partida.facilitations,
             });
         }
