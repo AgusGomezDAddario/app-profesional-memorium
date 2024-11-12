@@ -1,8 +1,8 @@
-import './Login.css';
-import React from 'react';
-import { LoginSystem } from './login.jsx';
-
+import "./Login.css";
+import React from "react";
+import { LoginSystem } from "./login.jsx";
 import { ThemeProvider, useTheme, View } from "@aws-amplify/ui-react";
+import { Link } from "react-router-dom";
 
 export const AuthenticatorTheme = () => {
   const { tokens } = useTheme();
@@ -46,10 +46,24 @@ export const AuthenticatorTheme = () => {
   };
 
   return (
-    <View style={{ textAlign: "justify" }}>
+    <View style={{ textAlign: "justify"}}>
       <ThemeProvider theme={theme}>
         <LoginSystem />
       </ThemeProvider>
+      <View style={{ textAlign: "center"}}>
+      <Link to="/" style={{ textDecoration: "none" }}>
+          <a
+            style={{
+              color: "white",
+              fontSize: "1.3rem",
+              fontFamily: "Gentium Plus",
+              marginTop: "2rem",
+            }}
+          >
+            Volver a Inicio
+          </a>
+        </Link>
+      </View>
     </View>
   );
 };

@@ -1,11 +1,11 @@
-import * as React from "react";
-import { CircularProgress } from "@mui/material/CircularProgress";
-import { Box } from "@mui/material/Box";
+import * as React from 'react';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
-export const CircularIndeterminate = () => {
+export const SimpleBackdrop = ({ open }) => {
   return (
-    <Box sx={{ display: "flex" }}>
-      <CircularProgress />
-    </Box>
+    <Backdrop open={open} style={{ color: "#fff", zIndex: 1000 }}>
+      <CircularProgress color="inherit" />
+    </Backdrop>
   );
 };

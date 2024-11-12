@@ -14,16 +14,15 @@ import { calcularPorcentajeAciertosPorJuego } from "../pacientesInfo/usePaciente
 
 export default function DenseTable() {
   const { id } = useParams();
-  const pacientes = usePacientes();
+  const { pacientesDataFirebase } = usePacientes();
   const [pacienteProfile, setPacienteProfile] = useState(null);
 
   useEffect(() => {
-    pacientes.forEach((paciente) => {
-      if (paciente.id === id) {
-        setPacienteProfile(paciente);
-      }
-    });
-  }, [pacientes, id]);
+    const pacienteEncontrado = pacientesDataFirebase.find((paciente) => paciente.id === id);
+    if (pacienteEncontrado) {
+      setPacienteProfile(pacienteEncontrado);
+    }
+  }, [pacientesDataFirebase, id]);
 
   return (
     <div>
@@ -92,7 +91,7 @@ export default function DenseTable() {
           </Table>
         </TableContainer>
       ) : (
-        <p>Cargando...</p>
+        <p style={{color: 'white'}}>Cargando...</p>
       )}
     </div>
   );

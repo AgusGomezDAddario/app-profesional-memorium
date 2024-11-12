@@ -37,10 +37,8 @@ const EmblaCarousel = (props) => {
                 </p>
               </div>
               <div className="embla__audio">
-                <AudioPlayer
-                  audioSrc={`https://mybuckets3appprofesionalesmemorium.s3.us-east-2.amazonaws.com/${index}.mp3`}
-                />
-              </div>
+                <AudioPlayer audioSrc={`https://mybuckets3appprofesionalesmemorium.s3.us-east-2.amazonaws.com/plataforma-${index}.mp3`} />
+            </div>
             </div>
           ))}
         </div>

@@ -1,56 +1,237 @@
 import { useState, useEffect } from "react";
-import { pacientes } from "./pacientes";
-
-function calcularPorcentajeAciertos(globalScores) {
-  let totalCorrect = 0;
-  let totalAttempts = 0;
-
-  for (let key in globalScores) {
-    // Iterar sobre las claves de globalScores
-    const game = globalScores[key]; // Acceder a cada objeto de juego
-    totalCorrect += game.scorecorrect; // Sumar los aciertos correctos
-    totalAttempts += game.scorecorrect + game.scoreincorrect; // Sumar intentos totales
-  }
-
-  const porcentajeAciertos =
-    totalAttempts > 0 ? (totalCorrect * 100) / totalAttempts : 0; // Evitar división por cero
-  return porcentajeAciertos.toFixed(2); // Redondear a dos decimales
-}
+import fetchScores from "../firebase/config.js";
 
 export function usePacientes() {
-  const [pacientesData, setPacientesData] = useState([]);
-  const [game, setGame] = useState(1);
+  const [pacientesDataFirebase, setPacientesDataFirebase] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!Array.isArray(pacientes)) return;
+    async function getPacientes() {
+      try {
+        const data = await fetchScores();
+        if (!Array.isArray(data)) {
+          console.error("fetchScores did not return an array:", data);
+          return;
+        }
 
-    const mappedPacientes = pacientes.map((paciente) => ({
-      id: paciente.dni,
-      nombre: paciente.name,
-      edad: paciente.age,
-      desempenoGlobal: calcularPorcentajeAciertos(paciente.globalScores),
+        const mappedPacientesFirebase = data.map((pacienteFirebase) => ({
+          id: pacienteFirebase.dni,
+          nombre: pacienteFirebase.name,
+          edad: pacienteFirebase.age,
+          historial: establecerHistorialJugadorFirebase(pacienteFirebase),
+          desempenoGlobal: calcularPorcentajeAciertos(establecerHistorialJugadorFirebase(pacienteFirebase)),
+        }));
+        setPacientesDataFirebase(mappedPacientesFirebase);
+      } catch (error) {
+        console.error("Error fetching scores:", error);
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    }
 
-      historial: Object.entries(paciente.globalScores).map(
-        ([juego, scores]) => ({
-          juego: scores.game,
-          errores: scores.scoreincorrect,
-          aciertos: scores.scorecorrect,
-        })
-      ),
-    }));
-    setPacientesData(mappedPacientes);
-  }, [pacientes]);
-  return pacientesData;
+    getPacientes();
+  }, []);
+
+  return { pacientesDataFirebase, loading, error };
 }
 
-export function calcularPorcentajeAciertosPorJuego(historial) {
-  let totalCorrect = 0;
-  let totalAttempts = 0;
+export function establecerHistorialJugadorFirebase(paciente) {
+    const historial = [];
 
-  totalCorrect += historial.aciertos;
-  totalAttempts += historial.errores + historial.aciertos;
+    const partidas_memory_game = [];
+    const partidas_numerium = [];
+    const partidas_go_no_go = [];
+    const partidas_orderium = [];
+    const partidas_abecedarium = [];
 
-  const porcentajeAciertos =
-    totalAttempts > 0 ? (totalCorrect * 100) / totalAttempts : 0;
-  return porcentajeAciertos.toFixed(2);
+    if (Array.isArray(paciente.memoryGame)) {
+        for (let i = 0; i < paciente.memoryGame.length; i++) {
+            const partida = paciente.memoryGame[i];
+            partidas_memory_game.push({
+                aciertos: obtenerAciertosMemoryGame(partida.acerto, "correct"),
+                errores: obtenerAciertosMemoryGame(partida.acerto, "error"),
+                tiempo: partida.tiempo,
+                dificultad: obtenerDificultadMemoryGame(partida.categoria, partida.dificultad, partida.distractorTime, partida.tiempoImagenes),
+            });
+        }
+        historial.push({
+            juego: "1",
+            aciertos: calcularAciertosPorJuego(partidas_memory_game),
+            errores: calcularErroresPorJuego(partidas_memory_game),
+            partidas: partidas_memory_game,
+        });
+    }
+
+    if (Array.isArray(paciente.numerium)) {
+        for (let i = 0; i < paciente.numerium.length; i++) {
+            const partida = paciente.numerium[i];
+            partidas_numerium.push({
+                aciertos: 1,
+                errores: partida.vecesJugadas - 1,
+                tiempo: partida.tiempo,
+                dificultad: obtenerDificultadNumerium(partida.digitos, partida.distractorTime, partida.tiempoDigitos),
+            });
+        }
+        historial.push({
+            juego: "2",
+            aciertos: calcularAciertosPorJuego(partidas_numerium),
+            errores: calcularErroresPorJuego(partidas_numerium),
+            partidas: partidas_numerium,
+        });
+    }
+
+    if (Array.isArray(paciente.gonoGo)) {
+        for (let i = 0; i < paciente.gonoGo.length; i++) {
+            const partida = paciente.gonoGo[i];
+            partidas_go_no_go.push({
+                aciertos: 1,
+                errores: parseInt(partida.attempts) - 1,
+                tiempo: partida.time,
+                facilitaciones: partida.facilitations,
+            });
+        }
+        historial.push({
+            juego: "3",
+            aciertos: calcularAciertosPorJuego(partidas_go_no_go),
+            errores: calcularErroresPorJuego(partidas_go_no_go),
+            partidas: partidas_go_no_go,
+        });
+    }
+
+    if (Array.isArray(paciente.orderium)) {
+        for (let i = 0; i < paciente.orderium.length; i++) {
+            const partida = paciente.orderium[i];
+            partidas_orderium.push({
+                aciertos: 1,
+                errores: parseInt(partida.attempts) - 1,
+                tiempo: partida.timeSpent,
+                facilitaciones: partida.facilitations,
+            });
+        }
+        historial.push({
+            juego: "4",
+            aciertos: calcularAciertosPorJuego(partidas_orderium),
+            errores: calcularErroresPorJuego(partidas_orderium),
+            partidas: partidas_orderium,
+        });
+    }
+
+    if (Array.isArray(paciente.abecedarium)) {
+        for (let i = 0; i < paciente.abecedarium.length; i++) {
+            const partida = paciente.abecedarium[i];
+            partidas_abecedarium.push({
+                errores: partida.equivocaciones.reduce((total, num) => total + num, 0),
+                aciertos: partida.vecesJugadas,
+                tiempo: partida.tiempo,
+                dificultad: `Jugó con la palabra: ${partida.palabra}`,
+            });
+        }
+        historial.push({
+            juego: "5",
+            aciertos: calcularAciertosPorJuego(partidas_abecedarium),
+            errores: calcularErroresPorJuego(partidas_abecedarium),
+            partidas: partidas_abecedarium,
+        });
+    }
+    // console.log(historial);
+    return historial;
+}
+
+export function calcularPorcentajeAciertosPorJuego(juego) {
+    let totalCorrect = 0;
+    let totalAttempts = 0;
+
+    for (let i = 0; i < juego.partidas.length; i++) {
+        totalCorrect += juego.partidas[i].aciertos;
+        totalAttempts += juego.partidas[i].errores + juego.partidas[i].aciertos;
+    }
+
+    const porcentajeAciertos =
+        totalAttempts > 0 ? (totalCorrect * 100) / totalAttempts : 0;
+    return porcentajeAciertos.toFixed(2);
+}
+
+export function calcularAciertosPorJuego(scores) {
+    // console.log(scores);
+    let totalCorrect = 0;
+    for (let i = 0; i <= Object.keys(scores).length; i++) {
+        if (scores[i] && scores[i].aciertos !== undefined) {
+            totalCorrect += scores[i].aciertos;
+        }
+    }
+    // console.log(totalCorrect);
+    return totalCorrect;
+}
+
+export function calcularErroresPorJuego(scores) {
+    let totalIncorrect = 0;
+    for (let i = 1; i <= Object.keys(scores).length; i++) {
+        if (scores[i] && scores[i].errores !== undefined) {
+            totalIncorrect += scores[i].errores;
+        }
+    }
+    return totalIncorrect;
+}
+
+function calcularPorcentajeAciertos(historial) {
+    let totalCorrect = 0;
+    let totalAttempts = 0;
+
+    for (const game of historial) {
+        for (const partida of game.partidas) {
+            totalCorrect += partida.aciertos;
+            totalAttempts += partida.aciertos + partida.errores;
+        }
+    }
+
+    const porcentajeAciertos = totalAttempts > 0 ? (totalCorrect * 100) / totalAttempts : 0;
+    return porcentajeAciertos.toFixed(2);
+}
+
+export function obtenerTiemposDePaciente(pacientes, id, juego) {
+    const paciente = pacientes.find((paciente) => paciente.id.trim().localeCompare(id.trim()) === 0);
+    if (!paciente) {
+      console.error(`Paciente con id ${id} no encontrado`);
+      return [];
+    }
+  
+    if (!paciente.historial || !Array.isArray(paciente.historial)) {
+      console.error(`Historial no encontrado para el paciente con id ${id}`);
+      return [];
+    }
+  
+    const juegoNumeric = juego.replace(/\D/g, "");
+    const juegoHistorial = paciente.historial.find((entry) => entry.juego === juegoNumeric);
+    if (!juegoHistorial || !Array.isArray(juegoHistorial.partidas)) {
+      console.error(`Partidas no encontradas para el juego ${juego} del paciente con id ${id}`);
+      return [];
+    }
+  
+    const tiempos = juegoHistorial.partidas.map((partida) => partida.tiempo);
+    return tiempos;
+  }
+
+export function obtenerAciertosMemoryGame(resultado, tipo) {
+  if (resultado === "SI" && tipo === "correct") {
+    return 1;
+  }
+  if (resultado === "SI" && tipo === "error") {
+    return 0;
+  }
+  if (resultado === "NO" && tipo === "correct") {
+    return 0;
+  }
+  if (resultado === "NO" && tipo === "error") {
+    return 1;
+  }
+}
+
+export function obtenerDificultadMemoryGame(categoria, dificultad, distractorTime, tiempoImagenes) {
+  return `Jugó ${categoria}, con dificultad ${dificultad}, con ${distractorTime/100} sg. de distractor y ${tiempoImagenes/100} sg. de tiempo de imágenes`;
+}
+
+export function obtenerDificultadNumerium(digitos, distractorTime, tiempoDigitos) {
+  return `Jugó usando ${digitos} dígitos, con ${distractorTime/100} sg. de distractor y ${tiempoDigitos/100} sg. de tiempo de dígitos`;
 }

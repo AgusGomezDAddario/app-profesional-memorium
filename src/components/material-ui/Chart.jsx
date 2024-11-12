@@ -11,18 +11,18 @@ export const SimpleCharts = () => {
   const [itemData, setItemData] = useState();
   const [axisData, setAxisData] = useState();
   const { id } = useParams();
-  const pacientes = usePacientes();
+  const { pacientesDataFirebase } = usePacientes();
   const [pacienteProfile, setPacienteProfile] = useState(null);
 
   useEffect(() => {
-    const pacienteEncontrado = pacientes.find((paciente) => paciente.id === id);
+    const pacienteEncontrado = pacientesDataFirebase.find((paciente) => paciente.id === id);
     if (pacienteEncontrado) {
       setPacienteProfile(pacienteEncontrado);
     }
-  }, [id, pacientes]);
+  }, [id, pacientesDataFirebase]);
 
   if (!pacienteProfile || !pacienteProfile.historial) {
-    return <div>Loading...</div>;
+    return <div style={{color: 'white'}}>cargando...</div>;
   }
 
   const barChartsParams = {
@@ -62,7 +62,7 @@ export const SimpleCharts = () => {
     ],
     xAxis: [
       {
-        data: ["Juego 1", "Juego 2", "Juego 3", "Juego 4", "Juego 5"],
+        data: ["Memory Game", "Numerium", "Contrarium", "Orderium", "Abecedarium"],
         scaleType: "band",
         id: "axis1",
       },
