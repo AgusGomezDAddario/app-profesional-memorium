@@ -13,3 +13,4 @@ Memorium es una plataforma web dirigida a profesionales de la salud que buscan m
 - Gráficas de Progreso: Visualización gráfica del desempeño de los pacientes, permitiendo un análisis rápido y comprensible de su evolución.
 
 - Exploración de la Plataforma: Sección informativa que permite a los profesionales descubrir más sobre las funciones y beneficios que ofrece Memorium, así como obtener detalles de los juegos disponibles y cómo estos impactan positivamente en el tratamiento.
+
