@@ -10,7 +10,7 @@ import {
   Image,
 } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
-import { awsExports } from "../../aws-exports";
+import { awsmobile as awsExports } from "../../aws-exports";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { logo } from "../../images/logo_memorium_white.png";
 import { I18n } from "aws-amplify/utils";

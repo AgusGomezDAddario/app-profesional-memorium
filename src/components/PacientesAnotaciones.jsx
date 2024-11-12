@@ -12,7 +12,7 @@ import {
 import { SimpleSnackbar } from "./material-ui/SnackbarAnotaciones.jsx";
 import { useRef } from "react";
 
-const PacientesAnotaciones = () => {
+export const PacientesAnotaciones = () => {
   const { anotacionFinal, clearAnotacion } = useContext(AnotacionContext);
   const { id } = useParams();
   const snackbarRef = useRef();
@@ -80,4 +80,3 @@ const PacientesAnotaciones = () => {
   );
 };
 
-export default PacientesAnotaciones;

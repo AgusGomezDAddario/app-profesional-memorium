@@ -26,7 +26,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SelectFiltrado({ filtrado, setFiltrado }) {
+export const SelectFiltrado = ({ filtrado, setFiltrado }) => {
   const handleChange = (event) => {
     setFiltrado(event.target.value);
   };

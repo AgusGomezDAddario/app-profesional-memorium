@@ -159,7 +159,7 @@ export const cardPlataforma = (
   </React.Fragment>
 );
 
-export default function OutlinedCard() {
+export const OutlinedCard = () => {
   return (
     <div>
       <Grid container spacing={3} sx={{ justifyContent: "center" }}>

@@ -11,7 +11,7 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 
-const AudioPlayer = ({ audioSrc }) => {
+export const AudioPlayer = ({ audioSrc }) => {
   const audioRef = useRef(null);
 
   const handlePlayAudio = () => {
@@ -44,4 +44,3 @@ const AudioPlayer = ({ audioSrc }) => {
   );
 };
 
-export default AudioPlayer;

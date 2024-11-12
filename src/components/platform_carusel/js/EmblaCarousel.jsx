@@ -9,7 +9,7 @@ import { useEmblaCarousel } from "embla-carousel-react";
 import { images_carrusel } from "../images_carrusel";
 import { AudioPlayer } from "../../AudioInstrucciones";
 
-const EmblaCarousel = (props) => {
+export const EmblaCarousel = (props) => {
   const { slides, options } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
@@ -54,4 +54,3 @@ const EmblaCarousel = (props) => {
   );
 };
 
-export default EmblaCarousel;
