@@ -1,25 +1,15 @@
 import * as React from "react";
-import { Stack } from "@mui/material/Stack";
-import { Box } from "@mui/material/Box";
-import { BarChart } from "@mui/x-charts/BarChart";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import { BarChart } from '@mui/x-charts/BarChart';
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { usePacientes } from "../../pacientesInfo/usePacientes.js";
 import "./Chart.css";
 
 export const SimpleCharts = () => {
   const [itemData, setItemData] = useState();
   const [axisData, setAxisData] = useState();
   const { id } = useParams();
-  const { pacientesDataFirebase } = usePacientes();
   const [pacienteProfile, setPacienteProfile] = useState(null);
-
-  useEffect(() => {
-    const pacienteEncontrado = pacientesDataFirebase.find((paciente) => paciente.id === id);
-    if (pacienteEncontrado) {
-      setPacienteProfile(pacienteEncontrado);
-    }
-  }, [id, pacientesDataFirebase]);
 
   if (!pacienteProfile || !pacienteProfile.historial) {
     return <div style={{color: 'white'}}>cargando...</div>;

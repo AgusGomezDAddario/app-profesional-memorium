@@ -1,15 +1,9 @@
 import React from 'react';
-import { Amplify } from 'aws-amplify';
-import { awsmobile as awsConfig } from './aws-exports';
 import { HomePage } from './components/HomePage.jsx'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { AuthenticatorTheme } from './components/auth/LoginThemeCustom.jsx';
-import { UpdateUser } from './components/auth/UpdateUserAttributes.jsx';
 import { ProfilePaciente } from './components/ProfilePaciente.jsx';
 import { ConozcaLaPlataforma } from './components/ConozcaLaPlataforma.jsx';
 import { Games } from './components/Games.jsx';
-
-Amplify.configure(awsConfig);
 
 export const App = () => {
   return (

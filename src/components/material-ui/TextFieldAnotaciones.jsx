@@ -1,7 +1,6 @@
-import { React, useContext } from "react";
+import useContext from "react";
 import { styled } from "@mui/material/styles";
-import { TextField } from "@mui/material/TextField";
-import { Button } from "@mui/material";
+import TextField from '@mui/material/TextField';
 import { AnotacionContext } from "../../contexts/anotaciones";
 
 const TextFieldCustom = styled(TextField)({

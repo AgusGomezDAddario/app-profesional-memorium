@@ -1,4 +1,3 @@
-import { ddbDocClient, PutCommand, ScanCommand } from "../dinamodb.js";
 
 const saveAnotacionOnBD = async (id_row, dni, date_row, note) => {
   try {

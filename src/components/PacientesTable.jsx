@@ -2,7 +2,6 @@ import { React } from "react";
 import "./PacientesTable.css";
 import CollapsibleTable from './TableCollapse';
 import TemporaryDrawer from './material-ui/Drawer';
-import { View } from '@aws-amplify/ui-react';
 import { Header } from './Header';
 import { FilterProvider } from '../contexts/filters';
 

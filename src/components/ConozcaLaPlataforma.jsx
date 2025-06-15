@@ -1,9 +1,9 @@
 import { React } from "react";
 import "./ConozcaLaPlataforma.css";
-import { Divider } from "@mui/material/Divider";
+import Divider from "@mui/material/Divider";
 import { EmblaCarousel } from "./platform_carusel/js/EmblaCarousel";
 import "./platform_carusel/css/embla.css";
-import { image } from "../images/image_brain.png";
+import image from "../images/image_brain.png";
 import { Link } from "react-router-dom";
 
 const OPTIONS = {};

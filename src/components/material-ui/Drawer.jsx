@@ -14,8 +14,6 @@ import { PsychologyIcon } from "@mui/icons-material/Psychology";
 import { DevicesIcon } from "@mui/icons-material/Devices";
 import { FeedIcon } from "@mui/icons-material/Feed";
 import { LogoutIcon } from "@mui/icons-material/Logout";
-import { Authenticator } from "@aws-amplify/ui-react";
-import { signOut } from "@aws-amplify/auth";
 import { Divider } from "@mui/material/Divider";
 import { useState } from "react";
 import { DialogProfile } from "./DialogProfile";

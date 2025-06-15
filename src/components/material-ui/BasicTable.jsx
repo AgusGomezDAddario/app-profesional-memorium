@@ -7,22 +7,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "../Table.css";
-import { useState, useEffect } from "react";
-import { usePacientes } from "../../pacientesInfo/usePacientes.js";
-import "../Table.css";
 import { useParams } from "react-router-dom";
 
 export const BasicTable = ({ game }) => {
   const { id } = useParams();
-  const { pacientesDataFirebase } = usePacientes();
-  const [pacienteProfile, setPacienteProfile] = useState(null);
-
-  useEffect(() => {
-    const pacienteEncontrado = pacientesDataFirebase.find((paciente) => paciente.id === id);
-    if (pacienteEncontrado) {
-      setPacienteProfile(pacienteEncontrado);
-    }
-  }, [id, pacientesDataFirebase]);
 
   return (
     <div>

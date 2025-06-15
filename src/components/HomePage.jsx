@@ -1,6 +1,6 @@
 import "./HomePage.css";
-import { logo } from "../images/logo_memorium_white.png";
-import { image } from "../images/image_brain.png";
+import logo from "../images/logo_memorium_white.png";
+import image from "../images/image_brain.png";
 import { OutlinedCard } from "./material-ui/Card";
 import { EmblaCarousel } from "./home_carusel/js/EmblaCarousel";
 import "./home_carusel/css/embla.css";
