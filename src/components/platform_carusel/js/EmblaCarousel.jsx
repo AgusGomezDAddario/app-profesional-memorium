@@ -7,7 +7,6 @@ import {
 } from "./EmblaCarouselArrowButtons";
 import useEmblaCarousel from "embla-carousel-react";
 import { images_carrusel } from "../images_carrusel";
-import { AudioPlayer } from "../../AudioInstrucciones";
 
 export const EmblaCarousel = (props) => {
   const { slides, options } = props;
@@ -36,9 +35,6 @@ export const EmblaCarousel = (props) => {
                   {images_carrusel[index].text}
                 </p>
               </div>
-              <div className="embla__audio">
-                <AudioPlayer audioSrc={`https://mybuckets3appprofesionalesmemorium.s3.us-east-2.amazonaws.com/plataforma-${index}.mp3`} />
-            </div>
             </div>
           ))}
         </div>

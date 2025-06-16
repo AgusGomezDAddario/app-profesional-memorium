@@ -71,14 +71,6 @@
   width: 35%;
   height: 35%;
 }
-.embla__audio {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  align-items: center;
-  margin-right: calc((2.6rem - 1.4rem) / 2 * -1);
-  
-}
 .embla__dot {
   -webkit-tap-highlight-color: white;
   -webkit-appearance: none;
