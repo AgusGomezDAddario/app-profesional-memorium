@@ -150,7 +150,6 @@ function Paciente({ paciente }) {
                       <TableBody>
                         {paciente.historial &&
                           paciente.historial.map((historial, index) => (
-                            console.log(historial),
                             <TableRow key={index}>
                               <TableCell
                                 component="th"

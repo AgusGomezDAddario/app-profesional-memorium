@@ -1,3 +1,4 @@
+// filepath: [BasicTable.jsx](http://_vscodecontentref_/8)
 import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,9 +9,24 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "../Table.css";
 import { useParams } from "react-router-dom";
+import { usePacientes } from "../../pacientesInfo/usePacientes.js";
 
 export const BasicTable = ({ game }) => {
   const { id } = useParams();
+  const { pacientesDataFirebase, loading, error } = usePacientes();
+  const [pacienteProfile, setPacienteProfile] = React.useState(null);
+
+  React.useEffect(() => {
+    if (Array.isArray(pacientesDataFirebase)) {
+      const pacienteEncontrado = pacientesDataFirebase.find((paciente) => paciente.id === id);
+      if (pacienteEncontrado) {
+        setPacienteProfile(pacienteEncontrado);
+      }
+    }
+  }, [id, pacientesDataFirebase]);
+
+  if (loading) return <p style={{ color: "white" }}>Cargando...</p>;
+  if (error) return <p style={{ color: "white" }}>Error: {error.message}</p>;
 
   return (
     <div>

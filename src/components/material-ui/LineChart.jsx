@@ -9,7 +9,7 @@ import './Chart.css';
 export const BasicLineChart = ({ juego }) => {
   const [tiempos, setTiempos] = useState([]);
   const { id } = useParams();
-  if (error) return <div>Error: {error.message}</div>;
+  // if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div style={{marginTop: '2rem', borderRadius: '20px'}}>
