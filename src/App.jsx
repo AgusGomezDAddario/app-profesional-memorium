@@ -11,8 +11,6 @@ export const App = () => {
                 <Router>
                     <Routes>
                         <Route path="/" element={<HomePage />} />
-                        <Route path="/login" element={<AuthenticatorTheme />}></Route>
-                        <Route path="/update-user" element={<UpdateUser />}></Route>
                         <Route path="/profile-paciente/:id" element={<ProfilePaciente />} />
                         <Route path="/plataforma" element={<ConozcaLaPlataforma />} />
                         <Route path="/juegos" element={<Games />} />

@@ -108,7 +108,6 @@ export default function TemporaryDrawer() {
         </ListItem>
         <DialogProfile />
         <Divider />
-        <Authenticator>
           <ListItem key={"Cerrar Sesión"} disablePadding>
             <ListItemButton onClick={signOut} sx={{ color: "red" }}>
               <ListItemIcon>
@@ -124,7 +123,6 @@ export default function TemporaryDrawer() {
               />
             </ListItemButton>
           </ListItem>
-        </Authenticator>
       </List>
     </Box>
   );
