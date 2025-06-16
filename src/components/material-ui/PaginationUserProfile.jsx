@@ -7,6 +7,7 @@ import DenseTable from "../DenseTable";
 import { BasicTable } from "./BasicTable";
 import { BasicLineChart } from "./LineChart";
 import { useParams } from "react-router-dom";
+import { usePacientes } from "../../pacientesInfo/usePacientes.js";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -40,10 +41,31 @@ function a11yProps(index) {
 export const BasicTabs = () => {
   const { id } = useParams();
   const [value, setValue] = React.useState(0);
+  const { pacientesDataFirebase, loading, error } = usePacientes();
+  const [pacienteProfile, setPacienteProfile] = React.useState(null);
+
+  React.useEffect(() => {
+    if (Array.isArray(pacientesDataFirebase)) {
+      const pacienteEncontrado = pacientesDataFirebase.find(
+        (paciente) => paciente.id === id
+      );
+      if (pacienteEncontrado) {
+        setPacienteProfile(pacienteEncontrado);
+      }
+    }
+  }, [id, pacientesDataFirebase]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  if (loading || !pacienteProfile) {
+    return <p style={{ color: "white" }}>Cargando...</p>;
+  }
+
+  if (error) {
+    return <p style={{ color: "white" }}>Error: {error.message}</p>;
+  }
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -94,27 +116,27 @@ export const BasicTabs = () => {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <DenseTable />
+        <DenseTable pacienteProfile={pacienteProfile} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <BasicTable game={1}/>
-        <BasicLineChart juego={"juego1"} />
+        <BasicTable game={1} pacienteProfile={pacienteProfile} />
+        <BasicLineChart juego={1} pacienteProfile={pacienteProfile} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <BasicTable game={2}/>
-        <BasicLineChart juego={"juego2"} />
+        <BasicTable game={2} pacienteProfile={pacienteProfile} />
+        <BasicLineChart juego={2} pacienteProfile={pacienteProfile} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
-        <BasicTable game={3}/>
-        <BasicLineChart juego={"juego3"} />
+        <BasicTable game={3} pacienteProfile={pacienteProfile} />
+        <BasicLineChart juego={3} pacienteProfile={pacienteProfile} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={4}>
-        <BasicTable game={4}/>
-        <BasicLineChart juego={"juego4"} />
+        <BasicTable game={4} pacienteProfile={pacienteProfile} />
+        <BasicLineChart juego={4} pacienteProfile={pacienteProfile} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={5}>
-        <BasicTable game={5}/>
-        <BasicLineChart juego={"juego5"} />
+        <BasicTable game={5} pacienteProfile={pacienteProfile} />
+        <BasicLineChart juego={5} pacienteProfile={pacienteProfile} />
       </CustomTabPanel>
     </Box>
   );

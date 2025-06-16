@@ -4,29 +4,36 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import { BarChart } from '@mui/x-charts/BarChart';
 import { useParams } from "react-router-dom";
+import { usePacientes } from "../../pacientesInfo/usePacientes.js";
 import "./Chart.css";
 
 export const SimpleCharts = () => {
+  const { id } = useParams();
+  const { pacientesDataFirebase, loading, error } = usePacientes();
+  const [pacienteProfile, setPacienteProfile] = useState(null);
   const [itemData, setItemData] = useState();
   const [axisData, setAxisData] = useState();
-  const { id } = useParams();
-  const [pacienteProfile, setPacienteProfile] = useState(null);
 
-  if (!pacienteProfile || !pacienteProfile.historial) {
-    return <div style={{color: 'white'}}>cargando...</div>;
+  useEffect(() => {
+    if (Array.isArray(pacientesDataFirebase)) {
+      const pacienteEncontrado = pacientesDataFirebase.find(
+        (paciente) => paciente.id === id
+      );
+      if (pacienteEncontrado) {
+        setPacienteProfile(pacienteEncontrado);
+      }
+    }
+  }, [id, pacientesDataFirebase]);
+
+  if (loading || !pacienteProfile || !pacienteProfile.historial) {
+    return <div style={{color: 'white'}}>Cargando...</div>;
   }
 
   const barChartsParams = {
     series: [
       {
         id: "aciertos",
-        data: [
-          pacienteProfile.historial[0].aciertos,
-          pacienteProfile.historial[1].aciertos,
-          pacienteProfile.historial[2].aciertos,
-          pacienteProfile.historial[3].aciertos,
-          pacienteProfile.historial[4].aciertos,
-        ],
+        data: pacienteProfile.historial.map(h => h.aciertos),
         label: "Aciertos",
         stack: "total",
         color: "#1ce418",
@@ -36,13 +43,7 @@ export const SimpleCharts = () => {
       },
       {
         id: "errores",
-        data: [
-          pacienteProfile.historial[0].errores,
-          pacienteProfile.historial[1].errores,
-          pacienteProfile.historial[2].errores,
-          pacienteProfile.historial[3].errores,
-          pacienteProfile.historial[4].errores,
-        ],
+        data: pacienteProfile.historial.map(h => h.errores),
         label: "Errores",
         stack: "total",
         color: "#e72f2f",

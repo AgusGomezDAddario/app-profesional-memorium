@@ -2,17 +2,26 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import { BarChart } from "@mui/x-charts/BarChart";
-import { useState } from "react";
-import { useParams } from "react-router-dom";
 import './Chart.css';
 
-export const BasicLineChart = ({ juego }) => {
-  const [tiempos, setTiempos] = useState([]);
-  const { id } = useParams();
-  // if (error) return <div>Error: {error.message}</div>;
+export const BasicLineChart = ({ juego, pacienteProfile }) => {
+  // Si no hay perfil o historial, no renderizar nada
+  if (!pacienteProfile || !pacienteProfile.historial) {
+    return <div style={{ color: "white" }}>Cargando...</div>;
+  }
+
+  // Buscar el historial del juego correspondiente
+  const historialJuego = pacienteProfile.historial.find(
+    (h) => h.juego === juego.toString() || h.juego === juego
+  );
+
+  // Extraer los tiempos de las partidas
+  const tiempos = historialJuego && historialJuego.partidas
+    ? historialJuego.partidas.map((partida) => partida.tiempo)
+    : [];
 
   return (
-    <div style={{marginTop: '2rem', borderRadius: '20px'}}>
+    <div style={{ marginTop: '2rem', borderRadius: '20px' }}>
       <Stack
         direction={{ xs: "column", md: "row" }}
         spacing={{ xs: 0, md: 4 }}
@@ -24,7 +33,7 @@ export const BasicLineChart = ({ juego }) => {
               xAxis={[
                 {
                   scaleType: "band",
-                  data: tiempos.map((_, index) => index + 1), // Muestra los índices como etiquetas
+                  data: tiempos.map((_, index) => index + 1), // Índices como etiquetas
                 },
               ]}
               series={[
