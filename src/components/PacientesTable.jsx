@@ -1,16 +1,12 @@
 import { React } from "react";
 import "./PacientesTable.css";
 import CollapsibleTable from './TableCollapse';
-import TemporaryDrawer from './material-ui/Drawer';
-import { Header } from './Header';
 import { FilterProvider } from '../contexts/filters';
 
 export const PacientesTable = () => {
     return (
-        <View>
+        <div>
             <div className="container">
-                <Header />
-                <TemporaryDrawer />
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                     <div style={{display: 'block'}}>
                         <h1 className="h1">Bienvenido a su sitio web de Memorium</h1>
@@ -21,6 +17,6 @@ export const PacientesTable = () => {
                     <CollapsibleTable />
                 </FilterProvider>
             </div>
-        </View >
+        </div >
     )
 }

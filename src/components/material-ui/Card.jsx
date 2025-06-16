@@ -49,7 +49,7 @@ export const cardPacientes = (
       <Link
         style={{ fontFamily: "Gentium Plus", color: "white" }}
         clickable
-        to="/login"
+        to="/pacientes"
       >
         Ingresar
       </Link>
