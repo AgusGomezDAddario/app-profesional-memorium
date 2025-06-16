@@ -14,77 +14,93 @@ import { calcularPorcentajeAciertosPorJuego } from "../pacientesInfo/usePaciente
 
 export default function DenseTable() {
   const { id } = useParams();
+  const { pacientesDataFirebase, loading, error } = usePacientes();
   const [pacienteProfile, setPacienteProfile] = useState(null);
+
+  useEffect(() => {
+    if (Array.isArray(pacientesDataFirebase)) {
+      const pacienteEncontrado = pacientesDataFirebase.find(
+        (paciente) => paciente.id === id
+      );
+      if (pacienteEncontrado) {
+        setPacienteProfile(pacienteEncontrado);
+      }
+    }
+  }, [id, pacientesDataFirebase]);
+
+  if (loading || !pacienteProfile) {
+    return <p style={{ color: "white" }}>Cargando...</p>;
+  }
+
+  if (error) {
+    return <p style={{ color: "white" }}>Error: {error.message}</p>;
+  }
 
   return (
     <div>
-      {pacienteProfile ? (
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-            <TableHead className="header">
-              <TableRow>
-                <TableCell
-                  align="center"
-                  sx={{
-                    color: "white",
-                    fontSize: "1.2rem",
-                    fontFamily: "Gentium Plus",
-                  }}
-                >
-                  Juego
-                </TableCell>
-                <TableCell
-                  align="center"
-                  sx={{
-                    color: "white",
-                    fontSize: "1.2rem",
-                    fontFamily: "Gentium Plus",
-                  }}
-                >
-                  Aciertos
-                </TableCell>
-                <TableCell
-                  align="center"
-                  sx={{
-                    color: "white",
-                    fontSize: "1.2rem",
-                    fontFamily: "Gentium Plus",
-                  }}
-                >
-                  Errores
-                </TableCell>
-                <TableCell
-                  align="center"
-                  sx={{
-                    color: "white",
-                    fontSize: "1.2rem",
-                    fontFamily: "Gentium Plus",
-                  }}
-                >
-                  Desempeño(%)
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {pacienteProfile.historial &&
-                pacienteProfile.historial.map((historial, index) => (
-                  <TableRow key={index}>
-                    <TableCell component="th" scope="row" align="center">
-                      {historial.juego}
-                    </TableCell>
-                    <TableCell align="center">{historial.aciertos}</TableCell>
-                    <TableCell align="center">{historial.errores}</TableCell>
-                    <TableCell align="center">
-                      {calcularPorcentajeAciertosPorJuego(historial)}
-                    </TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      ) : (
-        <p style={{color: 'white'}}>Cargando...</p>
-      )}
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+          <TableHead className="header">
+            <TableRow>
+              <TableCell
+                align="center"
+                sx={{
+                  color: "white",
+                  fontSize: "1.2rem",
+                  fontFamily: "Gentium Plus",
+                }}
+              >
+                Juego
+              </TableCell>
+              <TableCell
+                align="center"
+                sx={{
+                  color: "white",
+                  fontSize: "1.2rem",
+                  fontFamily: "Gentium Plus",
+                }}
+              >
+                Aciertos
+              </TableCell>
+              <TableCell
+                align="center"
+                sx={{
+                  color: "white",
+                  fontSize: "1.2rem",
+                  fontFamily: "Gentium Plus",
+                }}
+              >
+                Errores
+              </TableCell>
+              <TableCell
+                align="center"
+                sx={{
+                  color: "white",
+                  fontSize: "1.2rem",
+                  fontFamily: "Gentium Plus",
+                }}
+              >
+                Desempeño(%)
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {pacienteProfile.historial &&
+              pacienteProfile.historial.map((historial, index) => (
+                <TableRow key={index}>
+                  <TableCell component="th" scope="row" align="center">
+                    {historial.juego}
+                  </TableCell>
+                  <TableCell align="center">{historial.aciertos}</TableCell>
+                  <TableCell align="center">{historial.errores}</TableCell>
+                  <TableCell align="center">
+                    {calcularPorcentajeAciertosPorJuego(historial)}
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }
