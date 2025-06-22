@@ -1,3 +1,5 @@
+const { colors } = require("@mui/material");
+
 // tailwind.config.js
 module.exports = {
   content: [
@@ -6,9 +8,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        inter: ['Inter', 'sans-serif'],
-        // Si quieres mantener 'Gentium Plus', también agrégala aquí
-        // 'gentium-plus': ['"Gentium Plus"', 'serif'],
+        inter: ['Gentium Plus', 'sans-serif'],
+      },
+      colors: {
+        memorium: '#2f5496', // Color personalizado para el fondo de la sección Home
+        'memorium-light': '#3b6ab0', // Color más claro para hover o efectos secundarios
       },
       // Definición de animaciones (Opcional: solo si quieres usar animate-fade-in, animate-fade-in-up)
       keyframes: {

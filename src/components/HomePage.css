@@ -13,6 +13,10 @@ body {
     justify-content: center;
   }
   
+  h2 {
+    font-family: 'Gentium Plus', sans-serif;
+  }
+
   .logo {
     height: 8em;
     padding: 1.5em;
