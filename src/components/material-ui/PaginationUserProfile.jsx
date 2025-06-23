@@ -8,6 +8,7 @@ import { BasicTable } from "./BasicTable";
 import { BasicLineChart } from "./LineChart";
 import { useParams } from "react-router-dom";
 import { usePacientes } from "../../pacientesInfo/usePacientes.js";
+import AnnotationsTab from '../AnnotationsTab';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -113,6 +114,11 @@ export const BasicTabs = () => {
             {...a11yProps(5)}
             sx={{ fontSize: "1.2rem", fontFamily: "Gentium Plus" }}
           />
+          <Tab
+            label="Anotaciones"
+            {...a11yProps(6)} 
+            sx={{ fontSize: "1.2rem", fontFamily: "Gentium Plus" }}
+          />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -137,6 +143,9 @@ export const BasicTabs = () => {
       <CustomTabPanel value={value} index={5}>
         <BasicTable game={5} pacienteProfile={pacienteProfile} />
         <BasicLineChart juego={5} pacienteProfile={pacienteProfile} />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={6}>
+        <AnnotationsTab patientId={pacienteProfile.id} />
       </CustomTabPanel>
     </Box>
   );

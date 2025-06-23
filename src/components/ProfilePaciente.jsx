@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { usePacientes } from "../pacientesInfo/usePacientes.js";
 import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
-import { SimpleCharts } from "./material-ui/Chart.jsx";
-import { BasicTabs } from "./material-ui/PaginationUserProfile.jsx";
+import { SimpleCharts } from "./material-ui/Chart.jsx"; 
+import { BasicTabs } from "./material-ui/PaginationUserProfile.jsx"; 
 
 export const ProfilePaciente = () => {
   const { id } = useParams();
@@ -32,7 +32,7 @@ export const ProfilePaciente = () => {
   }
 
   return (
-    <div>
+    <div className="p-4"> 
       <p style={{ color: "white", fontSize: "3rem", marginTop: "0.7rem" }}>
         {pacienteProfile.nombre}
       </p>
@@ -43,7 +43,7 @@ export const ProfilePaciente = () => {
       <p style={{ color: "white", fontSize: "1.8rem", marginTop: "0.3rem" }}>
         Desempeño: {pacienteProfile.desempenoGlobal}%
       </p>
-      <BasicTabs />
+      <BasicTabs patientIdFromProfile={pacienteProfile.id} />
       <Link to="/pacientes" style={{ textDecoration: "none" }}>
         <span
           style={{
