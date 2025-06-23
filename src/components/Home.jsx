@@ -32,7 +32,7 @@ const FeatureCard = ({ title, description, to, icon: IconComponent }) => {
   );
 };
 
-const HomePageContent = () => { // Renombrado de App a HomePageContent
+const HomePageContent = () => { 
   return (
     <div className="min-h-screen bg-memorium font-inter text-gray-900 overflow-x-hidden">
       {/* Sección Hero */}
