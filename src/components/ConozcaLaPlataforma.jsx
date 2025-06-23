@@ -13,8 +13,8 @@ const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 export const ConozcaLaPlataforma = () => {
   return (
     <div>
-      <h1 className="plataforma-text">Conozca nuestra plataforma</h1>
-      <h2 className="plataforma-text">
+      <h1 id="h1-texto-grande">Conozca nuestra plataforma</h1>
+      <h2 id="h2-texto-mediano">
         A continuación, le mostraremos de qué manera aprovechar al máximo
         Memorium
       </h2>
@@ -36,7 +36,7 @@ export const ConozcaLaPlataforma = () => {
       <EmblaCarousel slides={SLIDES} options={OPTIONS} />
       <img
         src={image}
-        className="imagen_central"
+        className="mx-auto my-8 w-full max-w-md rounded-xl shadow-lg border-2 border-white animate-fade-in-up"
         alt="Imagen de cerebro con un celular"
       />
     </div>

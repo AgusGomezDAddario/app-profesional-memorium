@@ -10,7 +10,7 @@ import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 export const Games = () => {
   return (
     <div>
-      <h1 className="plataforma-text">
+      <h1 id="h1-texto-grande">
         Conozca los juegos disponibles en Memorium
       </h1>
       <SportsEsportsIcon sx={{ fontSize: "5rem", color: "white" }} />
@@ -32,7 +32,7 @@ export const Games = () => {
       <BasicStack />
       <img
         src={image}
-        className="imagen_central"
+        className="mx-auto my-8 w-full max-w-md rounded-xl shadow-lg border-2 border-white animate-fade-in-up"
         alt="Imagen de cerebro con un celular"
       />
     </div>

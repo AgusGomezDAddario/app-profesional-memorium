@@ -3,12 +3,53 @@
     font-family: 'Gentium Plus', sans-serif;
   }
 
-  h1 .plataforma-text {
-    font-size: 2em;
-    margin-top: 1em;
+#h1-texto-grande {
+    font-size: 3rem;
+    font-family: 'Gentium Plus', sans-serif;
+    font-style: normal;
+    margin-left: 2rem;
+    margin-bottom: 0rem;
+    color: white;
   }
 
-  h2 .plataforma-text {
-    font-size: 1.5em;
-    margin-top: 1em;
+#h2-texto-mediano  {
+    font-size: 1rem;
+    margin-top: 0rem;
+    font-family: 'Gentium Plus', sans-serif;
+    font-style: normal;
+    color: white;
+    margin-left: 2rem;
   }
+
+  @media screen and (max-width: 768px) {
+    #h1-texto-grande{
+        font-size: 2rem;
+        font-family: 'Gentium Plus', sans-serif;
+    }
+
+    #h2-texto-mediano{
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 485px) {
+    #h1-texto-grande br {
+        display: none;
+    }
+
+    #h2-texto-mediano{
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 485px) {
+    #h1-texto-grande br {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 405px) {
+    #h1-texto-grande{
+        font-size: 1.7rem;
+    }
+}
