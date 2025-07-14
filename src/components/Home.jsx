@@ -88,12 +88,27 @@ const HomePageContent = () => {
               to="/juegos"
               icon={Gamepad2}
             />
-            <FeatureCard
-              title="IA para Decisiones Médicas"
-              description="Utilice la inteligencia artificial para obtener insights y apoyar la toma de decisiones clínicas."
-              to="/ia-decision"
-              icon={Brain}
-            />
+            {/* Funcionalidad futura */}
+            <div
+              className="bg-gray-200 p-6 rounded-xl shadow-lg border border-gray-300 flex flex-col opacity-60 cursor-not-allowed"
+              style={{ fontFamily: "'Gentium Plus', sans-serif" }}
+              title="Próximamente"
+            >
+              <div className="flex justify-center mb-4">
+                <Brain size={48} className="text-gray-400" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-500 mb-2 text-center">
+                IA para Decisiones Médicas
+              </h3>
+              <p className="text-gray-400 text-center mb-6 text-lg flex-1">
+                Próximamente: Utilice la inteligencia artificial para obtener insights y apoyar la toma de decisiones clínicas.
+              </p>
+              <div className="text-center mt-auto">
+                <span className="inline-block bg-gray-400 text-white font-semibold py-3 px-6 rounded-lg text-base cursor-not-allowed">
+                  Próximamente
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
