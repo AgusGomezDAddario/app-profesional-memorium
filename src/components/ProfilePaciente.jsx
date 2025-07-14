@@ -32,7 +32,7 @@ export const ProfilePaciente = () => {
   }
 
   return (
-    <div className="p-4"> 
+    <div className="p-4">
       <p style={{ color: "white", fontSize: "3rem", marginTop: "0.7rem" }}>
         {pacienteProfile.nombre}
       </p>
@@ -44,20 +44,49 @@ export const ProfilePaciente = () => {
         Desempeño: {pacienteProfile.desempenoGlobal}%
       </p>
       <BasicTabs patientIdFromProfile={pacienteProfile.id} />
-      <Link to="/pacientes" style={{ textDecoration: "none" }}>
-        <span
-          style={{
-            color: "white",
-            fontSize: "1.2rem",
-            marginTop: "0.3rem",
-            marginLeft: "1.5rem",
-            display: "flex",
-            fontFamily: "Gentium Plus",
-          }}
-        >
-          Volver a Pacientes
-        </span>
-      </Link>
+      <div
+        style={{
+          width: "fit-content",
+          marginLeft: "1.5rem",
+          marginBottom: "1.5rem",
+        }}
+      >
+        <Link to="/pacientes" style={{ textDecoration: "none" }}>
+          <span
+            className="volver-pacientes-btn"
+            style={{
+              color: "#2f5496",
+              fontSize: "0.9rem",
+              marginTop: "0.3rem",
+              display: "flex",
+              fontFamily: "Gentium Plus",
+              border: "2px solid white",
+              padding: "1.5rem",
+              borderRadius: "1.1rem",
+              width: "11rem",
+              justifyContent: "center",
+              backgroundColor: "white",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+            }}
+            onMouseOver={e => {
+              e.currentTarget.style.backgroundColor = "#2f5496";
+              e.currentTarget.style.color = "white";
+              e.currentTarget.style.transform = "scale(1.05)";
+              e.currentTarget.style.boxShadow = "0 4px 16px rgba(47,84,150,0.18)";
+            }}
+            onMouseOut={e => {
+              e.currentTarget.style.backgroundColor = "white";
+              e.currentTarget.style.color = "#2f5496";
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.08)";
+            }}
+          >
+            Volver a Pacientes
+          </span>
+        </Link>
+      </div>
       <SimpleCharts />
     </div>
   );

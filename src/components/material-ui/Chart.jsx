@@ -29,6 +29,15 @@ export const SimpleCharts = () => {
     return <div style={{color: 'white'}}>Cargando...</div>;
   }
 
+  // Verifica si hay datos para mostrar
+  const noData =
+    pacienteProfile.historial.length === 0 ||
+    pacienteProfile.historial.every(
+      (h) =>
+        (!h.aciertos && !h.errores) ||
+        (Array.isArray(h.partidas) && h.partidas.length === 0)
+    );
+
   const barChartsParams = {
     series: [
       {
@@ -71,11 +80,17 @@ export const SimpleCharts = () => {
     >
       <Box sx={{ flexGrow: 1 }}>
         <div className="chart-container">
-          <BarChart
-            {...barChartsParams}
-            onItemClick={(event, d) => setItemData(d)}
-            onAxisClick={(event, d) => setAxisData(d)}
-          />
+          {noData ? (
+            <div style={{ color: "#2f5496", fontSize: "1.2rem", textAlign: "center", padding: "2rem", fontFamily: 'Gentium Plus' }}>
+              No hay datos de desempeño para este paciente.
+            </div>
+          ) : (
+            <BarChart
+              {...barChartsParams}
+              onItemClick={(event, d) => setItemData(d)}
+              onAxisClick={(event, d) => setAxisData(d)}
+            />
+          )}
         </div>
       </Box>
     </Stack>

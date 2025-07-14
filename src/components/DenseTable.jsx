@@ -36,6 +36,15 @@ export default function DenseTable() {
     return <p style={{ color: "white" }}>Error: {error.message}</p>;
   }
 
+  const noData =
+    !pacienteProfile.historial ||
+    pacienteProfile.historial.length === 0 ||
+    pacienteProfile.historial.every(
+      (historial) =>
+        (!historial.aciertos && !historial.errores && !historial.partidas) ||
+        (Array.isArray(historial.partidas) && historial.partidas.length === 0)
+    );
+
   return (
     <div>
       <TableContainer component={Paper}>
@@ -85,7 +94,13 @@ export default function DenseTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {pacienteProfile.historial &&
+            {noData ? (
+              <TableRow>
+                <TableCell colSpan={4} align="center" sx={{ color: "#2f5496", fontSize: "1.2rem", fontFamily: "Gentium Plus" }}>
+                  No hay datos de desempeño para este paciente.
+                </TableCell>
+              </TableRow>
+            ) : (
               pacienteProfile.historial.map((historial, index) => (
                 <TableRow key={index}>
                   <TableCell component="th" scope="row" align="center">
@@ -97,7 +112,8 @@ export default function DenseTable() {
                     {calcularPorcentajeAciertosPorJuego(historial)}
                   </TableCell>
                 </TableRow>
-              ))}
+              ))
+            )}
           </TableBody>
         </Table>
       </TableContainer>
